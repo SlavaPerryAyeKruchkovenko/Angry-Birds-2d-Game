@@ -26,6 +26,126 @@ TextureImporter:
   - first:
       213: 8522388667355152601
     second: ices_7
+  - first:
+      213: -6933602890099935796
+    second: ices_8
+  - first:
+      213: -3503116871617745072
+    second: ices_9
+  - first:
+      213: 1081180581599608206
+    second: ices_10
+  - first:
+      213: 6634171382659282941
+    second: ices_11
+  - first:
+      213: 5915753913562528527
+    second: ices_12
+  - first:
+      213: -6398507289982760345
+    second: ices_13
+  - first:
+      213: 4114599250301153855
+    second: ices_14
+  - first:
+      213: 1010936623225785254
+    second: ices_15
+  - first:
+      213: 8865074566730743779
+    second: ices_16
+  - first:
+      213: 7043295242015504458
+    second: ices_17
+  - first:
+      213: 54157586947538071
+    second: ices_18
+  - first:
+      213: -1735808009428493055
+    second: ices_19
+  - first:
+      213: -3501736854156202181
+    second: ices_20
+  - first:
+      213: -1476194417458707906
+    second: ices_21
+  - first:
+      213: -3988595361355788945
+    second: ices_22
+  - first:
+      213: 4044310502598401317
+    second: ices_23
+  - first:
+      213: -7185550869822880208
+    second: ices_24
+  - first:
+      213: -8754242099988185505
+    second: ices_25
+  - first:
+      213: 7864784563432105607
+    second: ices_26
+  - first:
+      213: -2927961665670927150
+    second: ices_27
+  - first:
+      213: -8883909351696157649
+    second: ices_28
+  - first:
+      213: -1527421448219907330
+    second: ices_29
+  - first:
+      213: 6616563291247059245
+    second: ices_30
+  - first:
+      213: 8354685727422372105
+    second: ices_31
+  - first:
+      213: -2847217370997750933
+    second: ices_32
+  - first:
+      213: -598256987498903524
+    second: ices_33
+  - first:
+      213: 4332307726922321984
+    second: ices_34
+  - first:
+      213: 3004904009051094726
+    second: ices_35
+  - first:
+      213: 3210989509280498790
+    second: ices_36
+  - first:
+      213: 5047210812977565139
+    second: ices_37
+  - first:
+      213: 2023669171902619169
+    second: ices_38
+  - first:
+      213: -8711834386922791576
+    second: ices_39
+  - first:
+      213: -1494855422396468638
+    second: ices_40
+  - first:
+      213: 309279466717828049
+    second: ices_41
+  - first:
+      213: 8687760706589797258
+    second: ices_42
+  - first:
+      213: -6595182310116593530
+    second: ices_43
+  - first:
+      213: -8065676064046814566
+    second: ices_44
+  - first:
+      213: -4116569594794796965
+    second: ices_45
+  - first:
+      213: -6416086900550982817
+    second: ices_46
+  - first:
+      213: 1713849435346455843
+    second: ices_47
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -282,7 +402,7 @@ TextureImporter:
         width: 95
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -290,6 +410,846 @@ TextureImporter:
       bones: []
       spriteID: 9d0c483e65b954670800000000000000
       internalID: 8522388667355152601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_8
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 346
+        width: 95
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5b8f148e4e6cf90800000000000000
+      internalID: -6933602890099935796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 250
+        width: 95
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05feb8cf3cd626fc0800000000000000
+      internalID: -3503116871617745072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_10
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 155
+        width: 95
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8d7b48b200210f00800000000000000
+      internalID: 1081180581599608206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 60
+        width: 95
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df7f77229bf411c50800000000000000
+      internalID: 6634171382659282941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_12
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 262
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b758467daf81250800000000000000
+      internalID: 5915753913562528527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_13
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 178
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a84df358fe337a0800000000000000
+      internalID: -6398507289982760345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_14
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 91
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f32f943d73ef91930800000000000000
+      internalID: 4114599250301153855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_15
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 5
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ab4ecda081970e00800000000000000
+      internalID: 1010936623225785254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_16
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 298
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eff5596952170b70800000000000000
+      internalID: 8865074566730743779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_17
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 298
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a487884a4bfceb160800000000000000
+      internalID: 7043295242015504458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_18
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 10
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79c76e3d90860c000800000000000000
+      internalID: 54157586947538071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_19
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 10
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d9cb7efcb29e7e0800000000000000
+      internalID: -1735808009428493055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_20
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 173
+        width: 232
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3f202752e4576fc0800000000000000
+      internalID: -3501736854156202181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_21
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 198
+        width: 232
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3285ff9ff0838be0800000000000000
+      internalID: -1476194417458707906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_22
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 148
+        width: 232
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6d0e9db6a9a5a8c0800000000000000
+      internalID: -3988595361355788945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_23
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 224
+        width: 232
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52d52c479f6402830800000000000000
+      internalID: 4044310502598401317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_24
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 123
+        width: 191
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03645b8fd8bc74c90800000000000000
+      internalID: -7185550869822880208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_25
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 98
+        width: 191
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e3f68213fa28680800000000000000
+      internalID: -8754242099988185505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_26
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 74
+        width: 191
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 786a85a14e3552d60800000000000000
+      internalID: 7864784563432105607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_27
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 50
+        width: 191
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc29b9c06acd57d0800000000000000
+      internalID: -2927961665670927150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_28
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 299
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f24316b738306b480800000000000000
+      internalID: -8883909351696157649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_29
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 299
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efa2a8419428dcae0800000000000000
+      internalID: -1527421448219907330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_30
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 248
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d21aba0e141c2db50800000000000000
+      internalID: 6616563291247059245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_31
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 248
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9095901776ec1f370800000000000000
+      internalID: 8354685727422372105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_32
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 249
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b638b53e2e6ac78d0800000000000000
+      internalID: -2847217370997750933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_33
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 249
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c188bb7807092b7f0800000000000000
+      internalID: -598256987498903524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_34
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 200
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04092e09ce27f1c30800000000000000
+      internalID: 4332307726922321984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_35
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 152
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ce33ab864093b920800000000000000
+      internalID: 3004904009051094726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_36
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 127
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6648b2632f9bf8c20800000000000000
+      internalID: 3210989509280498790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_37
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 102
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ddc90e3e7b4b0640800000000000000
+      internalID: 5047210812977565139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_38
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 77
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12e1a26d364851c10800000000000000
+      internalID: 2023669171902619169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_39
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 53
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86d1f6948c8591780800000000000000
+      internalID: -8711834386922791576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_40
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 38
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 262fd75d9e4314be0800000000000000
+      internalID: -1494855422396468638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_41
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 13
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3d90e4908ca4400800000000000000
+      internalID: 309279466717828049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_42
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 38
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ba1e93550219870800000000000000
+      internalID: 8687760706589797258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_43
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 13
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6807f88b1a43974a0800000000000000
+      internalID: -6595182310116593530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_44
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 25
+        width: 94
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9a6e118a56f01090800000000000000
+      internalID: -8065676064046814566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_45
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 1
+        width: 94
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b58151993c10fd6c0800000000000000
+      internalID: -4116569594794796965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_46
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 25
+        width: 94
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f532f9435fa75f6a0800000000000000
+      internalID: -6416086900550982817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ices_47
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 1
+        width: 94
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d44582bf0d8c710800000000000000
+      internalID: 1713849435346455843
       vertices: []
       indices: 
       edges: []

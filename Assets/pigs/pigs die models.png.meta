@@ -35,6 +35,27 @@ TextureImporter:
   - first:
       213: 5683476606050997307
     second: pigs die models_10
+  - first:
+      213: 4943830071169559792
+    second: pigs die models_11
+  - first:
+      213: 4001713014966193700
+    second: pigs die models_12
+  - first:
+      213: -7210397941977962713
+    second: pigs die models_13
+  - first:
+      213: -3519555057197554669
+    second: pigs die models_14
+  - first:
+      213: -1309295458589434795
+    second: pigs die models_15
+  - first:
+      213: -5996852404213109638
+    second: pigs die models_16
+  - first:
+      213: 7694926773988658659
+    second: pigs die models_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -354,7 +375,7 @@ TextureImporter:
         width: 79
         height: 73
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -362,6 +383,153 @@ TextureImporter:
       bones: []
       spriteID: b3499e06cd3cfde40800000000000000
       internalID: 5683476606050997307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_11
+      rect:
+        serializedVersion: 2
+        x: 1369
+        y: 496
+        width: 130
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fca4f591430c9440800000000000000
+      internalID: 4943830071169559792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_12
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 497
+        width: 130
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e0e1ef8c0f88730800000000000000
+      internalID: 4001713014966193700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_13
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 498
+        width: 130
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 727223b26458feb90800000000000000
+      internalID: -7210397941977962713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_14
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 498
+        width: 130
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3146f48a257082fc0800000000000000
+      internalID: -3519555057197554669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_15
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 378
+        width: 129
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55c9eb4a7b274dde0800000000000000
+      internalID: -1309295458589434795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_16
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 378
+        width: 131
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7c2e64d286e6cca0800000000000000
+      internalID: -5996852404213109638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_17
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 378
+        width: 129
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ed8c38a12fd9ca60800000000000000
+      internalID: 7694926773988658659
       vertices: []
       indices: 
       edges: []

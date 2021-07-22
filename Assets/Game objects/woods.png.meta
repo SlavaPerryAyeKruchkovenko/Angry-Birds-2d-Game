@@ -14,6 +14,138 @@ TextureImporter:
   - first:
       213: -4600807254491801440
     second: woods_3
+  - first:
+      213: 8635640632702646939
+    second: woods_4
+  - first:
+      213: -3139283027618813638
+    second: woods_5
+  - first:
+      213: -1158114178087897270
+    second: woods_6
+  - first:
+      213: 8373109749047125514
+    second: woods_7
+  - first:
+      213: -590673506266020736
+    second: woods_8
+  - first:
+      213: 6473524117145944574
+    second: woods_9
+  - first:
+      213: 8722623251468441611
+    second: woods_10
+  - first:
+      213: -4533260364756684495
+    second: woods_11
+  - first:
+      213: 1767589279584634765
+    second: woods_12
+  - first:
+      213: -962373268606363033
+    second: woods_13
+  - first:
+      213: 4816957722039208818
+    second: woods_14
+  - first:
+      213: 558663046068243840
+    second: woods_15
+  - first:
+      213: -2861251246611247614
+    second: woods_16
+  - first:
+      213: -8254747010534560045
+    second: woods_17
+  - first:
+      213: -9010971871606201007
+    second: woods_18
+  - first:
+      213: -6835527653268456533
+    second: woods_19
+  - first:
+      213: 4131791284846092232
+    second: woods_20
+  - first:
+      213: 5368433269747276760
+    second: woods_21
+  - first:
+      213: 5712621174575874778
+    second: woods_22
+  - first:
+      213: -1894235758268567622
+    second: woods_23
+  - first:
+      213: -6034683340495484771
+    second: woods_24
+  - first:
+      213: -9167854918332721537
+    second: woods_25
+  - first:
+      213: -7634885387671930595
+    second: woods_26
+  - first:
+      213: 8477289283799862440
+    second: woods_27
+  - first:
+      213: -40698261070575176
+    second: woods_28
+  - first:
+      213: -2044361362206888040
+    second: woods_29
+  - first:
+      213: -1716370140635453540
+    second: woods_30
+  - first:
+      213: -857451866106603369
+    second: woods_31
+  - first:
+      213: 8876572324085560543
+    second: woods_32
+  - first:
+      213: -4579356559409504363
+    second: woods_33
+  - first:
+      213: 1929104349208759130
+    second: woods_34
+  - first:
+      213: -6713038753277485439
+    second: woods_35
+  - first:
+      213: -1435130543005901493
+    second: woods_36
+  - first:
+      213: 6995598455761959597
+    second: woods_37
+  - first:
+      213: -2422811210430962672
+    second: woods_38
+  - first:
+      213: -423014285019262623
+    second: woods_39
+  - first:
+      213: -8219254909321461486
+    second: woods_40
+  - first:
+      213: -7846914966902429232
+    second: woods_41
+  - first:
+      213: -613165174246840548
+    second: woods_42
+  - first:
+      213: 965552671494801192
+    second: woods_43
+  - first:
+      213: 7605806194426483459
+    second: woods_44
+  - first:
+      213: -7937458817079643651
+    second: woods_45
+  - first:
+      213: 6226891989975769624
+    second: woods_46
+  - first:
+      213: 960264735915542783
+    second: woods_47
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -186,7 +318,7 @@ TextureImporter:
         width: 165
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,6 +326,930 @@ TextureImporter:
       bones: []
       spriteID: 0a8d9fb9d26a620c0800000000000000
       internalID: -4600807254491801440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 123
+        width: 136
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9abb20e665f7d770800000000000000
+      internalID: 8635640632702646939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_5
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 106
+        width: 136
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a392e5118b60f64d0800000000000000
+      internalID: -3139283027618813638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 88
+        width: 136
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a473abd7a4d8defe0800000000000000
+      internalID: -1158114178087897270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_7
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 70
+        width: 136
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a06605144f2433470800000000000000
+      internalID: 8373109749047125514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_8
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 52
+        width: 68
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08487c853918dc7f0800000000000000
+      internalID: -590673506266020736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_9
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 35
+        width: 68
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef18867e2e396d950800000000000000
+      internalID: 6473524117145944574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_10
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 52
+        width: 68
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b08d65df1abfc0970800000000000000
+      internalID: 8722623251468441611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_11
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 35
+        width: 68
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 131f15c67bf9611c0800000000000000
+      internalID: -4533260364756684495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_12
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 123
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d874e6ea51db78810800000000000000
+      internalID: 1767589279584634765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_13
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 105
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76ad26f6c96f4a2f0800000000000000
+      internalID: -962373268606363033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_14
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 88
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27bc830e68549d240800000000000000
+      internalID: 4816957722039208818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_15
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 70
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d090a9415c0c700800000000000000
+      internalID: 558663046068243840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_16
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 246
+        width: 66
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20ec798962bca48d0800000000000000
+      internalID: -2861251246611247614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_17
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 246
+        width: 66
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3deae56545f317d80800000000000000
+      internalID: -8254747010534560045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_18
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 246
+        width: 66
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15520ef23d892f280800000000000000
+      internalID: -9010971871606201007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_19
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 211
+        width: 66
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: babf296c0d35321a0800000000000000
+      internalID: -6835527653268456533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_20
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 212
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cf5e4b4842175930800000000000000
+      internalID: 4131791284846092232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_21
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 42
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dbdcab9d91808a40800000000000000
+      internalID: 5368433269747276760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_22
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 42
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad248f601be474f40800000000000000
+      internalID: 5712621174575874778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_23
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 212
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abf2f8b2d9256b5e0800000000000000
+      internalID: -1894235758268567622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_24
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 212
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d988cc5997f704ca0800000000000000
+      internalID: -6034683340495484771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_25
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 212
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f76d570768c35c080800000000000000
+      internalID: -9167854918332721537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_26
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 178
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d197ef6f0307b0690800000000000000
+      internalID: -7634885387671930595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_27
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8accd1360b165a570800000000000000
+      internalID: 8477289283799862440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_28
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 218
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b989eda5296f6ff0800000000000000
+      internalID: -40698261070575176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_29
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 157
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89fef1d2c28f0a3e0800000000000000
+      internalID: -2044361362206888040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_30
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 95
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c972658637a3e28e0800000000000000
+      internalID: -1716370140635453540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_31
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 31
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79858bc1218b914f0800000000000000
+      internalID: -857451866106603369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_32
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 278
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd4fe28af7bef2b70800000000000000
+      internalID: 8876572324085560543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_33
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 211
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59f9a80c87bd270c0800000000000000
+      internalID: -4579356559409504363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_34
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 144
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5bcf3d4f2e85ca10800000000000000
+      internalID: 1929104349208759130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_35
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 77
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18ed67332de76d2a0800000000000000
+      internalID: -6713038753277485439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_36
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 59
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4dd1d1ff54651ce0800000000000000
+      internalID: -1435130543005901493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_37
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 41
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa76f23bbb551160800000000000000
+      internalID: 6995598455761959597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_38
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 59
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 014ad6c6a02706ed0800000000000000
+      internalID: -2422811210430962672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_39
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 41
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 161d28ebfb6212af0800000000000000
+      internalID: -423014285019262623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_40
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 279
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211428b15375fed80800000000000000
+      internalID: -8219254909321461486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_41
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 212
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d9a51f89682a1390800000000000000
+      internalID: -7846914966902429232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_42
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 144
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c176060d5899d77f0800000000000000
+      internalID: -613165174246840548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_43
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 76
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 827806cf905566d00800000000000000
+      internalID: 965552671494801192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_44
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 281
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3039141cf604d8960800000000000000
+      internalID: 7605806194426483459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_45
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 281
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df1fca4a24b78d190800000000000000
+      internalID: -7937458817079643651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_46
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 281
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8122b3df54d5a6650800000000000000
+      internalID: 6226891989975769624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods_47
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 281
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff8849a80bb835d00800000000000000
+      internalID: 960264735915542783
       vertices: []
       indices: 
       edges: []
