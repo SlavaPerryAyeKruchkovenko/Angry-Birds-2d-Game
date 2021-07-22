@@ -32,6 +32,9 @@ TextureImporter:
   - first:
       213: 5524203853644941524
     second: pigs die models_9
+  - first:
+      213: 5683476606050997307
+    second: pigs die models_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -338,6 +341,27 @@ TextureImporter:
       bones: []
       spriteID: 4d8c95be22ae9ac40800000000000000
       internalID: 5524203853644941524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs die models_10
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 702
+        width: 79
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3499e06cd3cfde40800000000000000
+      internalID: 5683476606050997307
       vertices: []
       indices: 
       edges: []
