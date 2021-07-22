@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -4771024454969801159
     second: pigs model_0
+  - first:
+      213: 5284886663193577216
+    second: pigs model_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,7 +117,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -122,6 +125,27 @@ TextureImporter:
       bones: []
       spriteID: 936c2d2498ae9cdb0800000000000000
       internalID: -4771024454969801159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pigs model_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 25
+        width: 102
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0074add6b60b75940800000000000000
+      internalID: 5284886663193577216
       vertices: []
       indices: 
       edges: []
