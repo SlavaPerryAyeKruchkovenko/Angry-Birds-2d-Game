@@ -19,8 +19,12 @@ public class SlingshotScript : MonoBehaviour
 	{
         if(!Camera.main.GetComponent<GameScript>().GameStart)
 		{
-            Camera.main.GetComponent<GameScript>().ChangeGameConditional();
-            Camera.main.GetComponent<GameScript>().StartLocation = this.gameObject.transform.position;
+            var band = GameObject.Find("/Slingshot/elastic band");
+            band.GetComponent<SpriteRenderer>().enabled = true;
+			Camera.main.GetComponent<GameScript>().ChangeGameConditional();
+
+            var position = new Vector2(band.transform.position.x, band.transform.position.y);
+            Camera.main.GetComponent<GameScript>().StartLocation = (position + GameScript.BeaitifulRange);
         }        
 	}
 }

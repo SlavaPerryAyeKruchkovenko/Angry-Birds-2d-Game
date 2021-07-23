@@ -5,37 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Birds
+namespace Assets.scripts
 {
-	public enum Birds
-	{
-		Red, Blue, Yellow, Black, Green, White, BigRed
-	}
 	public abstract class Bird
 	{
 		public virtual int Health { get; protected set; } = 1;
 		public Sprite DefaultImage { get; protected set; }
 		public List<Sprite> AllBirdSprites;
-		public Vector2 StartLocation { get; set; }
 		public abstract void ChangeConditional();
-		public static Bird GetBird(Birds bird)
-        {
-            return bird switch
-            {
-                Birds.Red => new RedBird(),
-                Birds.Blue => new BlueBird(true),
-                Birds.Yellow => new YellowBird(true),
-                Birds.Black => new BlackBird(true),
-                Birds.Green => new GreenBird(true),
-                Birds.White => new WhiteBird(true),
-                Birds.BigRed => new BigRedBird(),
-                _ => throw new Exception("Bird not found"),
-            };
-        }
+		public abstract void ChangeSprite();
 	}
 	public class RedBird : Bird
 	{
 		public override void ChangeConditional()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void ChangeSprite()
 		{
 			throw new NotImplementedException();
 		}
@@ -44,23 +31,28 @@ namespace Assets.Birds
 	{
 		public BlueBird(bool haveClone)
 		{
-			IsClone = haveClone;
+			this.IsClone = haveClone;
 		}
 		public bool IsClone { get; private set; } = true;
 		public BlueBird[] BlueBirdChildrens { get; private set; } = null;
 		public void CloneBird()
 		{
-			if(IsClone)
+			if(this.IsClone)
 			{
-				BlueBirdChildrens = new BlueBird[] {new BlueBird(false), new BlueBird(false) , new BlueBird(false) };
-				IsClone = false;
+				this.BlueBirdChildrens = new BlueBird[] {new BlueBird(false), new BlueBird(false) , new BlueBird(false) };
+				this.IsClone = false;
 			}
 			else
 			{
-				IsClone = false;
+				this.IsClone = false;
 			}
 		}
 		public override void ChangeConditional()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void ChangeSprite()
 		{
 			throw new NotImplementedException();
 		}
@@ -69,7 +61,7 @@ namespace Assets.Birds
 	{
 		public YellowBird(bool canSpeedUp)
 		{
-			HaveNitro = canSpeedUp;
+			this.HaveNitro = canSpeedUp;
 		}
 		public int Speed { get; private set; }
 		public bool HaveNitro { get; private set; }
@@ -85,10 +77,20 @@ namespace Assets.Birds
 		{
 			throw new NotImplementedException();
 		}
+
+		public override void ChangeSprite()
+		{
+			throw new NotImplementedException();
+		}
 	}
 	public class BigRedBird : Bird
 	{
 		public override void ChangeConditional()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void ChangeSprite()
 		{
 			throw new NotImplementedException();
 		}
@@ -97,7 +99,7 @@ namespace Assets.Birds
 	{
 		public BlackBird(bool canExplode)
 		{
-			CanExplode = canExplode;
+			this.CanExplode = canExplode;
 		}
 		public bool CanExplode { get; private set; }
 
@@ -112,12 +114,17 @@ namespace Assets.Birds
 		{
 			throw new NotImplementedException();
 		}
-	}
-	public class WhiteBird : Bird
-	{
-		public WhiteBird(bool haveEgg)
+
+		public override void ChangeSprite()
 		{
-			HaveEgg = haveEgg;
+			throw new NotImplementedException();
+		}
+	}
+	public class MotherBird : Bird
+	{
+		public MotherBird(bool haveEgg)
+		{
+			this.HaveEgg = haveEgg;
 		}
 		public bool HaveEgg { get; private set; }
 
@@ -132,15 +139,25 @@ namespace Assets.Birds
 		{
 			throw new NotImplementedException();
 		}
+
+		public override void ChangeSprite()
+		{
+			throw new NotImplementedException();
+		}
 	}
 	public class GreenBird : Bird
 	{
 		public GreenBird(bool canReversere)
 		{
-			CanReverseFly = canReversere;
+			this.CanReverseFly = canReversere;
 		}
 		public bool CanReverseFly { get; private set; }
 		public override void ChangeConditional()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void ChangeSprite()
 		{
 			throw new NotImplementedException();
 		}
