@@ -12,6 +12,7 @@ namespace Assets.scripts
 		public virtual int Health { get; protected set; } = 1;
 		public Sprite DefaultImage { get; protected set; }
 		public List<Sprite> AllBirdSprites;
+		public Vector3 StartLocation { get; set; }
 		public abstract void ChangeConditional();
 		public abstract void ChangeSprite();
 	}
