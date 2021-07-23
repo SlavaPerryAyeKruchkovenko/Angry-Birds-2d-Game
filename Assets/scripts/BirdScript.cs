@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Birds;
 
-public class birdScript : MonoBehaviour
+public class BirdScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Birds TypeOfBird;
+
+    private Bird bird;
+    
     void Start()
     {
-        
+        bird = Bird.GetBird(TypeOfBird);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
