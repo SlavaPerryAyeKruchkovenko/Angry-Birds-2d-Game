@@ -7,13 +7,30 @@ using UnityEngine;
 
 namespace Assets.scripts
 {
-	public abstract class Bird
+	public enum Birds
+	{
+		Red, Blue, Yellow, Black, Green, White, BigRed
+	}
+	/*public abstract class Bird
 	{
 		public virtual int Health { get; protected set; } = 1;
 		public Sprite DefaultImage { get; protected set; }
-		public List<Sprite> AllBirdSprites;
+		public List<Sprite> Sprites;
 		public abstract void ChangeConditional();
-		public abstract void ChangeSprite();
+		public static Bird GetBird(Birds bird)
+        {
+            return bird switch
+            {
+                Birds.Red => new RedBird(),
+                Birds.Blue => new BlueBird(true),
+                Birds.Yellow => new YellowBird(true),
+                Birds.Black => new BlackBird(true),
+                Birds.Green => new GreenBird(true),
+                Birds.White => new WhiteBird(true),
+                Birds.BigRed => new BigRedBird(),
+                _ => throw new Exception("Bird not found"),
+            };
+        }
 	}
 	public class RedBird : Bird
 	{
@@ -156,11 +173,6 @@ namespace Assets.scripts
 		{
 			throw new NotImplementedException();
 		}
-
-		public override void ChangeSprite()
-		{
-			throw new NotImplementedException();
-		}
-	}
+	}*/
 
 }
