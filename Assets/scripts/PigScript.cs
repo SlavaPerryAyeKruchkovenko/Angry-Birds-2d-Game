@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class PigScript : MonoBehaviour
 {
-    public int Health;
-    public int Armor;
+    public float Health;
+    public float Armor;
     public List<Sprite> Default;
     public List<Sprite> Damaged;
     public List<Sprite> SoDamaged;
@@ -24,13 +24,24 @@ public class PigScript : MonoBehaviour
 	}
     void Update()
     {
-        if (Health <= 0 && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude == 0)
+        if (Health <= 0 && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude < 0.005)
             Destroy(this.gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ChangeCondition();
-        Health -= Convert.ToInt32(collision.relativeVelocity.sqrMagnitude * collision.gameObject.GetComponent<Rigidbody2D>().mass);
+        float damage = collision.relativeVelocity.sqrMagnitude * collision.gameObject.GetComponent<Rigidbody2D>().mass;
+        if(damage > 1)
+		{
+            Armor -= 0.666f * damage;
+            Health -= 0.333f * damage;
+            if (Armor < 0)
+            {
+                Health -= Math.Abs(Armor);
+                Armor = 0;
+            }
+            ChangeCondition();
+        }
+        
     }
     private void ChangeCondition()
 	{        

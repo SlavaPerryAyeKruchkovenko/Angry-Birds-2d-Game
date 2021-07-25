@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameScript : MonoBehaviour
 {
-    public GameObject SelectedBird { get; set; }
+    public GameObject SelectedBird { get; private set; }
     private GameObject Slingshot;
-    public Stack<GameObject> Birds = new Stack<GameObject>();
+    public Queue<GameObject> Birds { get; private set; } = new Queue<GameObject>();
     public bool GameStart { get; private set;} = false;
     public Vector3 StartLocation = default;
     private Quaternion startRotation = default;
@@ -20,12 +21,11 @@ public class GameScript : MonoBehaviour
 
         xLimit = GameObject.Find("Slingshot").transform.position.x + 3;
 
-        var birds = GameObject.FindGameObjectsWithTag("Bird");
+        var birds = GameObject.FindGameObjectsWithTag("Bird").Reverse();
 		foreach (var item in birds)
 		{
-            Birds.Push(item);
+            Birds.Enqueue(item);
 		}
-        SelectedBird = Birds.Pop();
         startRotation = SelectedBird.transform.rotation;
     }
 
@@ -34,7 +34,7 @@ public class GameScript : MonoBehaviour
     {
         var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mouseCoor = new Vector3(coor.x, coor.y, -1);
-        if (GameStart)
+        if (GameStart && SelectedBird != null)
         {                   
             if(mouseCoor.x >= xLimit)
 			{
@@ -53,10 +53,12 @@ public class GameScript : MonoBehaviour
                 if (!SelectedBird.GetComponent<Rigidbody2D>())
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
-                    DropBird(SelectedBird, StartLocation- mouseCoor);                  
+                    SelectedBird.GetComponent<Rigidbody2D>().useAutoMass = true;
+                    DropBird(SelectedBird, StartLocation - mouseCoor);
+                    SelectedBird = null;
                 }
             }
-            else if(SelectedBird != null && isPress)
+            else if(isPress)
 			{
                 ManageBird(mouseCoor, SelectedBird , StartLocation);
                 ChangeBand(mouseCoor, Slingshot, StartLocation);
@@ -68,8 +70,6 @@ public class GameScript : MonoBehaviour
 	{
         SelectedBird.transform.position = StartLocation;
         SelectedBird.transform.rotation = startRotation;
-        if(SelectedBird.GetComponent<Rigidbody2D>())
-            Destroy(SelectedBird.GetComponent<Rigidbody2D>());
     }
     private void ResetBand()
 	{
@@ -77,7 +77,7 @@ public class GameScript : MonoBehaviour
     }
     private static void DropBird(GameObject bird , Vector3 range)
 	{
-        var power = Vector2.SqrMagnitude(range);
+        var power = Vector2.SqrMagnitude(range) / 2;
         bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
 	}
     private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)
@@ -97,5 +97,12 @@ public class GameScript : MonoBehaviour
     }
     private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
     public void ChangeGameConditional() => this.GameStart = !this.GameStart;
+    public void ChangeBird()
+	{
+        if (Birds.Count > 0) 
+		{
+            SelectedBird = Birds.Dequeue();
+		}
+	}
 }
 

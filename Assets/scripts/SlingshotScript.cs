@@ -17,13 +17,22 @@ public class SlingshotScript : MonoBehaviour
     }
 	private void OnMouseDown()
 	{
-        if(!Camera.main.GetComponent<GameScript>().GameStart)
+        var game = Camera.main.GetComponent<GameScript>();
+        if (!game.GameStart)
 		{
             this.GetComponent<LineRenderer>().enabled = true;
-			Camera.main.GetComponent<GameScript>().ChangeGameConditional();
+			game.ChangeGameConditional();
 
             var position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
-            Camera.main.GetComponent<GameScript>().StartLocation = position;
-        }        
+            game.StartLocation = position;
+            game.ChangeBird();
+        }
+		else
+		{
+            if(game.SelectedBird == null)
+			{
+                game.ChangeBird();
+			}
+		}
 	}
 }

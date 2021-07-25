@@ -10,7 +10,8 @@ public class BirdScript : MonoBehaviour
     public Birds TypeOfBird;
     public List<Sprite> FlyingSprites;
     public List<Sprite> PowerSprites;
-    public int Health;
+    private int health;
+    public bool WasThrow { get; private set; } = false;
 
 
     private Action StartPower { get; set; }
@@ -23,7 +24,14 @@ public class BirdScript : MonoBehaviour
 
     void Update()
     {
-        
+        if(this.GetComponent<Rigidbody2D>())
+		{
+            WasThrow = true;
+		}
+        if (WasThrow && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude < 0.005)
+		{
+            Destroy(this.gameObject);
+        }           
     }
 
     public async void StartFlying()
@@ -56,7 +64,7 @@ public class BirdScript : MonoBehaviour
     private async void YellowBirdPower() 
     {
         var rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        while (Health > 0) 
+        while (health > 0) 
         {
             var startX = rigidbody2D.velocity.x;
             var startY = rigidbody2D.velocity.y;
