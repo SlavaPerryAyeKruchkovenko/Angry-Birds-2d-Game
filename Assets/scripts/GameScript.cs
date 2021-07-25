@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class GameScript : MonoBehaviour
 {
-    public static readonly Vector2 BeaitifulRange = new Vector2(0.15f, 0.35f);
     public GameObject SelectedBird { get; set; }
-    private GameObject elasticBand;
+    private GameObject Slingshot;
     public Stack<GameObject> Birds = new Stack<GameObject>();
     public bool GameStart { get; private set;} = false;
     public Vector2 StartLocation = default;
     private Quaternion startRotation = default;
-    private Vector3 startBandScale = default;
-    private Quaternion startBandRotation = default;
 
     private bool isPress;
     private float xLimit;
     // Start is called before the first frame update
     void Start()
     {
-        elasticBand = GameObject.Find("/Slingshot/elastic band");
-        startBandScale = elasticBand.transform.localScale; 
+        Slingshot = GameObject.Find("Slingshot");
 
         xLimit = GameObject.Find("Slingshot").transform.position.x + 3;
 
@@ -36,7 +32,8 @@ public class GameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mouseCoor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mouseCoor = new Vector3(coor.x, coor.y, -1);
         if (GameStart)
         {                   
             if(mouseCoor.x >= xLimit)
@@ -49,17 +46,21 @@ public class GameScript : MonoBehaviour
             {
                 isPress = true;
             }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                isPress = false;
+                ResetBand();
+                if (!SelectedBird.GetComponent<Rigidbody2D>())
+                {
+                    SelectedBird.AddComponent<Rigidbody2D>();
+                }
+            }
             else if(SelectedBird != null && isPress)
 			{
                 ManageBird(mouseCoor, SelectedBird , StartLocation);
-                ChangeBand(mouseCoor, elasticBand, StartLocation);
-
-                if (Input.GetMouseButtonUp(0))
-                {
-                    isPress = false;
-                    SelectedBird.AddComponent<Rigidbody2D>();
-                }
-            }                  
+                ChangeBand(mouseCoor, Slingshot, StartLocation);
+            }
+            
         }       
     }
     private void ResetBird()
@@ -69,29 +70,13 @@ public class GameScript : MonoBehaviour
     }
     private void ResetBand()
 	{
-        elasticBand.transform.position = StartLocation - BeaitifulRange;
-        elasticBand.transform.rotation = startBandRotation;
-        elasticBand.transform.localScale = startBandScale;
-        elasticBand.GetComponent<SpriteRenderer>().flipX = false;
-        elasticBand.GetComponent<SpriteRenderer>().flipY = false;
+        Slingshot.GetComponent<LineRenderer>().enabled = false;
     }
-    private static void ChangeBand(Vector3 mouseCoordinate , GameObject band , Vector2 startLocation)
+    private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)
 	{
-		var range = new Vector2(mouseCoordinate.x, mouseCoordinate.y) - startLocation;
-		band.transform.position = new Vector3(mouseCoordinate.x, mouseCoordinate.y, 0);
-		
-        band.transform. = startLocation;
-		var angle = Mathf.Atan2(range.y, range.x) * Mathf.Rad2Deg;
-        band.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        band.GetComponent<SpriteRenderer>().flipX = true;
-        if(Math.Abs(angle) >= 90 && Math.Abs(angle) < 180)
-		{
-            band.GetComponent<SpriteRenderer>().flipY = true;
-        }
-        else
-		{
-            band.GetComponent<SpriteRenderer>().flipY = false;
-        }
+        slingshot.GetComponent<LineRenderer>().enabled = true;
+        var rangeVector = new Vector3(startLocation.x - 0.3f, startLocation.y + 0.1f, -1);
+        slingshot.GetComponent<LineRenderer>().SetPositions(new Vector3[] { startLocation, rangeVector, mouseCoordinate });
     }
     private static void ManageBird(Vector3 mouseCoordinate , GameObject selectedBird , Vector2 startLocation)
 	{
