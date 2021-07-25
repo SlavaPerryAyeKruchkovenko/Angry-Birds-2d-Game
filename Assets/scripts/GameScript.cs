@@ -22,7 +22,7 @@ public class GameScript : MonoBehaviour
 
         xLimit = GameObject.Find("Slingshot").transform.position.x + 3;
 
-        var birds = GameObject.FindGameObjectsWithTag("Bird").Reverse();
+        var birds = GameObject.FindGameObjectsWithTag("Bird");
 		foreach (var item in birds)
 		{
             Birds.Enqueue(item);
