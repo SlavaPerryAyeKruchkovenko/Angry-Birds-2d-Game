@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Birds;
 using System.Threading.Tasks;
 using System;
+using Assets.scripts;
 
 public class BirdScript : MonoBehaviour
 {

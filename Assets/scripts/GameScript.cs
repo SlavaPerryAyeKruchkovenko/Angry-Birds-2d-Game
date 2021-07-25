@@ -8,7 +8,7 @@ public class GameScript : MonoBehaviour
     private GameObject Slingshot;
     public Stack<GameObject> Birds = new Stack<GameObject>();
     public bool GameStart { get; private set;} = false;
-    public Vector2 StartLocation = default;
+    public Vector3 StartLocation = default;
     private Quaternion startRotation = default;
 
     private bool isPress;
@@ -53,6 +53,7 @@ public class GameScript : MonoBehaviour
                 if (!SelectedBird.GetComponent<Rigidbody2D>())
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
+                    DropBird(SelectedBird, StartLocation- mouseCoor);                  
                 }
             }
             else if(SelectedBird != null && isPress)
@@ -67,11 +68,18 @@ public class GameScript : MonoBehaviour
 	{
         SelectedBird.transform.position = StartLocation;
         SelectedBird.transform.rotation = startRotation;
+        if(SelectedBird.GetComponent<Rigidbody2D>())
+            Destroy(SelectedBird.GetComponent<Rigidbody2D>());
     }
     private void ResetBand()
 	{
         Slingshot.GetComponent<LineRenderer>().enabled = false;
     }
+    private static void DropBird(GameObject bird , Vector3 range)
+	{
+        var power = Vector2.SqrMagnitude(range);
+        bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
+	}
     private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)
 	{
         slingshot.GetComponent<LineRenderer>().enabled = true;
@@ -85,8 +93,9 @@ public class GameScript : MonoBehaviour
                        Time.deltaTime * 100);
 
         var range = startLocation - new Vector2(selectedBird.transform.position.x, selectedBird.transform.position.y);
-        var angle = Mathf.Atan2(range.y, range.x) * Mathf.Rad2Deg;
-        selectedBird.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        selectedBird.transform.rotation = Quaternion.AngleAxis(GetAngle(range), Vector3.forward);
     }
+    private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
     public void ChangeGameConditional() => this.GameStart = !this.GameStart;
 }
+
