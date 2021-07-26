@@ -27,6 +27,8 @@ public class GameObjectScript : MonoBehaviour
         else if (Type is BuildMaterial)
         {
             Type = BuildMaterial.GetBuildMaterial(MaterialType);
+            BuildMaterial material = Type as BuildMaterial;
+            this.gameObject.GetComponent<Rigidbody2D>().mass *= material.Weight;
         }
         health = Type.Health;
         if (Type.SpriteCoount != ConditionalSprites.Count)

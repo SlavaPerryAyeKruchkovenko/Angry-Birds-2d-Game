@@ -12,10 +12,10 @@ namespace Assets.scripts
 		Pig, BuildMaterial, Bird
 	}
 	public abstract class TypeOfGameObject
-	{
+	{		
 		public abstract float Health { get; protected set; }
 		public abstract float Armor { get; protected set; }
-		public abstract short SpriteCoount {get;}
+		public abstract short SpriteCoount { get; }
 		public void GetDamage(float damage)
 		{
 			if (damage > 1)
