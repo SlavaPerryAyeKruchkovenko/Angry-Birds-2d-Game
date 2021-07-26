@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5413370956922709762}
   - component: {fileID: 5413370956922709763}
   - component: {fileID: 5413370956922709767}
+  - component: {fileID: 6152495541839281274}
   m_Layer: 0
   m_Name: StandartPig
-  m_TagString: Untagged
+  m_TagString: Pig
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,21 +114,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d85e041a5cdd9468c95c00e9e1b3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
-  Armor: 0
   Default:
   - {fileID: -3412045195160614301, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 7304515769502551955, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 5314284997102646371, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   Damaged:
-  - {fileID: 7103828445265919203, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 1640343557874310270, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 8369212268685519580, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 4737605869797093726, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   SoDamaged:
   - {fileID: 8422699138564909961, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: -9037807705518282832, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 5524203853644941524, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 5683476606050997307, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
 --- !u!50 &5413370956922709767
 Rigidbody2D:
@@ -150,3 +147,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6152495541839281274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5413370956922709760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PigType: 0
+  BirdType: 0
+  MaterialType: 0
+  ConditionalSprites:
+  - {fileID: -3412045195160614301, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: 1640343557874310270, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: 8422699138564909961, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}

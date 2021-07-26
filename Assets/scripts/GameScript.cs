@@ -26,8 +26,7 @@ public class GameScript : MonoBehaviour
 		foreach (var item in birds)
 		{
             Birds.Enqueue(item);
-		}
-        startRotation = SelectedBird.transform.rotation;
+		}       
     }
 
     // Update is called once per frame
@@ -103,7 +102,8 @@ public class GameScript : MonoBehaviour
         if (Birds.Count > 0) 
 		{
             SelectedBird = Birds.Dequeue();
-		}
+            startRotation = SelectedBird.transform.rotation;
+        }
 	}
     
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8322486155193216544}
   m_Layer: 0
   m_Name: ice polygon
-  m_TagString: Untagged
+  m_TagString: Build Material
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Material: 0
+  PigType: 0
+  BirdType: 0
+  MaterialType: 0
   ConditionalSprites:
   - {fileID: -8169880724804188264, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
   - {fileID: 8846348948802213365, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
