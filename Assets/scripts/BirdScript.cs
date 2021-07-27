@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using System;
-using Assets.scripts;
+
+public enum Birds
+{
+    Red, Blue, BlueClone, Yellow, Black, Green, White, BigRed
+}
 
 public class BirdScript : MonoBehaviour
 {
     public Birds TypeOfBird;
     public List<Sprite> FlyingSprites;
     public List<Sprite> PowerSprites;
+    public GameObject ExtraObject;
     private int health;
     public bool WasThrow { get; private set; } = false;
-
-
     private Action StartPower { get; set; }
     private bool IsPowerActivated { get; set; } = false;
 
@@ -54,12 +57,12 @@ public class BirdScript : MonoBehaviour
         StartPower();
     }
 
-    private void RedBirdPower() { }
-
     private void BlueBirdPower() 
-    { 
-
+    {
+        Instantiate(ExtraObject, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y - 1), gameObject.transform.rotation);
+        Instantiate(ExtraObject, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y - 1), gameObject.transform.rotation);
     }
+
 
     private async void YellowBirdPower() 
     {
@@ -74,12 +77,14 @@ public class BirdScript : MonoBehaviour
         
     }
 
-    private void BlackBirdPower() 
+    private async void BlackBirdPower() 
     {
         var collider = gameObject.GetComponent<CircleCollider2D>();
         var rigidbody = gameObject.GetComponent<Rigidbody2D>();
         rigidbody.mass = 100;
         collider.radius *= 3;
+        await Task.Delay(100);
+        Destroy(gameObject);
     }
 
     private void GreenBirdPower()
@@ -90,25 +95,22 @@ public class BirdScript : MonoBehaviour
 
     private void WhiteBirdPower()
     {
-
+        Instantiate(ExtraObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 10), gameObject.transform.rotation);
     }
 
-    private void BigRedBirdPower()
-    {
-
-    }
 
     private Action GetPower()
     {
         return TypeOfBird switch
         {
-            Birds.Red => RedBirdPower,
+            Birds.Red => () => { },
             Birds.Blue => BlueBirdPower,
+            Birds.BlueClone => () => { },
             Birds.Yellow => YellowBirdPower,
             Birds.Black => BlackBirdPower,
             Birds.Green => GreenBirdPower,
             Birds.White => WhiteBirdPower,
-            Birds.BigRed => BigRedBirdPower,
+            Birds.BigRed => () => { },
             _ => throw new NotImplementedException()
         };
     }

@@ -53,6 +53,7 @@ public class GameScript : MonoBehaviour
                 if (!SelectedBird.GetComponent<Rigidbody2D>())
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
+                    GameObject.Find("Background").GetComponent<Class1>().GameObject = SelectedBird;
                     SelectedBird.GetComponent<Rigidbody2D>().useAutoMass = true;
                     DropBird(SelectedBird, StartLocation - mouseCoor);
                     SelectedBird = null;
@@ -79,6 +80,7 @@ public class GameScript : MonoBehaviour
 	{
         var power = Vector2.SqrMagnitude(range) / 2;
         bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
+        bird.GetComponent<BirdScript>().StartFlying();
 	}
     private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)
 	{
