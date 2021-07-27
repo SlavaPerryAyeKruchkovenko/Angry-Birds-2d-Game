@@ -8,17 +8,20 @@ using UnityEngine;
 
 class HelpWindowEditor : EditorWindow
 {
-	[MenuItem("Tools/All Conditionals")]
+	[MenuItem("Tools/All Conditionals")]	
 	public static void ShowWindow()
 	{
 		GetWindow(typeof(HelpWindowEditor));
 	}
+	private Vector2 scrollPos;
 	private void OnGUI()
 	{
-		
+		EditorGUILayout.BeginVertical();
+		scrollPos = EditorGUILayout.BeginScrollView(scrollPos,GUILayout.Width(this.position.width), GUILayout.Height(this.position.height));
 		GetConditionalAboutTag("Pig");
 		GetConditionalAboutTag("Build Material");
 		this.Repaint();
+		EditorGUILayout.EndScrollView();
 	}
 	private static void GetConditionalAboutTag(string tag)
 	{
@@ -28,8 +31,11 @@ class HelpWindowEditor : EditorWindow
 			foreach (var item in birds)
 			{
 				EditorGUILayout.LabelField(item.name, EditorStyles.boldLabel);
-				EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().Type.Health.ToString());
-				EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().Type.Armor.ToString());
+				if(item.GetComponent<GameObjectScript>().Type!= null)
+				{
+					EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().Type.Health.ToString());
+					EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().Type.Armor.ToString());
+				}			
 				EditorGUILayout.Space();
 			}
 		}

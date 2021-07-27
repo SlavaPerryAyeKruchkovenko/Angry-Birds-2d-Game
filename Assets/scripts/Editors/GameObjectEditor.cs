@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 [CustomEditor(typeof(GameObjectScript))]
 public class GameObjectEditor : Editor
@@ -14,7 +15,7 @@ public class GameObjectEditor : Editor
 	}
 	public override void OnInspectorGUI()
 	{
-		script.TypeOfGameObj = (TypesOfGameObject)EditorGUILayout.EnumPopup("Object type", script.TypeOfGameObj);
+		script.TypeOfGameObj = TypeOfGameObject.GetTypesOfGameObject(script.gameObject);
 		switch (script.TypeOfGameObj)
 		{
 			case TypesOfGameObject.Bird: script.BirdType = (Birds)EditorGUILayout.EnumPopup("Bird type", script.BirdType); break;
@@ -49,6 +50,11 @@ public class GameObjectEditor : Editor
 			var notHave = script.Type.SpriteCoount - script.ConditionalSprites.Count;
 			EditorGUILayout.LabelField($"Нехватает {notHave} Спрайтов", EditorStyles.boldLabel);
 		}
+	}
+	public static void SetObjectDirty(GameObject obj)
+	{
+		EditorUtility.SetDirty(obj);
+		EditorSceneManager.MarkSceneDirty(obj.scene);
 	}
 }
  
