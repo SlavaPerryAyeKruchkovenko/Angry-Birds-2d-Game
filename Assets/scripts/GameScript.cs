@@ -1,43 +1,40 @@
+using Assets.scripts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameScript : MonoBehaviour
 {
-    public static readonly Vector2 BeaitifulRange = new Vector2(0.15f, 0.35f);
-    public GameObject SelectedBird { get; set; }
-    private GameObject elasticBand;
-    public Stack<GameObject> Birds = new Stack<GameObject>();
+    public GameObject SelectedBird { get; private set; }
+    private GameObject Slingshot;
+    public Queue<GameObject> Birds { get; private set; } = new Queue<GameObject>();
     public bool GameStart { get; private set;} = false;
-    public Vector2 StartLocation = default;
+    public Vector3 StartLocation = default;
     private Quaternion startRotation = default;
-    private Vector3 startBandScale = default;
-    private Quaternion startBandRotation = default;
 
     private bool isPress;
     private float xLimit;
     // Start is called before the first frame update
     void Start()
     {
-        elasticBand = GameObject.Find("/Slingshot/elastic band");
-        startBandScale = elasticBand.transform.localScale; 
+        Slingshot = GameObject.Find("Slingshot");
 
         xLimit = GameObject.Find("Slingshot").transform.position.x + 3;
 
         var birds = GameObject.FindGameObjectsWithTag("Bird");
 		foreach (var item in birds)
 		{
-            Birds.Push(item);
-		}
-        SelectedBird = Birds.Pop();
-        startRotation = SelectedBird.transform.rotation;
+            Birds.Enqueue(item);
+		}       
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 mouseCoor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (GameStart)
+        var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mouseCoor = new Vector3(coor.x, coor.y, -1);
+        if (GameStart && SelectedBird != null)
         {                   
             if(mouseCoor.x >= xLimit)
 			{
@@ -49,49 +46,47 @@ public class GameScript : MonoBehaviour
             {
                 isPress = true;
             }
-            else if(SelectedBird != null && isPress)
+            else if (Input.GetMouseButtonUp(0))
+            {
+                isPress = false;
+                ResetBand();
+                if (!SelectedBird.GetComponent<Rigidbody2D>())
+                {
+                    SelectedBird.AddComponent<Rigidbody2D>();
+                    
+                    SelectedBird.GetComponent<Rigidbody2D>().useAutoMass = true;
+                    DropBird(SelectedBird, StartLocation - mouseCoor);
+                    SelectedBird = null;
+                }
+            }
+            else if(isPress)
 			{
                 ManageBird(mouseCoor, SelectedBird , StartLocation);
-                ChangeBand(mouseCoor, elasticBand, StartLocation);
-
-                if (Input.GetMouseButtonUp(0))
-                {
-                    isPress = false;
-                    SelectedBird.AddComponent<Rigidbody2D>();
-                }
-            }                  
+                ChangeBand(mouseCoor, Slingshot, StartLocation);
+            }
+            
         }       
     }
-    private void ResetBird()
+    private void ResetBird()//ResetPosition
 	{
         SelectedBird.transform.position = StartLocation;
         SelectedBird.transform.rotation = startRotation;
     }
     private void ResetBand()
 	{
-        elasticBand.transform.position = StartLocation - BeaitifulRange;
-        elasticBand.transform.rotation = startBandRotation;
-        elasticBand.transform.localScale = startBandScale;
-        elasticBand.GetComponent<SpriteRenderer>().flipX = false;
-        elasticBand.GetComponent<SpriteRenderer>().flipY = false;
+        Slingshot.GetComponent<LineRenderer>().enabled = false;
     }
-    private static void ChangeBand(Vector3 mouseCoordinate , GameObject band , Vector2 startLocation)
+    private static void DropBird(GameObject bird , Vector3 range)
 	{
-		var range = new Vector2(mouseCoordinate.x, mouseCoordinate.y) - startLocation;
-		band.transform.position = new Vector3(mouseCoordinate.x, mouseCoordinate.y, 0);
-		
-        band.transform. = startLocation;
-		var angle = Mathf.Atan2(range.y, range.x) * Mathf.Rad2Deg;
-        band.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        band.GetComponent<SpriteRenderer>().flipX = true;
-        if(Math.Abs(angle) >= 90 && Math.Abs(angle) < 180)
-		{
-            band.GetComponent<SpriteRenderer>().flipY = true;
-        }
-        else
-		{
-            band.GetComponent<SpriteRenderer>().flipY = false;
-        }
+        var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;//delta x^2 * k /2
+        bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
+        bird.GetComponent<BirdScript>().StartFlying();
+	}
+    private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)
+	{
+        slingshot.GetComponent<LineRenderer>().enabled = true;
+        var rangeVector = new Vector3(startLocation.x - 0.3f, startLocation.y + 0.1f, -1);
+        slingshot.GetComponent<LineRenderer>().SetPositions(new Vector3[] { startLocation, rangeVector, mouseCoordinate });
     }
     private static void ManageBird(Vector3 mouseCoordinate , GameObject selectedBird , Vector2 startLocation)
 	{
@@ -100,8 +95,18 @@ public class GameScript : MonoBehaviour
                        Time.deltaTime * 100);
 
         var range = startLocation - new Vector2(selectedBird.transform.position.x, selectedBird.transform.position.y);
-        var angle = Mathf.Atan2(range.y, range.x) * Mathf.Rad2Deg;
-        selectedBird.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        selectedBird.transform.rotation = Quaternion.AngleAxis(GetAngle(range), Vector3.forward);
     }
+    private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
     public void ChangeGameConditional() => this.GameStart = !this.GameStart;
+    public void ChangeBird()
+	{
+        if (Birds.Count > 0) 
+		{
+            SelectedBird = Birds.Dequeue();
+            startRotation = SelectedBird.transform.rotation;
+        }
+	}
+    
 }
+

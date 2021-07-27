@@ -4,27 +4,24 @@ using UnityEngine;
 
 public class SlingshotScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 	private void OnMouseDown()
 	{
-        if(!Camera.main.GetComponent<GameScript>().GameStart)
+        var game = Camera.main.GetComponent<GameScript>();
+        if (!game.GameStart)
 		{
-            var band = GameObject.Find("/Slingshot/elastic band");
-            band.GetComponent<SpriteRenderer>().enabled = true;
-			Camera.main.GetComponent<GameScript>().ChangeGameConditional();
+            this.GetComponent<LineRenderer>().enabled = true;
+			game.ChangeGameConditional();
 
-            var position = new Vector2(band.transform.position.x, band.transform.position.y);
-            Camera.main.GetComponent<GameScript>().StartLocation = (position + GameScript.BeaitifulRange);
-        }        
+            var position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
+            game.StartLocation = position;
+            game.ChangeBird();
+        }
+		else
+		{
+            if(game.SelectedBird == null)
+			{
+                game.ChangeBird();
+			}
+		}
 	}
 }

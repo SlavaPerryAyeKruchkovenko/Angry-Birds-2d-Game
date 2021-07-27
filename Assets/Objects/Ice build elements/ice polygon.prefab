@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5413370956922709760
+--- !u!1 &6215429954027238189
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5413370956922709764}
-  - component: {fileID: 5413370956922709765}
-  - component: {fileID: 5413370956922709762}
-  - component: {fileID: 5413370956922709763}
-  - component: {fileID: 5413370956922709767}
-  - component: {fileID: 6152495541839281274}
+  - component: {fileID: 1030093737047035437}
+  - component: {fileID: 663495570212813668}
+  - component: {fileID: 9190399630728943743}
+  - component: {fileID: 6179743468357862774}
+  - component: {fileID: 8322486155193216544}
   m_Layer: 0
-  m_Name: StandartPig
-  m_TagString: Pig
+  m_Name: ice polygon
+  m_TagString: Build Material
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5413370956922709764
+--- !u!4 &1030093737047035437
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413370956922709760}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.972722, y: -0.2688334, z: 0}
+  m_GameObject: {fileID: 6215429954027238189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6185677, y: -1.22633, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5413370956922709765
+--- !u!212 &663495570212813668
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413370956922709760}
+  m_GameObject: {fileID: 6215429954027238189}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,70 +74,61 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3412045195160614301, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  m_Sprite: {fileID: -8169880724804188264, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.77, y: 0.76}
+  m_Size: {x: 0.95, y: 0.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &5413370956922709762
-CircleCollider2D:
+--- !u!60 &9190399630728943743
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413370956922709760}
+  m_GameObject: {fileID: 6215429954027238189}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 9ad559fceef11994fa8e3e9ef3562d29, type: 2}
+  m_Material: {fileID: 6200000, guid: e264265dd0193ab41b32facf48b744ea, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.01}
-  serializedVersion: 2
-  m_Radius: 0.37
---- !u!114 &5413370956922709763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413370956922709760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d85e041a5cdd9468c95c00e9e1b3a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Default:
-  - {fileID: -3412045195160614301, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 7304515769502551955, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 5314284997102646371, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  Damaged:
-  - {fileID: 1640343557874310270, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 8369212268685519580, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 4737605869797093726, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  SoDamaged:
-  - {fileID: 8422699138564909961, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: -9037807705518282832, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 5683476606050997307, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
---- !u!50 &5413370956922709767
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.95, y: 0.92}
+    newSize: {x: 0.95, y: 0.92}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.39499998, y: 0.45999998}
+      - {x: -0.475, y: 0.45999998}
+      - {x: -0.475, y: -0.45999998}
+      - {x: 0.45499998, y: -0.45999998}
+      - {x: 0.45499998, y: -0.39}
+      - {x: 0.33499998, y: -0.21}
+--- !u!50 &6179743468357862774
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413370956922709760}
+  m_GameObject: {fileID: 6215429954027238189}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.43008405
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -147,22 +137,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6152495541839281274
+--- !u!114 &8322486155193216544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413370956922709760}
+  m_GameObject: {fileID: 6215429954027238189}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TypeOfGameObj: 1
   PigType: 0
   BirdType: 0
   MaterialType: 0
   ConditionalSprites:
-  - {fileID: -3412045195160614301, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 1640343557874310270, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 8422699138564909961, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: -8169880724804188264, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
+  - {fileID: 8846348948802213365, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
+  - {fileID: -7334979964960106736, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
+  - {fileID: 8522388667355152601, guid: f660a5d21aca60746a79d0873f15ee71, type: 3}
