@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1560645717798813336}
   - component: {fileID: 211506162109438011}
   - component: {fileID: 979467105008139824}
+  - component: {fileID: 3509828181911215055}
   m_Layer: 0
   m_Name: GreenBird
   m_TagString: Bird
@@ -96,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 0
   FlyingSprites:
   - {fileID: -7142375501184544581, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
   - {fileID: -325208574543100564, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
@@ -151,3 +151,20 @@ PolygonCollider2D:
       - {x: 0.13, y: -0.21}
       - {x: 0.35, y: -0.22}
       - {x: 0.48, y: -0.16}
+--- !u!114 &3509828181911215055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449682106790720181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfGameObj: 0
+  PigType: 0
+  BirdType: 0
+  MaterialType: 0
+  ConditionalSprites: []

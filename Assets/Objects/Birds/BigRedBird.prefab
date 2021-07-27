@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3964981624794228446}
   - component: {fileID: 6162436652568801196}
   - component: {fileID: 5708637177634328875}
+  - component: {fileID: 472156334757661445}
   m_Layer: 0
   m_Name: BigRedBird
   m_TagString: Bird
@@ -96,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 7
   FlyingSprites:
   - {fileID: 3826211718632959946, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
   - {fileID: -2058253761029501655, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
@@ -119,3 +119,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.495
+--- !u!114 &472156334757661445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57584614343211392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfGameObj: 0
+  PigType: 0
+  BirdType: 0
+  MaterialType: 0
+  ConditionalSprites: []

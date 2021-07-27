@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5275800568255319708}
   - component: {fileID: 6057435593112226575}
   - component: {fileID: 8918042836197895231}
+  - component: {fileID: -4512176249127140818}
   m_Layer: 0
   m_Name: BlackBird
   m_TagString: Bird
@@ -96,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 4
   FlyingSprites:
   - {fileID: 6037705425155367157, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
   - {fileID: 3414959011045282404, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
@@ -123,3 +123,20 @@ CircleCollider2D:
   m_Offset: {x: 0.015529888, y: -0.03420505}
   serializedVersion: 2
   m_Radius: 0.32699588
+--- !u!114 &-4512176249127140818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547543058917793840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfGameObj: 0
+  PigType: 0
+  BirdType: 0
+  MaterialType: 0
+  ConditionalSprites: []

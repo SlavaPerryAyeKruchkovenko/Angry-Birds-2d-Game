@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1542601914659532381}
   - component: {fileID: 4931511116471027043}
   - component: {fileID: -2096353124749682954}
+  - component: {fileID: -4765678486175947094}
   m_Layer: 0
   m_Name: 'BlueCloneBird '
-  m_TagString: Untagged
+  m_TagString: Bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 2
   FlyingSprites:
   - {fileID: -4464569400506775591, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
   PowerSprites: []
@@ -139,3 +139,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4765678486175947094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3206944724106927722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfGameObj: 0
+  PigType: 0
+  BirdType: 0
+  MaterialType: 0
+  ConditionalSprites: []
