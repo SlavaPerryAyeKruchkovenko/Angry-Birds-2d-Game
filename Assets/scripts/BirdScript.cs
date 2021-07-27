@@ -52,7 +52,7 @@ public class BirdScript : MonoBehaviour
     private async void YellowBirdPower() 
     {
         var rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        while (gameObject.GetComponent<GameObjectScript>().Type.Health > 0) 
+        while (gameObject.GetComponent<GameObjectScript>().GameObj.Health > 0) 
         {
             var startX = rigidbody2D.velocity.x;
             var startY = rigidbody2D.velocity.y;

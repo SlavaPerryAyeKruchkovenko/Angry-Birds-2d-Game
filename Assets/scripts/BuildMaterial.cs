@@ -13,7 +13,6 @@ namespace Assets.scripts
 	public class BuildMaterial :TypeOfGameObject
 	{
 		public override short SpriteCoount => 4;
-		public virtual float Weight { get; }
 		public override float Health { get ; protected set; }
 		public override float Armor { get ; protected set; }
 

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2547543058917793840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.99, y: -3.22, z: 0}
-  m_LocalScale: {x: 1.6196, y: 1.4707, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015529888, y: -0.03420505}
+  m_Offset: {x: 0.01, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.32699588
 --- !u!114 &-4512176249127140818
@@ -135,8 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfGameObj: 0
+  TypeOfGameObj: 2
   PigType: 0
-  BirdType: 0
+  BirdType: 3
   MaterialType: 0
-  ConditionalSprites: []
+  ConditionalSprites:
+  - {fileID: -3238897439310337441, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
+  - {fileID: -6583705251678338530, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}

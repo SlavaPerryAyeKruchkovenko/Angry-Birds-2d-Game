@@ -53,8 +53,6 @@ public class GameScript : MonoBehaviour
                 if (!SelectedBird.GetComponent<Rigidbody2D>())
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
-                    
-                    SelectedBird.GetComponent<Rigidbody2D>().useAutoMass = true;
                     DropBird(SelectedBird, StartLocation - mouseCoor);
                     SelectedBird = null;
                 }
@@ -76,7 +74,7 @@ public class GameScript : MonoBehaviour
 	{
         Slingshot.GetComponent<LineRenderer>().enabled = false;
     }
-    private static void DropBird(GameObject bird , Vector3 range)
+    private static void DropBird(GameObject bird , Vector3 range)//when Bird Start Flying
 	{
         var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;//delta x^2 * k /2
         bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);

@@ -10,26 +10,23 @@ public class GameObjectScript : MonoBehaviour
     public Pigs PigType;
     public Birds BirdType;
     public BuildMaterials MaterialType;
-    public TypeOfGameObject Type { get; private set; }
+    public TypeOfGameObject GameObj { get; private set; }
     public List<Sprite> ConditionalSprites;
 	public void Start()
 	{
-        Type = TypeOfGameObject.GetGameObjectType(TypeOfGameObj);
-        if (Type is Pig)
-        {
-            Type = Pig.GetPig(PigType);
-        }
-        else if (Type is Bird)
-        {
-            Type = Bird.GetBird(BirdType);
-        }
-        else if (Type is BuildMaterial)
-        {
-            Type = BuildMaterial.GetBuildMaterial(MaterialType);
-            BuildMaterial material = Type as BuildMaterial;
-            this.gameObject.GetComponent<Rigidbody2D>().mass *= material.Weight;
-        }
-        maxHealth = Type.Health;
+        GameObj = TypeOfGameObject.GetGameObjectType(TypeOfGameObj);
+        if (GameObj is Pig)
+            GameObj = Pig.GetPig(PigType);
+
+        else if (GameObj is Bird)
+            GameObj = Bird.GetBird(BirdType);
+
+        else if (GameObj is BuildMaterial)
+            GameObj = BuildMaterial.GetBuildMaterial(MaterialType);
+
+        if(this.gameObject.GetComponent<Rigidbody2D>())
+            this.gameObject.GetComponent<Rigidbody2D>().mass = GameObj.Weight;
+        maxHealth = GameObj.Health;
 	}
 	// Start is called before the first frame update
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -52,24 +49,24 @@ public class GameObjectScript : MonoBehaviour
             return;
 		}
         damage = Mathf.Abs(damage);
-        Type.GetDamage(damage);
+        GameObj.GetDamage(damage);
         ChangeConditional();
     }
     // Update is called once per frame
     void Update()
     {
-        if (Type.Health <= 0 && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude < 0.005)
+        if (GameObj.Health <= 0 && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude < 0.005)
             Destroy(this.gameObject);
 
     }
     private void ChangeConditional()
 	{
 
-		for (float i = Type.SpriteCoount-1; i >= 0; i--)
+		for (float i = GameObj.SpriteCoount-1; i >= 0; i--)
 		{
-            if (Type.Health >= i / Type.SpriteCoount * maxHealth && Type.Health < (i + 1) / Type.SpriteCoount * maxHealth) 
+            if (GameObj.Health >= i / GameObj.SpriteCoount * maxHealth && GameObj.Health < (i + 1) / GameObj.SpriteCoount * maxHealth) 
 			{
-                ChangeSprite(this.gameObject, ConditionalSprites[(int)(Type.SpriteCoount - 1 - i)]);
+                ChangeSprite(this.gameObject, ConditionalSprites[(int)(GameObj.SpriteCoount - 1 - i)]);
             }
 		}
     }

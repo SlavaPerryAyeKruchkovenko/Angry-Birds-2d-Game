@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8567409504844273856}
   - component: {fileID: 1843987283393765748}
   - component: {fileID: 5716914818234680526}
+  - component: {fileID: 708055832898116454}
   m_Layer: 0
   m_Name: YellowBird
   m_TagString: Bird
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1928547766303695280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.7219, y: -3.1526, z: 0}
-  m_LocalScale: {x: 1.4143, y: 1.422, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 3
   FlyingSprites:
   - {fileID: 5827684999355348692, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
   - {fileID: 5745019727991100432, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
@@ -130,20 +130,31 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.25, y: -0.02}
-      - {x: 0.049999997, y: 0.16}
-      - {x: 0.049999997, y: 0.22}
-      - {x: 0.04, y: 0.24}
-      - {x: -0.04, y: 0.26999998}
-      - {x: -0.089999996, y: 0.26999998}
-      - {x: -0.12, y: 0.099999994}
-      - {x: -0.26999998, y: -0.01}
-      - {x: -0.28, y: -0.04}
-      - {x: -0.28, y: -0.06}
-      - {x: -0.26, y: -0.21}
-      - {x: -0.19, y: -0.26}
-      - {x: 0, y: -0.26999998}
-      - {x: 0.19, y: -0.26999998}
-      - {x: 0.28, y: -0.22999999}
-      - {x: 0.28, y: -0.13}
-      - {x: 0.26999998, y: -0.07}
+    - - {x: 0.11708012, y: 0.04011798}
+      - {x: 0.22112212, y: -0.10075712}
+      - {x: 0.2586347, y: -0.19916989}
+      - {x: 0.14894912, y: -0.23163486}
+      - {x: -0.06299099, y: -0.2412293}
+      - {x: -0.22846885, y: -0.20913312}
+      - {x: -0.16447502, y: -0.05104494}
+      - {x: -0.0712845, y: 0.09614742}
+      - {x: 0.006826535, y: 0.15955707}
+--- !u!114 &708055832898116454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928547766303695280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfGameObj: 2
+  PigType: 0
+  BirdType: 2
+  MaterialType: 0
+  ConditionalSprites:
+  - {fileID: -6001116547907348392, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
+  - {fileID: 1568432389808191259, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}

@@ -34,15 +34,18 @@ namespace Assets.scripts
 	{
 		public override float Health { get; protected set; } = 100;
 		public override float Armor { get; protected set; } = 200;
+		public override float Weight => 2;
 	}
 	public class ArmorPig : Pig
 	{
 		public override float Health { get; protected set; } = 100;
 		public override float Armor { get; protected set; } = 100;
+		public override float Weight => 1.2f;
 	}
 	public class KingPig : Pig
 	{
 		public override float Health { get; protected set; } = 100;
 		public override float Armor { get; protected set; } = 500;
+		public override float Weight => 2.5f;
 	}
 }

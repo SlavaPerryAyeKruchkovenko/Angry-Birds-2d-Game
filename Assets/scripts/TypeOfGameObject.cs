@@ -16,6 +16,7 @@ namespace Assets.scripts
 		public abstract float Health { get; protected set; }
 		public abstract float Armor { get; protected set; }
 		public abstract short SpriteCoount { get; }
+		public virtual float Weight => 1;
 		public void GetDamage(float damage)
 		{
 			if (damage > 1)

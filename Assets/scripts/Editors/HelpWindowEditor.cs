@@ -31,10 +31,10 @@ class HelpWindowEditor : EditorWindow
 			foreach (var item in birds)
 			{
 				EditorGUILayout.LabelField(item.name, EditorStyles.boldLabel);
-				if(item.GetComponent<GameObjectScript>().Type!= null)
+				if(item.GetComponent<GameObjectScript>().GameObj!= null)
 				{
-					EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().Type.Health.ToString());
-					EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().Type.Armor.ToString());
+					EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().GameObj.Health.ToString());
+					EditorGUILayout.LabelField(item.GetComponent<GameObjectScript>().GameObj.Armor.ToString());
 				}			
 				EditorGUILayout.Space();
 			}

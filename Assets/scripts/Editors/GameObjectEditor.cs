@@ -45,9 +45,9 @@ public class GameObjectEditor : Editor
 		{
 			script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
 		}
-		if (script.ConditionalSprites.Count != script.Type.SpriteCoount)
+		if (script.ConditionalSprites.Count != script.GameObj.SpriteCoount)
 		{
-			var notHave = script.Type.SpriteCoount - script.ConditionalSprites.Count;
+			var notHave = script.GameObj.SpriteCoount - script.ConditionalSprites.Count;
 			EditorGUILayout.LabelField($"Нехватает {notHave} Спрайтов", EditorStyles.boldLabel);
 		}
 	}
