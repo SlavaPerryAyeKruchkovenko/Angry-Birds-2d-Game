@@ -66,7 +66,7 @@ public class GameScript : MonoBehaviour
             
         }       
     }
-    private void ResetBird()
+    private void ResetBird()//ResetPosition
 	{
         SelectedBird.transform.position = StartLocation;
         SelectedBird.transform.rotation = startRotation;
@@ -77,7 +77,7 @@ public class GameScript : MonoBehaviour
     }
     private static void DropBird(GameObject bird , Vector3 range)
 	{
-        var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;
+        var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;//delta x^2 * k /2
         bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
 	}
     private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)

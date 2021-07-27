@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class GameObjectScript : MonoBehaviour
 {
-    private TypesOfGameObject TypeOfGameObj;
-    private float health;
+    public TypesOfGameObject TypeOfGameObj;
+    private float maxHealth;
     public Pigs PigType;
     public Birds BirdType;
     public BuildMaterials MaterialType;
     public TypeOfGameObject Type { get; private set; }
     public List<Sprite> ConditionalSprites;
-	private void Start()
+	public void Start()
 	{
-        TypeOfGameObj = TypeOfGameObject.GetTypesOfGameObject(this.gameObject);
         Type = TypeOfGameObject.GetGameObjectType(TypeOfGameObj);
         if (Type is Pig)
         {
@@ -30,11 +29,7 @@ public class GameObjectScript : MonoBehaviour
             BuildMaterial material = Type as BuildMaterial;
             this.gameObject.GetComponent<Rigidbody2D>().mass *= material.Weight;
         }
-        health = Type.Health;
-        if (Type.SpriteCoount != ConditionalSprites.Count)
-		{
-            Debug.LogError("Не хватает спрайтов");
-		}
+        maxHealth = Type.Health;
 	}
 	// Start is called before the first frame update
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -44,10 +39,18 @@ public class GameObjectScript : MonoBehaviour
 		{
             damage *= collision.gameObject.GetComponent<Rigidbody2D>().mass;
         }
+        else//if object down on ground
+		{
+            damage *= 5;
+		}
         if (this.gameObject.GetComponent<Rigidbody2D>())
 		{
             damage *= this.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
         }
+        else
+		{
+            return;
+		}
         damage = Mathf.Abs(damage);
         Type.GetDamage(damage);
         ChangeConditional();
@@ -64,7 +67,7 @@ public class GameObjectScript : MonoBehaviour
 
 		for (float i = Type.SpriteCoount-1; i >= 0; i--)
 		{
-            if (Type.Health >= i / Type.SpriteCoount * health && Type.Health < (i + 1) / Type.SpriteCoount * health) 
+            if (Type.Health >= i / Type.SpriteCoount * maxHealth && Type.Health < (i + 1) / Type.SpriteCoount * maxHealth) 
 			{
                 ChangeSprite(this.gameObject, ConditionalSprites[(int)(Type.SpriteCoount - 1 - i)]);
             }

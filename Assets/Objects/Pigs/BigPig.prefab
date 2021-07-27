@@ -157,9 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PigType: 1
-  BirdType: 0
-  MaterialType: 0
   ConditionalSprites:
   - {fileID: 4943830071169559792, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: -3519555057197554669, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
