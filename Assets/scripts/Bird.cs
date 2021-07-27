@@ -6,41 +6,58 @@ using System;
 
 namespace Assets.scripts
 {
+	public enum Birds
+	{
+		Red, Blue, Yellow, Black, Green, White, BigRed
+	}
+	public class Bird: TypeOfGameObject
+	{
+		public override float Health { get; protected set; } = 1;
+		public override float Armor { get; protected set; } = 0;
 
-    public enum Birds
-    {
-        Red, Blue, Yellow, Black, Green, White, BigRed
-    }
+		public override short SpriteCoount => 2;
+		public static Bird GetBird(Birds bird)
+		{
+			return bird switch
+			{
+				Birds.Red => new RedBird(),
+				Birds.Blue => new BlueBird(),
+				Birds.Yellow => new YellowBird(),
+				Birds.Black => new BlackBird(),
+				Birds.Green => new GreenBird(),
+				Birds.White => new WhiteBird(),
+				Birds.BigRed => new BigRedBird(),
+				_ => throw new Exception("Bird not found"),
+			};
+		}
+	}
+	public class RedBird : Bird
+	{
+	}
+	public class BlueBird : Bird
+	{
 
-    public abstract class Bird
-    {
-        public abstract void Power();
-        public static Bird GetType(Birds TypeOfBird)
-        {
-            return TypeOfBird switch
-            {
-                Birds.Red => new RedBird(),
-                Birds.Blue => new BlueBird(),
-                Birds.Yellow => new YellowBird(),
-                Birds.Black => new BlackBird(),
-                Birds.Green => new GreenBird(),
-                Birds.White => new WhiteBird(),
-                Birds.BigRed => new BigRedBird(),
-                _ => throw new NotImplementedException()
-            };
-        }
-    }
-    public class RedBird : Bird
-    {
-        public override void Power() { }
-    }
-    public class BlueBird: Bird
-    {
-        public override void Power(GameObject @object)
-        {
-            @object.Instantiate(ExtraObject, new Vector3(gameObject.transform.position.x - 10, gameObject.transform.position.y - 10), gameObject.transform.rotation);
-            @object.Instantiate(@objectExtraObject, new Vector3(gameObject.transform.position.x + 10, gameObject.transform.position.y - 10), gameObject.transform.rotation);
-        }
-    }
+	}
+	public class YellowBird : Bird
+	{
+
+	}
+	public class BigRedBird : Bird
+	{
+
+	}
+	public class BlackBird : Bird
+	{
+
+	}
+	public class WhiteBird : Bird
+	{
+
+	}
+	public class GreenBird : Bird
+	{
+
+	}
+
 }
 */

@@ -1,3 +1,4 @@
+using Assets.scripts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,11 @@ public class GameScript : MonoBehaviour
 
         xLimit = GameObject.Find("Slingshot").transform.position.x + 3;
 
-        var birds = GameObject.FindGameObjectsWithTag("Bird").Reverse();
+        var birds = GameObject.FindGameObjectsWithTag("Bird");
 		foreach (var item in birds)
 		{
             Birds.Enqueue(item);
-		}
-        startRotation = SelectedBird.transform.rotation;
+		}       
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public class GameScript : MonoBehaviour
             
         }       
     }
-    private void ResetBird()
+    private void ResetBird()//ResetPosition
 	{
         SelectedBird.transform.position = StartLocation;
         SelectedBird.transform.rotation = startRotation;
@@ -78,7 +78,7 @@ public class GameScript : MonoBehaviour
     }
     private static void DropBird(GameObject bird , Vector3 range)
 	{
-        var power = Vector2.SqrMagnitude(range) / 2;
+        var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;//delta x^2 * k /2
         bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
         bird.GetComponent<BirdScript>().StartFlying();
 	}
@@ -104,7 +104,9 @@ public class GameScript : MonoBehaviour
         if (Birds.Count > 0) 
 		{
             SelectedBird = Birds.Dequeue();
-		}
+            startRotation = SelectedBird.transform.rotation;
+        }
 	}
+    
 }
 

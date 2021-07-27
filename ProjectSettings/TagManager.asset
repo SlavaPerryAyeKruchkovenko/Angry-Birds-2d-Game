@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bird
-  - ClickablePlace
+  - Pig
+  - Build Material
   layers:
   - Default
   - TransparentFX
