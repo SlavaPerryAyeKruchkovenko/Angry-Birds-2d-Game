@@ -28,7 +28,7 @@ namespace Assets.scripts
 	}
 	public class IceBuildMaterial : BuildMaterial
 	{
-		public override float Health { get; protected set; } = 100;
+		public override float Health { get; protected set; } = 50;
 
 		public override float Armor { get; protected set; } = 0;
 
@@ -38,7 +38,7 @@ namespace Assets.scripts
 	{
 		public override float Health { get; protected set; } = 100;
 
-		public override float Armor { get; protected set; } = 100;
+		public override float Armor { get; protected set; } = 0;
 
 		public override float Weight => 1f;
 	}
@@ -46,7 +46,7 @@ namespace Assets.scripts
 	{
 		public override float Health { get; protected set; } = 100;
 
-		public override float Armor { get; protected set; } = 200;
+		public override float Armor { get; protected set; } = 100;
 
 		public override float Weight => 2f;
 	}

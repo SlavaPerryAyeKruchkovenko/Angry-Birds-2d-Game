@@ -4,37 +4,22 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System;
 
-public enum Birds
-{
-    Red, Blue, BlueClone, Yellow, Black, Green, White, BigRed
-}
-
 public class BirdScript : MonoBehaviour
 {
-    public Birds TypeOfBird;
     public List<Sprite> FlyingSprites;
     public List<Sprite> PowerSprites;
     public GameObject ExtraObject;
-    private int health;
-    public bool WasThrow { get; private set; } = false;
     private Action StartPower { get; set; }
     private bool IsPowerActivated { get; set; } = false;
 
     void Start()
     {
-        StartPower = GetPower();
+
     }
 
     void Update()
     {
-        if(this.GetComponent<Rigidbody2D>())
-		{
-            WasThrow = true;
-		}
-        if (WasThrow && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude < 0.005)
-		{
-            Destroy(this.gameObject);
-        }           
+
     }
 
     public async void StartFlying()
@@ -67,14 +52,13 @@ public class BirdScript : MonoBehaviour
     private async void YellowBirdPower() 
     {
         var rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        while (health > 0) 
+        while (gameObject.GetComponent<GameObjectScript>().Type.Health > 0) 
         {
             var startX = rigidbody2D.velocity.x;
             var startY = rigidbody2D.velocity.y;
             rigidbody2D.velocity = new Vector2(startX * (float)1.5, startY * (float)1.5);
             await Task.Delay(1000);
         }
-        
     }
 
     private async void BlackBirdPower() 
@@ -96,22 +80,5 @@ public class BirdScript : MonoBehaviour
     private void WhiteBirdPower()
     {
         Instantiate(ExtraObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 10), gameObject.transform.rotation);
-    }
-
-
-    private Action GetPower()
-    {
-        return TypeOfBird switch
-        {
-            Birds.Red => () => { },
-            Birds.Blue => BlueBirdPower,
-            Birds.BlueClone => () => { },
-            Birds.Yellow => YellowBirdPower,
-            Birds.Black => BlackBirdPower,
-            Birds.Green => GreenBirdPower,
-            Birds.White => WhiteBirdPower,
-            Birds.BigRed => () => { },
-            _ => throw new NotImplementedException()
-        };
     }
 }

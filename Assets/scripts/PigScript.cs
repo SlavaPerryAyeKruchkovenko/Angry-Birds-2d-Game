@@ -15,7 +15,9 @@ public class PigScript : MonoBehaviour
         while (true)
         {
             if (this.gameObject.GetComponent<GameObjectScript>().Type.Health <= 0) { break; }
-            await Task.Delay(new System.Random().Next(1000, 10000));           
+            await Task.Delay(new System.Random().Next(1000, 10000));
+            if (this == null)
+                break;
             ChangeCondition(this.gameObject.GetComponent<GameObjectScript>().Type.Health);
         }
 	}
