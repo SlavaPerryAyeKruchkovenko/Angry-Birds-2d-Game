@@ -53,6 +53,7 @@ public class GameScript : MonoBehaviour
                 if (!SelectedBird.GetComponent<Rigidbody2D>())
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
+                    
                     SelectedBird.GetComponent<Rigidbody2D>().useAutoMass = true;
                     DropBird(SelectedBird, StartLocation - mouseCoor);
                     SelectedBird = null;
