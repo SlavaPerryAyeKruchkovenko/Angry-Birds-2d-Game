@@ -98,12 +98,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3022040939462081550}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 0
   FlyingSprites:
   - {fileID: -2415912074369151941, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
   - {fileID: -7870824516964482885, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}

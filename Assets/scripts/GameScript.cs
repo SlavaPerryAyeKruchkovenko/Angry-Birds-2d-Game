@@ -14,13 +14,10 @@ public class GameScript : MonoBehaviour
     private Quaternion startRotation = default;
 
     private bool isPress;
-    private float xLimit;
     // Start is called before the first frame update
     void Start()
     {
         Slingshot = GameObject.Find("Slingshot");
-
-        xLimit = GameObject.Find("Slingshot").transform.position.x + 3;
 
         var birds = GameObject.FindGameObjectsWithTag("Bird");
 		foreach (var item in birds)
@@ -35,8 +32,10 @@ public class GameScript : MonoBehaviour
         var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mouseCoor = new Vector3(coor.x, coor.y, -1);
         if (GameStart && SelectedBird != null)
-        {                   
-            if(mouseCoor.x >= xLimit)
+        {
+            var cameraLeftButtomCoor = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)) + new Vector3(0, 1, 0);
+            var cameraRightUpCoor = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) - new Vector3(3, 1, 0);
+            if (!CompareVectors3(mouseCoor, cameraLeftButtomCoor) || !CompareVectors3(cameraRightUpCoor,mouseCoor)) 
 			{
                 isPress = false;
                 ResetBird();
@@ -104,6 +103,13 @@ public class GameScript : MonoBehaviour
             SelectedBird = Birds.Dequeue();
             startRotation = SelectedBird.transform.rotation;
         }
+	}
+    public static bool CompareVectors3(Vector3 vector1, Vector3 vector2)//if 1 postion will be more that true
+	{
+        if (vector1.x > vector2.x && vector1.y > vector2.y)
+            return true;
+        else
+            return false;
 	}
     
 }

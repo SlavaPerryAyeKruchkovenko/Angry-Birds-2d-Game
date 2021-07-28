@@ -7,6 +7,7 @@ TagManager:
   - Bird
   - Pig
   - Build Material
+  - Slingshot
   layers:
   - Default
   - TransparentFX
