@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MainCameraScript : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class MainCameraScript : MonoBehaviour
     private Vector3 startPosition;
     private GameObject background;
     private Vector3 lastLocation;
+    private Vector3 range;
+    private float firstClickTime = 0;
+    private int clickCount = 0;
     // Start is called before the first frame update
     void Start()
-    {       
+    {
         background = GameObject.FindGameObjectWithTag("Background");
         startPosition = this.transform.position;
     }
@@ -22,7 +26,12 @@ public class MainCameraScript : MonoBehaviour
     void Update()
     {
         lastLocation = this.transform.position;
-        if (FlyingBird != null)
+        if(clickCount >= 2)
+		{
+            ResetCamera();
+            clickCount = 0;
+		}
+       else if (FlyingBird != null)
 		{
             var coor = FlyingBird.transform.position;
             this.gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
@@ -30,11 +39,37 @@ public class MainCameraScript : MonoBehaviour
 			{
                 this.gameObject.transform.position = lastLocation;              
             }
-        }
-        else
+        }        
+        else if(Input.GetMouseButtonDown(0))
 		{
+            firstClickTime = Time.time;
+            range += Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if(Time.time - firstClickTime < 0.1f)
+			{
+                clickCount++;
+			}
+            else
+			{
+                clickCount = 0;
+			}
+            range -= Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            this.gameObject.transform.position += new Vector3(range.x, range.y, 0);
+            if (!CanMoveCamera(background, Camera.main))
+            {
+                this.gameObject.transform.position = lastLocation;
+            }
+            range = default;
+        }
+    }
+    public virtual void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.clickCount >= 2)
+        {
             ResetCamera();
-		}
+        }
     }
     public void AddBird(GameObject bird)
 	{
