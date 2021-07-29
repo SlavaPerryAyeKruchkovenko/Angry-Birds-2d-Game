@@ -1,3 +1,4 @@
+
 using Assets.scripts;
 using System;
 using System.Collections;
@@ -15,12 +16,12 @@ public class GameObjectEditor : Editor
 	}
 	public override void OnInspectorGUI()
 	{
-		script.TypeOfGameObj = TypeOfGameObject.GetTypesOfGameObject(script.gameObject);
+		script.TypeOfGameObj = AngryBirdsGameObject.GetTypesOfGameObject(script.gameObject.tag);
 		switch (script.TypeOfGameObj)
 		{
-			case TypesOfGameObject.Bird: script.BirdType = (Birds)EditorGUILayout.EnumPopup("Bird type", script.BirdType); break;
-			case TypesOfGameObject.Pig: script.PigType = (Pigs)EditorGUILayout.EnumPopup("Pig type", script.PigType); break;
-			case TypesOfGameObject.BuildMaterial: script.MaterialType = (BuildMaterials)EditorGUILayout.EnumPopup("Material type", script.MaterialType); break;
+			case AngryBirdsGameObjects.Bird: script.BirdType = (Birds)EditorGUILayout.EnumPopup("Bird type", script.BirdType); break;
+			case AngryBirdsGameObjects.Pig: script.PigType = (Pigs)EditorGUILayout.EnumPopup("Pig type", script.PigType); break;
+			case AngryBirdsGameObjects.BuildMaterial: script.MaterialType = (BuildMaterials)EditorGUILayout.EnumPopup("Material type", script.MaterialType); break;
 			default:
 				break;
 		}
@@ -45,9 +46,9 @@ public class GameObjectEditor : Editor
 		{
 			script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
 		}
-		if (script.ConditionalSprites.Count != script.GameObj.SpriteCoount)
+		if (script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount)
 		{
-			var notHave = script.GameObj.SpriteCoount - script.ConditionalSprites.Count;
+			var notHave = script.ABGameObj.SpriteCoount - script.ConditionalSprites.Count;
 			EditorGUILayout.LabelField($"Нехватает {notHave} Спрайтов", EditorStyles.boldLabel);
 		}
 	}

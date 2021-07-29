@@ -14,11 +14,11 @@ public class PigScript : MonoBehaviour
 	{       
         while (true)
         {
-            if (this.gameObject.GetComponent<GameObjectScript>().GameObj.Health <= 0) { break; }
+            if (this.gameObject.GetComponent<GameObjectScript>().ABGameObj.Health <= 0) { break; }
             await Task.Delay(new System.Random().Next(1000, 10000));
             if (this == null)
                 break;
-            ChangeCondition(this.gameObject.GetComponent<GameObjectScript>().GameObj.Health);
+            ChangeCondition(this.gameObject.GetComponent<GameObjectScript>().ABGameObj.Health);
         }
 	}
     private void ChangeCondition(float health)

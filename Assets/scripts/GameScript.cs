@@ -53,6 +53,10 @@ public class GameScript : MonoBehaviour
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
                     DropBird(SelectedBird, StartLocation - mouseCoor);
+                    if(Camera.main.GetComponent<MainCameraScript>())
+					{
+                        Camera.main.GetComponent<MainCameraScript>().AddBird(SelectedBird);
+                    }
                     SelectedBird = null;
                 }
             }

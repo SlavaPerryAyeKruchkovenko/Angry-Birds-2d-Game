@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TypeOfGameObj: 0
   PigType: 0
   BirdType: 0
   MaterialType: 0

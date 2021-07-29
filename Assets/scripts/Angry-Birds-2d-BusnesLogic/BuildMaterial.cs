@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.scripts
 {
@@ -10,7 +6,7 @@ namespace Assets.scripts
 	{
 		Ice, Wood, Stone
 	}
-	public class BuildMaterial :TypeOfGameObject
+	public class BuildMaterial :AngryBirdsGameObject
 	{
 		public override short SpriteCoount => 4;
 		public override float Health { get ; protected set; }

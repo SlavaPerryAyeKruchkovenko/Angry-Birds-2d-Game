@@ -8,6 +8,7 @@ TagManager:
   - Pig
   - Build Material
   - Slingshot
+  - Background
   layers:
   - Default
   - TransparentFX
