@@ -43,7 +43,7 @@ public class GameScript : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(0))
             {
-                isPress = true;
+                isPress = true;              
             }
             else if (Input.GetMouseButtonUp(0))
             {
@@ -56,12 +56,15 @@ public class GameScript : MonoBehaviour
                     if(Camera.main.GetComponent<MainCameraScript>())
 					{
                         Camera.main.GetComponent<MainCameraScript>().AddBird(SelectedBird);
+                        Camera.main.GetComponent<MainCameraScript>().LockCamera = false;
                     }
                     SelectedBird = null;
                 }
+                
             }
             else if(isPress)
 			{
+                Camera.main.GetComponent<MainCameraScript>().LockCamera = true;
                 ManageBird(mouseCoor, SelectedBird , StartLocation);
                 ChangeBand(mouseCoor, Slingshot, StartLocation);
             }

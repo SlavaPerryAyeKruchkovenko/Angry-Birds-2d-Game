@@ -12,11 +12,11 @@ public class GameObjectScript : MonoBehaviour
     public BuildMaterials MaterialType;
     public AngryBirdsGameObject ABGameObj { get; private set; }
     public List<Sprite> ConditionalSprites;
-	public void Start()
+	public void Start()//Found Type of AngryBird object
 	{
         ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
         if (ABGameObj is Pig)
-            ABGameObj = Pig.GetPig(PigType);
+            ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...)
 
         else if (ABGameObj is Bird)
             ABGameObj = Bird.GetBird(BirdType);
@@ -26,8 +26,8 @@ public class GameObjectScript : MonoBehaviour
 
         if(this.gameObject.GetComponent<Rigidbody2D>())
             this.gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Weight;
-        maxHealth = ABGameObj.Health;
-	}
+        maxHealth = ABGameObj.Health;// const that compare it with now health      
+    }
 	// Start is called before the first frame update
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
@@ -40,11 +40,11 @@ public class GameObjectScript : MonoBehaviour
 		{
             damage *= 5;
 		}
-        if (this.gameObject.GetComponent<Rigidbody2D>())
-		{
+        if (this.gameObject.GetComponent<Rigidbody2D>())// second Newton's law
+        {
             damage *= this.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
         }
-        else
+        else// if object hasn't rigid body it isn't 'Game' object
 		{
             return;
 		}
@@ -52,18 +52,20 @@ public class GameObjectScript : MonoBehaviour
         ABGameObj.GetDamage(damage);
         ChangeConditional();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        if (ABGameObj.Health <= 0 && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= 0.005)
-            Destroy(this.gameObject);
-
+    private void Update()
+	{
+        if (gameObject.GetComponent<Rigidbody2D>() && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= 0.005)
+		{
+            ABGameObj.BirdDie += () => Destroy(this.gameObject);
+            ABGameObj.InvokeDiedEvent();
+        }
+            
     }
     private void ChangeConditional()
 	{
 
-		for (float i = ABGameObj.SpriteCoount-1; i >= 0; i--)
-		{
+		for (float i = ABGameObj.SpriteCoount-1; i >= 0; i--)//Condisional status defined by count sprites and health
+        {
             if (ABGameObj.Health >= i / ABGameObj.SpriteCoount * maxHealth && ABGameObj.Health < (i + 1) / ABGameObj.SpriteCoount * maxHealth) 
 			{
                 ChangeSprite(this.gameObject, ConditionalSprites[(int)(ABGameObj.SpriteCoount - 1 - i)]);

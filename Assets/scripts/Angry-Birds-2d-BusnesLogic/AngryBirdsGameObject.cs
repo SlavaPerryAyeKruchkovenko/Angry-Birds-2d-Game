@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Assets.scripts
 {
@@ -6,12 +7,14 @@ namespace Assets.scripts
 	{
 		Pig, BuildMaterial, Bird
 	}
+	public  delegate void BirdDayDelegate();
 	public abstract class AngryBirdsGameObject
 	{		
-		public abstract float Health { get; protected set; }
+		public virtual float Health { get; protected set; }
 		public abstract float Armor { get; protected set; }
 		public abstract short SpriteCoount { get; }
 		public virtual float Weight => 1;
+		public event BirdDayDelegate BirdDie = null;
 		public void GetDamage(float damage)
 		{
 			if (damage > 1)
@@ -29,6 +32,12 @@ namespace Assets.scripts
 				}
 			}
 		}
+		public void InvokeDiedEvent()
+		{
+			if(Health == 0)
+				this.BirdDie.Invoke();			
+		}
+
 		public static AngryBirdsGameObjects GetTypesOfGameObject(string tag) => tag switch
 		{
 			"Bird" => AngryBirdsGameObjects.Bird,
