@@ -12,21 +12,29 @@ public class GameObjectScript : MonoBehaviour
     public BuildMaterials MaterialType;
     public AngryBirdsGameObject ABGameObj { get; private set; }
     public List<Sprite> ConditionalSprites;
-	public void Start()//Found Type of AngryBird object
+	private void OnDestroy()
 	{
-        ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
-        if (ABGameObj is Pig)
-            ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...)
+        this.ABGameObj = null;
+	}
+	public void Awake()//Found Type of AngryBird object
+    {
+        if (ABGameObj == null)
+        {
+            ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
+            if (ABGameObj is Pig)
+                ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...)
 
-        else if (ABGameObj is Bird)
-            ABGameObj = Bird.GetBird(BirdType);
+            else if (ABGameObj is Bird)
+                ABGameObj = Bird.GetBird(BirdType);
 
-        else if (ABGameObj is BuildMaterial)
-            ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
+            else if (ABGameObj is BuildMaterial)
+                ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
 
-        if(this.gameObject.GetComponent<Rigidbody2D>())
-            this.gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Weight;
-        maxHealth = ABGameObj.Health;// const that compare it with now health      
+            if (this.gameObject.GetComponent<Rigidbody2D>())
+                this.gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Weight;
+            maxHealth = ABGameObj.Health;// const that compare it with now health    
+            ABGameObj.ObjectDie += DestroyObject;
+        }         
     }
 	// Start is called before the first frame update
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -55,12 +63,17 @@ public class GameObjectScript : MonoBehaviour
     private void Update()
 	{
         if (gameObject.GetComponent<Rigidbody2D>() && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= 0.005)
-		{
-            ABGameObj.BirdDie += () => Destroy(this.gameObject);
+		{            
             ABGameObj.InvokeDiedEvent();
         }
             
     }
+    private void DestroyObject()
+	{
+        ABGameObj = null;
+        Destroy(this.gameObject);
+        Destroy(this);
+	}
     private void ChangeConditional()
 	{
 

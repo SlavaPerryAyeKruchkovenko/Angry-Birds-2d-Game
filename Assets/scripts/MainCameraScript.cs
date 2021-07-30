@@ -19,8 +19,11 @@ public class MainCameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        background = GameObject.FindGameObjectWithTag("Background");
-        startPosition = this.transform.position;
+        if(background == null)
+		{
+            background = GameObject.FindGameObjectWithTag("Background");
+            startPosition = this.transform.position;
+        }       
     }
 
     // Update is called once per frame
@@ -68,7 +71,7 @@ public class MainCameraScript : MonoBehaviour
                 }
                 range = null;
             }
-            else if (FlyingBird != null)
+            else if (FlyingBird != null && FlyingBird.GetComponent<GameObjectScript>().ABGameObj != null)
             {
                 var coor = FlyingBird.transform.position;
                 this.gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
@@ -88,10 +91,10 @@ public class MainCameraScript : MonoBehaviour
         if(bird.GetComponent<GameObjectScript>() && bird.GetComponent<GameObjectScript>().ABGameObj is Bird)
 		{
             this.FlyingBird = bird;
-            this.FlyingBird.GetComponent<GameObjectScript>().ABGameObj.BirdDie += ResetCamera;
+            this.FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie += ResetCamera;
 		}
 	}
-    public void ResetCamera()
+    private void ResetCamera()
 	{
         this.gameObject.transform.position = startPosition;
 	}

@@ -39,7 +39,11 @@ namespace Assets.scripts
     }
     public class YellowBird : Bird
     {
-        public override float Health { get; protected set; } = 1;
+        public YellowBird()
+		{
+            Health = 1;
+		}
+        public override float Health { get; protected set; }
         public override float Weight => 1;
     }
     public class BigRedBird : Bird

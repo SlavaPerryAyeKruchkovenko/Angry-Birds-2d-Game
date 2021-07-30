@@ -25,7 +25,7 @@ public class GameObjectEditor : Editor
 			default:
 				break;
 		}
-		script.Start();		
+		script.Awake();		
 		if(GUILayout.Button("Add new Sprite", GUILayout.Height(20)))
 		{			
 			if(script.ConditionalSprites == null)
