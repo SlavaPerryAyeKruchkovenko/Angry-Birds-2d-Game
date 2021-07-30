@@ -49,7 +49,7 @@ public class GameScript : MonoBehaviour
             {
                 isPress = false;
                 ResetBand();
-                if (!SelectedBird.GetComponent<Rigidbody2D>())
+                if (!SelectedBird.GetComponent<Rigidbody2D>() && Mathf.Abs(StartLocation.x - mouseCoor.x) > 1) 
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();
                     DropBird(SelectedBird, StartLocation - mouseCoor);
@@ -59,6 +59,11 @@ public class GameScript : MonoBehaviour
                         Camera.main.GetComponent<MainCameraScript>().LockCamera = false;
                     }
                     SelectedBird = null;
+                    GameStart = false;
+                }
+                else
+				{
+                    ResetBird();
                 }
                 
             }

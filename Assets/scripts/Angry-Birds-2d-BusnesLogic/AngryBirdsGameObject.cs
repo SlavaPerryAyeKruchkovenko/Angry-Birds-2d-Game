@@ -13,7 +13,7 @@ namespace Assets.scripts
 		public virtual float Health { get; protected set; }
 		public abstract float Armor { get; protected set; }
 		public abstract short SpriteCoount { get; }
-		public virtual float Weight => 1;
+		public virtual float Mass => 1;
 		public event ObjectDieDelegate ObjectDie = null;
 		public void GetDamage(float damage)
 		{

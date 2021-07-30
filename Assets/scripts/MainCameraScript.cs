@@ -36,6 +36,7 @@ public class MainCameraScript : MonoBehaviour
             {
                 ResetCamera();
                 clickCount = 0;
+                
             }
             else if (Input.GetMouseButtonDown(0))
             {
@@ -51,7 +52,7 @@ public class MainCameraScript : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                if (Time.time - firstClickTime < 0.1f)
+                if (Time.time - firstClickTime < 0.12f)//0.12 is time of standart click
                 {
                     clickCount++;
                 }
@@ -71,7 +72,7 @@ public class MainCameraScript : MonoBehaviour
                 }
                 range = null;
             }
-            else if (FlyingBird != null && FlyingBird.GetComponent<GameObjectScript>().ABGameObj != null)
+            else if (FlyingBird != null)
             {
                 var coor = FlyingBird.transform.position;
                 this.gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
@@ -90,14 +91,16 @@ public class MainCameraScript : MonoBehaviour
 	{
         if(bird.GetComponent<GameObjectScript>() && bird.GetComponent<GameObjectScript>().ABGameObj is Bird)
 		{
-            this.FlyingBird = bird;
-            this.FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie += ResetCamera;
+            FlyingBird = bird;
+            FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie += ResetCamera;
 		}
 	}
     private void ResetCamera()
 	{
-        this.gameObject.transform.position = startPosition;
-	}
+        this.gameObject.transform.position = startPosition;      
+        FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie -= ResetCamera;
+        FlyingBird = null;
+    }
     private static bool CanMoveCamera(GameObject background, Camera camera)
 	{
         var rect = background.GetComponent<RectTransform>();

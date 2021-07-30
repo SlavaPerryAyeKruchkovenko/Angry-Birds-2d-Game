@@ -30,12 +30,12 @@ namespace Assets.scripts
     public class RedBird : Bird
     {
         public override float Health { get; protected set; } = 1;
-		public override float Weight => 1;
+		public override float Mass => 1;
 	}
     public class BlueBird : Bird
     {
         public override float Health { get; protected set; } = 1;
-        public override float Weight => 0.5f;
+        public override float Mass => 0.5f;
     }
     public class YellowBird : Bird
     {
@@ -44,27 +44,27 @@ namespace Assets.scripts
             Health = 1;
 		}
         public override float Health { get; protected set; }
-        public override float Weight => 1;
+        public override float Mass => 1;
     }
     public class BigRedBird : Bird
     {
         public override float Health { get; protected set; } = 1;
-        public override float Weight => 2;
+        public override float Mass => 2;
     }
     public class BlackBird : Bird
     {
         public override float Health { get; protected set; } = 1;
-        public override float Weight => 1.2f;
+        public override float Mass => 1.2f;
     }
     public class WhiteBird : Bird
     {
         public override float Health { get; protected set; } = 1;
-        public override float Weight => 1.5f;
+        public override float Mass => 1.5f;
     }
     public class GreenBird : Bird
     {
         public override float Health { get; protected set; } = 1;
-        public override float Weight => 1;
+        public override float Mass => 1;
     }
 
 }

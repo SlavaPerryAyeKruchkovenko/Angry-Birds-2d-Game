@@ -31,9 +31,9 @@ public class GameObjectScript : MonoBehaviour
                 ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
 
             if (this.gameObject.GetComponent<Rigidbody2D>())
-                this.gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Weight;
+                this.gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Mass;
             maxHealth = ABGameObj.Health;// const that compare it with now health    
-            ABGameObj.ObjectDie += DestroyObject;
+            ABGameObj.ObjectDie += () => Destroy(this.gameObject);
         }         
     }
 	// Start is called before the first frame update
@@ -68,12 +68,6 @@ public class GameObjectScript : MonoBehaviour
         }
             
     }
-    private void DestroyObject()
-	{
-        ABGameObj = null;
-        Destroy(this.gameObject);
-        Destroy(this);
-	}
     private void ChangeConditional()
 	{
 

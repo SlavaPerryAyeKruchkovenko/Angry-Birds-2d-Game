@@ -28,13 +28,13 @@ public class GameObjectEditor : Editor
 		script.Awake();		
 		if(GUILayout.Button("Add new Sprite", GUILayout.Height(20)))
 		{			
-			if(script.ConditionalSprites == null)
-			{
-				script.ConditionalSprites = new List<Sprite>();
-			}
 			script.ConditionalSprites.Add(Sprite.Create(null,default,default));
-		}		
-		if(script.ConditionalSprites.Count>0)
+		}
+		if (script.ConditionalSprites == null)
+		{
+			script.ConditionalSprites = new List<Sprite>();
+		}
+		if (script.ConditionalSprites.Count > 0) 
 		{
 			for (int i = 0; i < script.ConditionalSprites.Count; i++)
 			{
@@ -42,9 +42,12 @@ public class GameObjectEditor : Editor
 					$"Image {i + 1}", script.ConditionalSprites[i], typeof(Sprite), true);
 			}
 		}
-		if (GUILayout.Button("Delete last Sprite", GUILayout.Height(20)))
+		if (script.ConditionalSprites.Count > 0 && script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount) 
 		{
-			script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
+			if (GUILayout.Button("Delete last Sprite", GUILayout.Height(20)))
+			{			
+				script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
+			}			
 		}
 		if (script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount)
 		{
