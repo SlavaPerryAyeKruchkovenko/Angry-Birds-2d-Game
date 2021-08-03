@@ -7,7 +7,7 @@ namespace Assets.scripts
 	{
 		Pig, BuildMaterial, Bird
 	}
-	public  delegate void ObjectDieDelegate();
+	public delegate void ObjectDieDelegate();
 	public abstract class AngryBirdsGameObject
 	{		
 		public virtual float Health { get; protected set; }
@@ -17,10 +17,10 @@ namespace Assets.scripts
 		public event ObjectDieDelegate ObjectDie = null;
 		public void GetDamage(float damage)
 		{
-			if (damage > 1)
+			if (damage >= 1)
 			{
-				Armor -= 0.666f * damage;
-				Health -= 0.333f * damage;
+				Armor -= 0.8f * damage;
+				Health -= 0.2f * damage;
 				if (Armor < 0)
 				{
 					Health -= Math.Abs(Armor);

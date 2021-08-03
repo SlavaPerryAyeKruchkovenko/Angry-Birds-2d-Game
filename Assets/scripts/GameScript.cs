@@ -15,15 +15,18 @@ public class GameScript : MonoBehaviour
 
     private bool isPress;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Slingshot = GameObject.Find("Slingshot");
-
-        var birds = GameObject.FindGameObjectsWithTag("Bird");
-		foreach (var item in birds)
+        if(Slingshot == null)
 		{
-            Birds.Enqueue(item);
-		}       
+            Slingshot = GameObject.Find("Slingshot");
+
+            var birds = GameObject.FindGameObjectsWithTag("Bird");
+            foreach (var item in birds)
+            {
+                Birds.Enqueue(item);
+            }
+        }          
     }
 
     // Update is called once per frame
@@ -60,6 +63,7 @@ public class GameScript : MonoBehaviour
                     }
                     SelectedBird = null;
                     GameStart = false;
+                    //Make Fly Animation;
                 }
                 else
 				{

@@ -1,4 +1,6 @@
 using Assets.scripts;
+using Assets.scripts.Angry_Birds_2d_BusnesLogic;
+using Assets.scripts.Converters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +18,7 @@ public class GameObjectScript : MonoBehaviour
 	{
         this.ABGameObj = null;
 	}
-	public void Awake()//Found Type of AngryBird object
+	public void Awake()//Found Type of AngryBirds object
     {
         if (ABGameObj == null)
         {
@@ -25,40 +27,35 @@ public class GameObjectScript : MonoBehaviour
                 ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...)
 
             else if (ABGameObj is Bird)
-                ABGameObj = Bird.GetBird(BirdType);
+                ABGameObj = Bird.GetBird(BirdType, new Powers(this.gameObject));
 
             else if (ABGameObj is BuildMaterial)
                 ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
 
             if (this.gameObject.GetComponent<Rigidbody2D>())
                 this.gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Mass;
+
             maxHealth = ABGameObj.Health;// const that compare it with now health    
             ABGameObj.ObjectDie += () => Destroy(this.gameObject);
         }         
     }
-	// Start is called before the first frame update
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-        float damage = collision.relativeVelocity.magnitude;
-        if (collision.gameObject.GetComponent<Rigidbody2D>())
-		{
-            damage *= collision.gameObject.GetComponent<Rigidbody2D>().mass;
-        }
-        else//if object down on ground
-		{
-            damage *= 5;
-		}
-        if (this.gameObject.GetComponent<Rigidbody2D>())// second Newton's law
+        if (gameObject.GetComponent<Rigidbody2D>())// second Newton's law
         {
-            damage *= this.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
-        }
-        else// if object hasn't rigid body it isn't 'Game' object
-		{
-            return;
-		}
-        damage = Mathf.Abs(damage);
-        ABGameObj.GetDamage(damage);
-        ChangeConditional();
+            if (ABGameObj is IBird bird && bird.Ability == TypeUsingAbility.TouchObject && collision.gameObject.GetComponent<Rigidbody2D>())
+            {
+                bird.UsePower();
+                ABGameObj.GetDamage(1);
+                ABGameObj.InvokeDiedEvent();
+            }
+            else
+            {
+                float damage = CountDamage(this.gameObject, collision);
+                ABGameObj.GetDamage(damage);
+                ChangeConditional();
+            }
+        }          
     }
     private void Update()
 	{
@@ -68,7 +65,17 @@ public class GameObjectScript : MonoBehaviour
         }
             
     }
-    private void ChangeConditional()
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+        if(collision.CompareTag("Background") && this.gameObject.GetComponent<Rigidbody2D>())
+		{
+            if (ABGameObj is IBird bird && bird.Ability == TypeUsingAbility.Click)
+            {
+                bird.UsePower();
+            }
+        }      
+	}
+	private void ChangeConditional()
 	{
 
 		for (float i = ABGameObj.SpriteCoount-1; i >= 0; i--)//Condisional status defined by count sprites and health
@@ -81,5 +88,22 @@ public class GameObjectScript : MonoBehaviour
     }
     private static void ChangeSprite(GameObject gameObject, Sprite sprite) =>
         gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-	
+    private static float CountDamage(GameObject gameObject, Collision2D collision)
+	{
+        float damage = collision.relativeVelocity.magnitude;
+        damage *= gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+        if (collision.gameObject.GetComponent<Rigidbody2D>())
+        {
+            damage *= collision.gameObject.GetComponent<Rigidbody2D>().mass;
+        }
+        else//if object down on ground
+        {
+            damage *= 5;
+        }
+        if (gameObject.GetComponent<Rigidbody2D>())// second Newton's law
+        {
+            damage *= gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+        }
+        return Mathf.Abs(damage);        
+    }	
 }

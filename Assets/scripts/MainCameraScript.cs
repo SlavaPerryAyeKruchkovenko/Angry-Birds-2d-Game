@@ -98,8 +98,11 @@ public class MainCameraScript : MonoBehaviour
     private void ResetCamera()
 	{
         this.gameObject.transform.position = startPosition;      
-        FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie -= ResetCamera;
-        FlyingBird = null;
+        if(FlyingBird != null)
+		{
+            FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie -= ResetCamera;
+            FlyingBird = null;
+        }              
     }
     private static bool CanMoveCamera(GameObject background, Camera camera)
 	{
