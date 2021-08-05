@@ -9,6 +9,7 @@ TagManager:
   - Build Material
   - Slingshot
   - Background
+  - point
   layers:
   - Default
   - TransparentFX

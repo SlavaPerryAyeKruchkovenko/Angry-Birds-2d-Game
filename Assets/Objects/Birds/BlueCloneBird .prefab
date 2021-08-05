@@ -98,10 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlyingSprites:
-  - {fileID: -4464569400506775591, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  PowerSprites: []
-  ExtraObject: {fileID: 0}
+  FlyMaterial: {fileID: 0}
 --- !u!58 &4931511116471027043
 CircleCollider2D:
   m_ObjectHideFlags: 0

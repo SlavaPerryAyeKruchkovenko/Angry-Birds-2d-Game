@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assets.scripts.Angry_Birds_2d_BusnesLogic
@@ -17,11 +18,11 @@ namespace Assets.scripts.Angry_Birds_2d_BusnesLogic
 	}
 	public interface IPowers
 	{
-		void Clone();
-		void UTurn();
-		void Explode();
-		void DropEgg();
-		void SpeedUp();
+		void Clone(CancellationTokenSource cancelTokenSource);
+		void UTurn(CancellationTokenSource cancelTokenSource);
+		void Explode(CancellationTokenSource cancelTokenSource);
+		void DropEgg(CancellationTokenSource cancelTokenSource);
+		void SpeedUp(CancellationTokenSource cancelTokenSource);
 	}
 	
 }

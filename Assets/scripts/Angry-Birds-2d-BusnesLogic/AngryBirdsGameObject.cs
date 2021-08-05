@@ -26,7 +26,11 @@ namespace Assets.scripts
 					Health -= Math.Abs(Armor);
 					Armor = 0;
 				}
-				if (Health < 0) 
+				if (Health < 0 && this is Pig)
+				{
+					ObjectDie.Invoke();
+				}				
+				else if (Health < 0) 
 				{
 					Health = 0;
 				}

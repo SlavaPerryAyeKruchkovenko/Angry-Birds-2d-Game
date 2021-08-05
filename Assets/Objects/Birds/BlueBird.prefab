@@ -97,13 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlyingSprites:
-  - {fileID: -5258086831951101665, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  - {fileID: -7077395640796292531, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  - {fileID: -5612448727518940885, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  PowerSprites:
-  - {fileID: -4464569400506775591, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  ExtraObject: {fileID: 3206944724106927722, guid: e6576faa1feb3e54aa4db06a783a1668, type: 3}
+  FlyMaterial: {fileID: 812584031472445385, guid: c428729f0bd5783408a33d65e3e60b42, type: 3}
 --- !u!58 &8698110845615445182
 CircleCollider2D:
   m_ObjectHideFlags: 0
