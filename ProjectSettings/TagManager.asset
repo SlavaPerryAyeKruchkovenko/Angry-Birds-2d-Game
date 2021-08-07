@@ -10,6 +10,7 @@ TagManager:
   - Slingshot
   - Background
   - point
+  - Egg
   layers:
   - Default
   - TransparentFX

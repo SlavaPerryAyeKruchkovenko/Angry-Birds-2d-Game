@@ -5,12 +5,12 @@ namespace Assets.scripts
 {
 	public enum AngryBirdsGameObjects
 	{
-		Pig, BuildMaterial, Bird
+		Pig, BuildMaterial, Bird , Egg
 	}
 	public delegate void ObjectDieDelegate();
 	public abstract class AngryBirdsGameObject
-	{		
-		public virtual float Health { get; protected set; }
+	{
+		public virtual float Health { get; protected set; } = 1;
 		public abstract float Armor { get; protected set; }
 		public abstract short SpriteCoount { get; }
 		public virtual float Mass => 1;
@@ -47,6 +47,7 @@ namespace Assets.scripts
 			"Bird" => AngryBirdsGameObjects.Bird,
 			"Pig" => AngryBirdsGameObjects.Pig,
 			"Build Material" => AngryBirdsGameObjects.BuildMaterial,
+			"Egg" => AngryBirdsGameObjects.Egg,
 			_ => throw new NotImplementedException()
 		};
 		public static AngryBirdsGameObject GetGameObjectType(AngryBirdsGameObjects type) => type switch
@@ -54,6 +55,7 @@ namespace Assets.scripts
 			AngryBirdsGameObjects.Pig => new Pig(),
 			AngryBirdsGameObjects.Bird => new Bird(),
 			AngryBirdsGameObjects.BuildMaterial => new BuildMaterial(),
+			AngryBirdsGameObjects.Egg => new Egg(),
 			_ => throw new NotImplementedException()
 		};
 	}

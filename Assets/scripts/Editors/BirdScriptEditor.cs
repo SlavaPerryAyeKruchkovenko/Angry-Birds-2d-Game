@@ -22,7 +22,6 @@ public class BirdScriptEditor : Editor
 			EditorGUILayout.LabelField("Please add Material", EditorStyles.boldLabel);			
 		}
 		script.FlyMaterial = (GameObject)EditorGUILayout.ObjectField($"points", script.FlyMaterial, typeof(GameObject), true);
-		SetObjectDirty(script.gameObject);
 	}
 	public static void SetObjectDirty(GameObject obj)
 	{

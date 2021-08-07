@@ -18,11 +18,13 @@ namespace Assets.scripts.Converters
 			{
 				return;
 			}
-			await Task.Delay(0);
 			var gameObj1 = GameObject.Instantiate(gameObject, this.gameObject.transform.position + Vector3.up, default);
 			ReturnForce(gameObj1, gameObject);
 			var gameObj2 = GameObject.Instantiate(gameObject, this.gameObject.transform.position - Vector3.up, default);
 			ReturnForce(gameObj2, gameObject);
+
+			cancelTokenSource.Cancel();
+			await Task.Delay(20);
 			Debug.Log("клонируюсь");
 		}
 		private static void ReturnForce(GameObject gameObject1, GameObject gameObject2)
@@ -31,8 +33,21 @@ namespace Assets.scripts.Converters
 			gameObject1.GetComponent<GameObjectScript>().BirdType = Birds.BlueClone;
 			gameObject1.GetComponent<GameObjectScript>().SetStartSettings();
 		}
-		public void DropEgg(CancellationTokenSource cancelTokenSource)
+		async public void DropEgg(CancellationTokenSource cancelTokenSource)
 		{
+			if(cancelTokenSource.IsCancellationRequested)
+			{
+				return;
+			}
+			GameObject egg = gameObject.transform.GetChild(0).gameObject;
+			egg.GetComponent<CapsuleCollider2D>().enabled = true;
+			egg.GetComponent<SpriteRenderer>().enabled = true;
+			GameObject.Instantiate(egg, this.gameObject.transform.position - Vector3.up, default);
+			var rigidbody = egg.GetComponent<Rigidbody2D>();
+			float power = rigidbody.mass * 10;//F = mg
+			rigidbody.AddForce(-Vector3.up * power, ForceMode2D.Impulse);
+			await Task.Delay(20);
+			cancelTokenSource.Cancel();
 			Debug.Log("Снес яйцо");
 		}
 
@@ -55,6 +70,7 @@ namespace Assets.scripts.Converters
 					}
 					await Task.Delay(10);
 				}
+				cancelTokenSource.Cancel();
 				gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
 				Debug.Log("boom");
 			}
@@ -73,7 +89,8 @@ namespace Assets.scripts.Converters
 					return;
 				}
 				await Task.Delay(10);
-			}			
+			}
+			cancelTokenSource.Cancel();
 		}
 
 		async public void UTurn(CancellationTokenSource cancelTokenSource)
@@ -96,8 +113,9 @@ namespace Assets.scripts.Converters
 				}
 				await Task.Delay(1);
 			}
+			cancelTokenSource.Cancel();
 			await Task.Run(() => Debug.Log("Развернулся"));
 			rigidbody.velocity = -speed;
-		}
+		}		
 	}
 }
