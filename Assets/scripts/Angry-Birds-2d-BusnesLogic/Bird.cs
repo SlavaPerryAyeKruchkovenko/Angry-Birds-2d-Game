@@ -2,20 +2,54 @@
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
 using System;
 using System.Threading;
+using UnityEngine;
 
 namespace Assets.scripts
-{
+{  
     public enum Birds
     {
         Red, Blue, Yellow, Black, Green, White, BigRed, BlueClone
     }
+    public delegate void BirdReadyFly(Vector3 range);
+    public delegate void BirdStartFly();
+    public delegate void TakeAim(Vector3 range);
+    public delegate void ResetBird();
+
     public delegate void Power(CancellationTokenSource cancelTokenSource);
     public class Bird : AngryBirdsGameObject
     {
         public override float Health { get; protected set; } = 1;
         public override float Armor { get; protected set; } = 0;
+
+        public event BirdReadyFly ReadyFly = null;
+        public event BirdStartFly StartFly = null;
+        public event TakeAim TakeAim = null;
+        public event ResetBird ResetBird = null;
         public override short SpriteCoount => 2;
         public readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
+		public override void GetDamage(float damage)
+		{
+            cancelTokenSource.Cancel();
+            Health -= damage;
+            if (Health < 0)
+                Health = 0;
+		}
+		public void InvokeFlyEvent(Vector3 range)
+		{
+            if(ReadyFly!= null)
+                ReadyFly.Invoke(range);
+            if (StartFly != null)
+                StartFly.Invoke();
+        }
+        public void InvokeTakeAimEvent(Vector3 range)
+		{
+            if (TakeAim != null)
+                TakeAim.Invoke(range);
+		}
+        public void InvokeResetEvent()
+		{
+            ResetBird.Invoke();
+		}
         public static Bird GetBird(Birds bird, IPowers powersRealeasetion)
         {
             return bird switch
@@ -31,7 +65,20 @@ namespace Assets.scripts
                 _ => throw new Exception("Bird not found"),
             };
         }
-	}
+        public static float CountDamageAbility(Birds bird, BuildMaterials material)// Calculate Damage for bird with ability
+        {
+            switch (bird)
+            {
+                case (Birds.Black): if (material == BuildMaterials.Stone) { return 2; } break;
+                case (Birds.Yellow): if (material == BuildMaterials.Wood) { return 3; } break;
+                case (Birds.Blue): if (material == BuildMaterials.Ice) { return 4; } break;
+                case (Birds.White): if (material == BuildMaterials.Stone) { return 5; } break;
+                case (Birds.BigRed): if (material == BuildMaterials.Wood) { return 2; } break;
+                case (Birds.Green): if (material == BuildMaterials.Wood) { return 2; } break;
+            }
+            return 1;
+        }
+    }
     public class BirdWithPower : Bird, IBird
 	{
         public BirdWithPower(Power _power)
@@ -58,8 +105,8 @@ namespace Assets.scripts
 		public override float Mass => 1;
 	}
     public class BlueBird: BirdWithPower
-    {
-		public BlueBird(Power _power, bool _canUsePower):base(_power)
+    {       
+        public BlueBird(Power _power, bool _canUsePower):base(_power)
 		{
             canUsePower = _canUsePower;
             if(!canUsePower)
@@ -87,7 +134,7 @@ namespace Assets.scripts
         {
 
         }
-		public override TypeUsingAbility Ability => TypeUsingAbility.TouchObject;
+		public override TypeUsingAbility Ability => TypeUsingAbility.Universal;
 		public override float Mass => 1.2f;
     }
     public class WhiteBird : BirdWithPower

@@ -1334,7 +1334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e4d153682c043439605ac81028ddfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartLocation: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

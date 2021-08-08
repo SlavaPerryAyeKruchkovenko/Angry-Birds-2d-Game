@@ -15,7 +15,7 @@ namespace Assets.scripts
 		public abstract short SpriteCoount { get; }
 		public virtual float Mass => 1;
 		public event ObjectDieDelegate ObjectDie = null;
-		public void GetDamage(float damage)
+		public virtual void GetDamage(float damage)
 		{
 			if (damage >= 1)
 			{

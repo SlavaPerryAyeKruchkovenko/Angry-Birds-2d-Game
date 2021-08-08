@@ -11,9 +11,7 @@ public class SlingshotScript : MonoBehaviour
 		{
             this.GetComponent<LineRenderer>().enabled = true;
 			game.ChangeGameConditional();
-
-            var position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
-            game.StartLocation = position;
+          
             game.ChangeBird();
         }
 		else

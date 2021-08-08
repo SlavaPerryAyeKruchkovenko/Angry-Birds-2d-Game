@@ -15,10 +15,6 @@ public class GameObjectScript : MonoBehaviour
     public BuildMaterials MaterialType;
     public AngryBirdsGameObject ABGameObj { get; private set; }
     public List<Sprite> ConditionalSprites;
-	private void OnDestroy()
-	{
-        this.ABGameObj = null;
-	}
 	public void Awake()//Found Type of AngryBirds object
     {
         if (ABGameObj == null)
@@ -49,24 +45,17 @@ public class GameObjectScript : MonoBehaviour
         if (gameObject.GetComponent<Rigidbody2D>())
         {
             var rigidbody = gameObject.GetComponent<Rigidbody2D>();
-            if (ABGameObj is IBird bird && bird.Ability == TypeUsingAbility.TouchObject)
+
+            float damage = CountDamage(this.gameObject, collision);
+            ABGameObj.GetDamage(damage);
+            ChangeConditional();
+            if (rigidbody.velocity.magnitude > 4)
             {
-                bird.UsePower();
-                ABGameObj.GetDamage(1);
-            }
-            else
-            {
-                float damage = CountDamage(this.gameObject, collision);
-                ABGameObj.GetDamage(damage);
-                ChangeConditional();
-                if (rigidbody.velocity.magnitude > 4)
+                Vector2 speed = new Vector2(rigidbody.velocity.x / 5, rigidbody.velocity.y / 5);
+                rigidbody.velocity -= speed;
+                if (collision.gameObject.GetComponent<Rigidbody2D>())
                 {
-                    Vector2 speed = new Vector2(rigidbody.velocity.x / 5, rigidbody.velocity.y / 5);
-                    rigidbody.velocity -= speed;
-                    if(collision.gameObject.GetComponent<Rigidbody2D>())
-					{
-                        collision.gameObject.GetComponent<Rigidbody2D>().velocity += speed / ABGameObj.Mass;
-                    }
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity += speed / ABGameObj.Mass;
                 }
             }
         }          
@@ -79,16 +68,7 @@ public class GameObjectScript : MonoBehaviour
         }
             
     }
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-        if(collision.CompareTag("Background") && this.gameObject.GetComponent<Rigidbody2D>())
-		{
-            if (ABGameObj is IBird bird && bird.Ability == TypeUsingAbility.Click)
-            {
-                bird.UsePower();
-            }
-        }      
-	}
+	
 	private void ChangeConditional()
 	{
 		for (float i = ABGameObj.SpriteCoount-1; i >= 0; i--)//Condisional status defined by count sprites and health
@@ -98,19 +78,7 @@ public class GameObjectScript : MonoBehaviour
                 ChangeSprite(this.gameObject, ConditionalSprites[(int)(ABGameObj.SpriteCoount - 1 - i)]);
             }
 		}
-        if (ABGameObj is IBird bird && ABGameObj.Health < maxHealth && bird.Ability == TypeUsingAbility.Click) 
-		{
-            var birdObj = (Bird)ABGameObj;
-            if(!birdObj.cancelTokenSource.IsCancellationRequested)
-			{
-                StopAbility(birdObj);
-            }           
-		}
     }
-    private static void StopAbility(Bird bird)
-	{
-        bird.cancelTokenSource.Cancel();
-	}
     private static void ChangeSprite(GameObject gameObject, Sprite sprite) =>
         gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
     private static float CountDamage(GameObject gameObject, Collision2D collision)
@@ -138,22 +106,10 @@ public class GameObjectScript : MonoBehaviour
             var script = damagedObj.GetComponent<GameObjectScript>();
             if (angryBirdsObj.ABGameObj is IBird && script.CompareTag("Build Material"))
 			{
-                damage *= CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);
+                damage *= Bird.CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);
 			}
         }       
         return Mathf.Abs(damage);        
     }	
-    private static float CountDamageAbility(Birds bird, BuildMaterials material)// Calculate Damage for bird with ability
-	{
-        switch (bird)
-		{
-            case (Birds.Black): if (material == BuildMaterials.Stone) { return 2; } break;
-            case (Birds.Yellow): if (material == BuildMaterials.Wood) { return 3; } break;
-            case (Birds.Blue): if (material == BuildMaterials.Ice) { return 4; } break;
-            case (Birds.White): if (material == BuildMaterials.Stone) { return 5; } break;
-            case (Birds.BigRed): if (material == BuildMaterials.Wood) { return 2; } break;
-            case (Birds.Green): if (material == BuildMaterials.Wood) { return 2; } break;
-        }
-        return 1;
-	}
+    
 }

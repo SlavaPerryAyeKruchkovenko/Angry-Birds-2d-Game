@@ -99,6 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlyMaterial: {fileID: 0}
+  Target: {fileID: 0}
+  FirePointPos: {fileID: 0}
+  Rigit: {fileID: 0}
+  Zone: {fileID: 0}
 --- !u!58 &4931511116471027043
 CircleCollider2D:
   m_ObjectHideFlags: 0

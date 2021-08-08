@@ -7,19 +7,22 @@ using UnityEngine;
 public class GameScript : MonoBehaviour
 {
     public GameObject SelectedBird { get; private set; }
-    private GameObject Slingshot;
+    private GameObject slingshot;
+    private Bird bird;
     public Queue<GameObject> Birds { get; private set; } = new Queue<GameObject>();
     public bool GameStart { get; private set;} = false;
-    public Vector3 StartLocation = default;
+    public Vector3 StartLocation { get; private set; } = default;
     private Quaternion startRotation = default;
 
     private bool isPress;
     // Start is called before the first frame update
     void Awake()
     {
-        if(Slingshot == null)
+        if(slingshot == null)
 		{
-            Slingshot = GameObject.Find("Slingshot");
+            slingshot = GameObject.Find("Slingshot");
+            var position = new Vector3(slingshot.transform.position.x, slingshot.transform.position.y, -1);
+            StartLocation = position;
 
             var birds = GameObject.FindGameObjectsWithTag("Bird");
             foreach (var item in birds)
@@ -41,8 +44,7 @@ public class GameScript : MonoBehaviour
             if (!CompareVectors3(mouseCoor, cameraLeftButtomCoor) || !CompareVectors3(cameraRightUpCoor,mouseCoor)) 
 			{
                 isPress = false;
-                ResetBird();
-                ResetBand();
+                bird.InvokeResetEvent();
             }
             else if (Input.GetMouseButtonDown(0))
             {
@@ -54,8 +56,8 @@ public class GameScript : MonoBehaviour
                 ResetBand();
                 if (!SelectedBird.GetComponent<Rigidbody2D>() && Mathf.Abs(StartLocation.x - mouseCoor.x) > 1) 
                 {
-                    SelectedBird.AddComponent<Rigidbody2D>();
-                    DropBird(SelectedBird, StartLocation - mouseCoor);
+                    SelectedBird.AddComponent<Rigidbody2D>();                  
+                    bird.InvokeFlyEvent(StartLocation - mouseCoor);
                     if(Camera.main.GetComponent<MainCameraScript>())
 					{
                         Camera.main.GetComponent<MainCameraScript>().AddBird(SelectedBird);
@@ -74,52 +76,49 @@ public class GameScript : MonoBehaviour
             else if(isPress)
 			{
                 Camera.main.GetComponent<MainCameraScript>().LockCamera = true;
-                ManageBird(mouseCoor, SelectedBird , StartLocation);
-                ChangeBand(mouseCoor, Slingshot, StartLocation);
-            }
-            
+                bird.InvokeTakeAimEvent(mouseCoor);
+                var script = SelectedBird.GetComponent<BirdScript>();
+                script.DrawTraectory(SelectedBird.transform.right * (StartLocation - mouseCoor).sqrMagnitude);
+            }           
         }       
-    }
-    private void ResetBird()//ResetPosition
-	{
-        SelectedBird.transform.position = StartLocation;
-        SelectedBird.transform.rotation = startRotation;
-    }
-    private void ResetBand()
-	{
-        Slingshot.GetComponent<LineRenderer>().enabled = false;
-    }
-    private static void DropBird(GameObject bird , Vector3 range)//when Bird Start Flying
+    }   
+    private void DropBird(Vector3 range)//when Bird Start Flying
 	{
         var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;//delta x^2 * k /2
-        bird.GetComponent<Rigidbody2D>().AddForce(bird.transform.right*power, ForceMode2D.Impulse);
+        SelectedBird.GetComponent<Rigidbody2D>().AddForce(SelectedBird.transform.right*power, ForceMode2D.Impulse);
 	}
-    private static void ChangeBand(Vector3 mouseCoordinate , GameObject slingshot , Vector2 startLocation)
+    private void ChangeBand(Vector3 mouseCoordinate)
 	{
         slingshot.GetComponent<LineRenderer>().enabled = true;
-        var rangeVector = new Vector3(startLocation.x - 0.3f, startLocation.y + 0.1f, -1);
-        slingshot.GetComponent<LineRenderer>().SetPositions(new Vector3[] { startLocation, rangeVector, mouseCoordinate });
+        var rangeVector = new Vector3(StartLocation.x - 0.3f, StartLocation.y + 0.1f, -1);
+        slingshot.GetComponent<LineRenderer>().SetPositions(new Vector3[] { StartLocation, rangeVector, mouseCoordinate });
     }
     //Bird will be on mouse position with small delay
-    private static void ManageBird(Vector3 mouseCoordinate , GameObject selectedBird , Vector2 startLocation)
+    private void ManageBird(Vector3 mouseCoordinate)
 	{
-        selectedBird.transform.position = Vector3.MoveTowards(selectedBird.transform.position,
+        SelectedBird.transform.position = Vector3.MoveTowards(SelectedBird.transform.position,
                        new Vector2(mouseCoordinate.x, mouseCoordinate.y),
                        Time.deltaTime * 100);
 
-        var range = startLocation - new Vector2(selectedBird.transform.position.x, selectedBird.transform.position.y);
-        selectedBird.transform.rotation = Quaternion.AngleAxis(GetAngle(range), Vector3.forward);
-    }
-    private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-    public void ChangeGameConditional() => this.GameStart = !this.GameStart;
+        var vector = new Vector2(StartLocation.x, StartLocation.y);
+        var range = vector - new Vector2(SelectedBird.transform.position.x, SelectedBird.transform.position.y);
+        SelectedBird.transform.rotation = Quaternion.AngleAxis(GetAngle(range), Vector3.forward);
+    } 
     public void ChangeBird()
-	{
+	{       
         if (Birds.Count > 0) 
 		{
             SelectedBird = Birds.Dequeue();
+            bird = SelectedBird.GetComponent<GameObjectScript>().ABGameObj as Bird;            
+            bird.TakeAim += ChangeBand;
+            bird.TakeAim += ManageBird;
+            bird.ResetBird += ResetBand;
+            bird.ResetBird += ResetBand;
+            bird.ReadyFly += DropBird;
             startRotation = SelectedBird.transform.rotation;
         }
 	}
+    private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
     public static bool CompareVectors3(Vector3 vector1, Vector3 vector2)//if 1 postion will be more that true
 	{
         if (vector1.x > vector2.x && vector1.y > vector2.y)
@@ -127,6 +126,15 @@ public class GameScript : MonoBehaviour
         else
             return false;
 	}
-    
+    private void ResetBird()//ResetPosition
+    {
+        SelectedBird.transform.position = StartLocation;
+        SelectedBird.transform.rotation = startRotation;
+    }
+    private void ResetBand()
+    {
+        slingshot.GetComponent<LineRenderer>().enabled = false;
+    }
+    public void ChangeGameConditional() => this.GameStart = !this.GameStart;
 }
 

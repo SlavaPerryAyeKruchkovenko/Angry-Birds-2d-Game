@@ -9,7 +9,7 @@ namespace Assets.scripts.Angry_Birds_2d_BusnesLogic
 {
 	public enum TypeUsingAbility
 	{
-		Click, TouchObject
+		Click, TouchObject, Universal
 	}
 	public interface IBird
 	{
