@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bird
+  - Pig
+  - Build Material
+  - Slingshot
+  - Background
+  - point
+  - Egg
   layers:
   - Default
   - TransparentFX
