@@ -1,3 +1,4 @@
+
 using Assets.scripts;
 using System;
 using System.Collections;
@@ -15,25 +16,25 @@ public class GameObjectEditor : Editor
 	}
 	public override void OnInspectorGUI()
 	{
-		script.TypeOfGameObj = TypeOfGameObject.GetTypesOfGameObject(script.gameObject);
+		script.TypeOfGameObj = AngryBirdsGameObject.GetTypesOfGameObject(script.gameObject.tag);
 		switch (script.TypeOfGameObj)
 		{
-			case TypesOfGameObject.Bird: script.BirdType = (Birds)EditorGUILayout.EnumPopup("Bird type", script.BirdType); break;
-			case TypesOfGameObject.Pig: script.PigType = (Pigs)EditorGUILayout.EnumPopup("Pig type", script.PigType); break;
-			case TypesOfGameObject.BuildMaterial: script.MaterialType = (BuildMaterials)EditorGUILayout.EnumPopup("Material type", script.MaterialType); break;
+			case AngryBirdsGameObjects.Bird: script.BirdType = (Birds)EditorGUILayout.EnumPopup("Bird type", script.BirdType); break;
+			case AngryBirdsGameObjects.Pig: script.PigType = (Pigs)EditorGUILayout.EnumPopup("Pig type", script.PigType); break;
+			case AngryBirdsGameObjects.BuildMaterial: script.MaterialType = (BuildMaterials)EditorGUILayout.EnumPopup("Material type", script.MaterialType); break;
 			default:
 				break;
 		}
-		script.Start();		
+		script.Awake();	
 		if(GUILayout.Button("Add new Sprite", GUILayout.Height(20)))
 		{			
-			if(script.ConditionalSprites == null)
-			{
-				script.ConditionalSprites = new List<Sprite>();
-			}
 			script.ConditionalSprites.Add(Sprite.Create(null,default,default));
-		}		
-		if(script.ConditionalSprites.Count>0)
+		}
+		if (script.ConditionalSprites == null)
+		{
+			script.ConditionalSprites = new List<Sprite>();
+		}
+		if (script.ConditionalSprites.Count > 0) 
 		{
 			for (int i = 0; i < script.ConditionalSprites.Count; i++)
 			{
@@ -41,13 +42,16 @@ public class GameObjectEditor : Editor
 					$"Image {i + 1}", script.ConditionalSprites[i], typeof(Sprite), true);
 			}
 		}
-		if (GUILayout.Button("Delete last Sprite", GUILayout.Height(20)))
+		if (script.ConditionalSprites.Count > 0 && script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount) 
 		{
-			script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
+			if (GUILayout.Button("Delete last Sprite", GUILayout.Height(20)))
+			{			
+				script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
+			}			
 		}
-		if (script.ConditionalSprites.Count != script.Type.SpriteCoount)
+		if (script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount)
 		{
-			var notHave = script.Type.SpriteCoount - script.ConditionalSprites.Count;
+			var notHave = script.ABGameObj.SpriteCoount - script.ConditionalSprites.Count;
 			EditorGUILayout.LabelField($"Нехватает {notHave} Спрайтов", EditorStyles.boldLabel);
 		}
 	}

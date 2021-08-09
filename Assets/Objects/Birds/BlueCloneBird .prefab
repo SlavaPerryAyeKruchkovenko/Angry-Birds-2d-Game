@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3206944724106927722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.02, y: -4.45, z: 0}
-  m_LocalScale: {x: 1.7779552, y: 1.6203978, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,15 +93,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3206944724106927722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f9d5273975bd49448c6851bdb30978b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlyingSprites:
-  - {fileID: -4464569400506775591, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  PowerSprites: []
-  ExtraObject: {fileID: 0}
+  FlyMaterial: {fileID: 0}
 --- !u!58 &4931511116471027043
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -130,7 +127,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -151,8 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfGameObj: 0
+  TypeOfGameObj: 2
   PigType: 0
-  BirdType: 0
+  BirdType: 1
   MaterialType: 0
-  ConditionalSprites: []
+  ConditionalSprites:
+  - {fileID: -4464569400506775591, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
+  - {fileID: -9092280484554424640, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}

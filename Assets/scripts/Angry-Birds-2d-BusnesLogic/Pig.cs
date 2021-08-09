@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.scripts
 {
@@ -10,7 +6,7 @@ namespace Assets.scripts
 	{
 		StandartPig, BigPig, ArmorPig, KingPig
 	}
-	public class Pig : TypeOfGameObject
+	public class Pig : AngryBirdsGameObject
 	{
 		public override float Health { get; protected set; }
 		public override float Armor { get; protected set; }
@@ -34,15 +30,18 @@ namespace Assets.scripts
 	{
 		public override float Health { get; protected set; } = 100;
 		public override float Armor { get; protected set; } = 200;
+		public override float Mass => 2;
 	}
 	public class ArmorPig : Pig
 	{
 		public override float Health { get; protected set; } = 100;
 		public override float Armor { get; protected set; } = 100;
+		public override float Mass => 1.2f;
 	}
 	public class KingPig : Pig
 	{
 		public override float Health { get; protected set; } = 100;
 		public override float Armor { get; protected set; } = 500;
+		public override float Mass => 2.5f;
 	}
 }

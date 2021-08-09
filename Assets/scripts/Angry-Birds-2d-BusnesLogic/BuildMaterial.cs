@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.scripts
 {
@@ -10,10 +6,9 @@ namespace Assets.scripts
 	{
 		Ice, Wood, Stone
 	}
-	public class BuildMaterial :TypeOfGameObject
+	public class BuildMaterial :AngryBirdsGameObject
 	{
 		public override short SpriteCoount => 4;
-		public virtual float Weight { get; }
 		public override float Health { get ; protected set; }
 		public override float Armor { get ; protected set; }
 
@@ -32,7 +27,7 @@ namespace Assets.scripts
 
 		public override float Armor { get; protected set; } = 0;
 
-		public override float Weight => 0.5f;
+		public override float Mass => 0.5f;
 	}
 	public class WoodBildMaterial : BuildMaterial
 	{
@@ -40,7 +35,7 @@ namespace Assets.scripts
 
 		public override float Armor { get; protected set; } = 0;
 
-		public override float Weight => 1f;
+		public override float Mass => 1f;
 	}
 	public class StoneBildMaterial : BuildMaterial
 	{
@@ -48,7 +43,7 @@ namespace Assets.scripts
 
 		public override float Armor { get; protected set; } = 100;
 
-		public override float Weight => 2f;
+		public override float Mass => 2f;
 	}
 
 }
