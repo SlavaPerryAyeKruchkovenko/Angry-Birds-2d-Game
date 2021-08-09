@@ -23,8 +23,11 @@ namespace Assets.scripts
         public override float Armor { get; protected set; } = 0;
 
         public event BirdReadyFly ReadyFly = null;
+
         public event BirdStartFly StartFly = null;
+
         public event TakeAim TakeAim = null;
+
         public event ResetBird ResetBird = null;
         public override short SpriteCoount => 2;
         public readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();

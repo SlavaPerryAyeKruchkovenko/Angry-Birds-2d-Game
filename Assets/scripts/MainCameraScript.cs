@@ -17,8 +17,9 @@ public class MainCameraScript : MonoBehaviour
     private float firstClickTime = 0;
     private int clickCount = 0;
     public bool LockCamera = false;
+    private bool needCheck = true;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(background == null)
 		{
@@ -37,19 +38,18 @@ public class MainCameraScript : MonoBehaviour
             {
                 ResetCamera();
                 clickCount = 0;
-                
             }
             else if (Input.GetMouseButtonDown(0))
             {
                 firstClickTime = Time.time;
-                if(range == null)
-				{
+                if (range == null)
+                {
                     range = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 }
                 else
-				{
+                {
                     range += Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                }               
+                }
             }
             else if (Input.GetMouseButtonUp(0))
             {
@@ -61,19 +61,19 @@ public class MainCameraScript : MonoBehaviour
                 {
                     clickCount = 0;
                 }
-                
-                if(range != null)
-				{
+
+                if (range != null)
+                {
                     range -= Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     this.gameObject.transform.position += new Vector3(range.Value.x, range.Value.y, 0);
-                }               
+                }
                 if (!CanMoveCamera(background, Camera.main))
                 {
                     this.gameObject.transform.position = lastLocation;
                 }
                 range = null;
             }
-            else if (bird != null && FlyingBird!= null && bird.IsFly)
+            else if (bird != null && FlyingBird != null && bird.IsFly && needCheck) 
             {
                 var coor = FlyingBird.transform.position;
                 this.gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
@@ -94,12 +94,14 @@ public class MainCameraScript : MonoBehaviour
 		{
             FlyingBird = bird;
             this.bird = bird.GetComponent<GameObjectScript>().ABGameObj as Bird;
-            FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie += ResetCamera;
-		}
+            this.bird.ObjectDie += ResetCamera;
+            needCheck = true;
+        }
 	}
     private void ResetCamera()
 	{
-        this.gameObject.transform.position = startPosition;                    
+        this.gameObject.transform.position = startPosition;
+        needCheck = false;
     }
     private static bool CanMoveCamera(GameObject background, Camera camera)
 	{

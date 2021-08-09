@@ -55,20 +55,18 @@ public class GameScript : MonoBehaviour
                 isPress = false;
                 ResetBand();
                 if (!SelectedBird.GetComponent<Rigidbody2D>() && Mathf.Abs(StartLocation.x - mouseCoor.x) > 1) 
-                {
-                    SelectedBird.AddComponent<Rigidbody2D>();                  
+                {                  
                     Bird.InvokeFlyEvent(StartLocation - mouseCoor);
                     if(Camera.main.GetComponent<MainCameraScript>())
 					{
                         Camera.main.GetComponent<MainCameraScript>().AddBird(SelectedBird);
                         Camera.main.GetComponent<MainCameraScript>().LockCamera = false;
                     }
-                    GameStart = false;
                     //Make Fly Animation;
                 }
                 else
 				{
-                    ResetBird();
+                    Bird.InvokeResetEvent();
                 }
                 
             }
@@ -77,15 +75,24 @@ public class GameScript : MonoBehaviour
                 Camera.main.GetComponent<MainCameraScript>().LockCamera = true;
                 Bird.InvokeTakeAimEvent(mouseCoor);
                 var script = SelectedBird.GetComponent<BirdScript>();
-                script.DrawTraectory(SelectedBird.transform.right * (StartLocation - mouseCoor).sqrMagnitude);
+                float impulse = GetImpulse(StartLocation - mouseCoor);
+                script.DrawTraectory(SelectedBird.transform.right * impulse);
             }           
         }       
     }   
     private void DropBird(Vector3 range)//when Bird Start Flying
 	{
-        var power = Vector3.SqrMagnitude(range) / 2 * 0.8f;//delta x^2 * k /2
-        SelectedBird.GetComponent<Rigidbody2D>().AddForce(SelectedBird.transform.right*power, ForceMode2D.Impulse);
+        SelectedBird.AddComponent<Rigidbody2D>();
+        var rigidbody = SelectedBird.GetComponent<Rigidbody2D>();
+        rigidbody.mass = Bird.Mass;
+        var power = GetImpulse(range);
+        var vector = SelectedBird.transform.right;
+        rigidbody.AddForce(vector*power, ForceMode2D.Impulse);
 	}
+    private float GetImpulse(Vector3 power)
+	{
+        return Vector3.SqrMagnitude(power) / 2 * 1.6f;//delta x^2 * k /2
+    }
     private void ChangeBand(Vector3 mouseCoordinate)
 	{
         slingshot.GetComponent<LineRenderer>().enabled = true;
@@ -112,8 +119,10 @@ public class GameScript : MonoBehaviour
             Bird.TakeAim += ChangeBand;
             Bird.TakeAim += ManageBird;
             Bird.ResetBird += ResetBand;
-            Bird.ResetBird += ResetBand;
+            Bird.ResetBird += ResetBird;
             Bird.ReadyFly += DropBird;
+            Bird.ResetBird += () => SelectedBird.GetComponent<LineRenderer>().enabled = false;
+            Bird.TakeAim += (vector) => { SelectedBird.GetComponent<LineRenderer>().enabled = true; };
             startRotation = SelectedBird.transform.rotation;
         }
 	}
@@ -134,6 +143,6 @@ public class GameScript : MonoBehaviour
     {
         slingshot.GetComponent<LineRenderer>().enabled = false;
     }
-    public void ChangeGameConditional() => this.GameStart = !this.GameStart;
+    public void StartGame() => this.GameStart = true;
 }
 

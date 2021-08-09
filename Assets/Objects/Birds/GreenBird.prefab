@@ -99,10 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlyMaterial: {fileID: 812584031472445385, guid: c428729f0bd5783408a33d65e3e60b42, type: 3}
-  Target: {fileID: 0}
-  FirePointPos: {fileID: 0}
-  Rigit: {fileID: 0}
-  Zone: {fileID: 0}
 --- !u!60 &979467105008139824
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -188,7 +184,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 1459c914896fbca4a8e3d70e237617cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -262,7 +258,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1

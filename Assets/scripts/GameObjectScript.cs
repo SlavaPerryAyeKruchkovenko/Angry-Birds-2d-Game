@@ -40,7 +40,7 @@ public class GameObjectScript : MonoBehaviour
         maxHealth = ABGameObj.Health;// const that compare it with now health    
         ABGameObj.ObjectDie += () => Destroy(this.gameObject);
     }
-	private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
 	{
         if (gameObject.GetComponent<Rigidbody2D>())
         {
@@ -57,6 +57,11 @@ public class GameObjectScript : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Rigidbody2D>().velocity += speed / ABGameObj.Mass;
                 }
+            }
+            if(gameObject.GetComponent<BirdScript>())
+			{
+                gameObject.GetComponent<BirdScript>().Token.Cancel();
+
             }
         }          
     }

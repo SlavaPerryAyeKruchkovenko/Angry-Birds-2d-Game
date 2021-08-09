@@ -10,16 +10,13 @@ public class SlingshotScript : MonoBehaviour
         if (!game.GameStart)
 		{
             this.GetComponent<LineRenderer>().enabled = true;
-			game.ChangeGameConditional();
+			game.StartGame();
           
             game.ChangeBird();
         }
 		else
 		{
-            if(game.Bird.IsFly)
-			{
-                game.ChangeBird();
-			}
+            game.ChangeBird();
 		}
 	}
 }
