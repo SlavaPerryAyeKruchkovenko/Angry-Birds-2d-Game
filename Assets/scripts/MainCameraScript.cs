@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class MainCameraScript : MonoBehaviour
 {
     public GameObject FlyingBird { get; private set; }
+    private Bird bird;
     private Vector3 startPosition;
     private GameObject background;
     private Vector3 lastLocation;
@@ -72,7 +73,7 @@ public class MainCameraScript : MonoBehaviour
                 }
                 range = null;
             }
-            else if (FlyingBird != null)
+            else if (bird != null && FlyingBird!= null && bird.IsFly)
             {
                 var coor = FlyingBird.transform.position;
                 this.gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
@@ -92,17 +93,13 @@ public class MainCameraScript : MonoBehaviour
         if(bird.GetComponent<GameObjectScript>() && bird.GetComponent<GameObjectScript>().ABGameObj is Bird)
 		{
             FlyingBird = bird;
+            this.bird = bird.GetComponent<GameObjectScript>().ABGameObj as Bird;
             FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie += ResetCamera;
 		}
 	}
     private void ResetCamera()
 	{
-        this.gameObject.transform.position = startPosition;      
-        if(FlyingBird != null)
-		{
-            FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie -= ResetCamera;
-            FlyingBird = null;
-        }              
+        this.gameObject.transform.position = startPosition;                    
     }
     private static bool CanMoveCamera(GameObject background, Camera camera)
 	{

@@ -62,11 +62,13 @@ public class GameObjectScript : MonoBehaviour
     }
     private void Update()
 	{
-        if (gameObject.GetComponent<Rigidbody2D>() && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= 0.005)
-		{            
-            ABGameObj.InvokeDiedEvent();
-        }
-            
+        if(ABGameObj.Health == 0)
+		{
+            if (gameObject.GetComponent<Rigidbody2D>() && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= 0.005)
+            {
+                ABGameObj.InvokeDiedEvent();
+            }
+        }                
     }
 	
 	private void ChangeConditional()
@@ -76,6 +78,7 @@ public class GameObjectScript : MonoBehaviour
             if (ABGameObj.Health >= i / ABGameObj.SpriteCoount * maxHealth && ABGameObj.Health < (i + 1) / ABGameObj.SpriteCoount * maxHealth) 
 			{
                 ChangeSprite(this.gameObject, ConditionalSprites[(int)(ABGameObj.SpriteCoount - 1 - i)]);
+                return;
             }
 		}
     }

@@ -12,18 +12,23 @@ public class BirdScript : MonoBehaviour
 	private bool canDrawPoint = true;
     private readonly int steps = 50;
 	private const float g = 9.8f;
-    private void Awake()
-	{		
+	private CancellationTokenSource token = new CancellationTokenSource();
+
+	private void Awake()
+	{				
 		gameObject.GetComponent<LineRenderer>().positionCount = steps;
 		if(bird == null)
 		{
 			bird = this.gameObject.GetComponent<GameObjectScript>().ABGameObj as Bird;
 			if (bird != null && canDrawPoint)
 			{
-				bird.StartFly += DeleteFlyPoints;
-				
+				bird.StartFly += DeleteFlyPoints;				
 			}
-		}			
+		}
+		if (bird.cancelTokenSource.IsCancellationRequested)
+		{
+			token.Cancel();
+		}
 	}
 	async public void DrawPoints(CancellationTokenSource token)
 	{
@@ -35,16 +40,16 @@ public class BirdScript : MonoBehaviour
 			}
 			if (this.gameObject.GetComponent<Rigidbody2D>())
 			{
-				Instantiate(FlyMaterial, this.gameObject.transform.position, default);
-				await Task.Delay(5);
+				Instantiate(FlyMaterial, this.gameObject.transform.position, default);			
 			}
+			await Task.Delay(5);
 		}	
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (bird!=null && canDrawPoint && collision.gameObject.CompareTag("Slingshot"))
 		{
-			DrawPoints(bird.cancelTokenSource);
+			DrawPoints(token);
 			canDrawPoint = false;
 		}
 	}
@@ -53,8 +58,8 @@ public class BirdScript : MonoBehaviour
 		if (bird is IBird birdAbility)
 		{
 			if (birdAbility.Ability == TypeUsingAbility.TouchObject || birdAbility.Ability == TypeUsingAbility.Universal)
-			{
-				birdAbility.UsePower();
+			{				
+				birdAbility.UsePower();				
 				bird.GetDamage(1);
 			}
 		}
@@ -72,6 +77,7 @@ public class BirdScript : MonoBehaviour
 		{
 			if (bird is IBird ibird && ibird.Ability == TypeUsingAbility.Click)
 			{
+				token.Cancel();
 				ibird.UsePower();
 			}
 		}
@@ -92,7 +98,7 @@ public class BirdScript : MonoBehaviour
 		for (int i = 0; i < steps; i++)
 		{
 			time += 0.1f;
-			float x = speed * Mathf.Cos(corner) * time;
+			float x = speed * Mathf.Cos(corner) * time;// x = |v| * cos(a) * t
 			float y = speed * Mathf.Sin(corner) * time - g * Mathf.Pow(time, 2) / 2; //y = v0 * sina * t - g * t^2 / 2
 			Vector3 point = new Vector2(x, y);
 			results[i] = posicion + point;

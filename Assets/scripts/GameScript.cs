@@ -8,7 +8,7 @@ public class GameScript : MonoBehaviour
 {
     public GameObject SelectedBird { get; private set; }
     private GameObject slingshot;
-    private Bird bird;
+    public Bird Bird { get; private set; }
     public Queue<GameObject> Birds { get; private set; } = new Queue<GameObject>();
     public bool GameStart { get; private set;} = false;
     public Vector3 StartLocation { get; private set; } = default;
@@ -37,14 +37,14 @@ public class GameScript : MonoBehaviour
     {
         var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mouseCoor = new Vector3(coor.x, coor.y, -1);
-        if (GameStart && SelectedBird != null)
+        if (GameStart && SelectedBird != null && !Bird.IsFly)
         {
             var cameraLeftButtomCoor = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)) + new Vector3(0, 1, 0);
             var cameraRightUpCoor = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) - new Vector3(3, 1, 0);
             if (!CompareVectors3(mouseCoor, cameraLeftButtomCoor) || !CompareVectors3(cameraRightUpCoor,mouseCoor)) 
 			{
                 isPress = false;
-                bird.InvokeResetEvent();
+                Bird.InvokeResetEvent();
             }
             else if (Input.GetMouseButtonDown(0))
             {
@@ -57,13 +57,12 @@ public class GameScript : MonoBehaviour
                 if (!SelectedBird.GetComponent<Rigidbody2D>() && Mathf.Abs(StartLocation.x - mouseCoor.x) > 1) 
                 {
                     SelectedBird.AddComponent<Rigidbody2D>();                  
-                    bird.InvokeFlyEvent(StartLocation - mouseCoor);
+                    Bird.InvokeFlyEvent(StartLocation - mouseCoor);
                     if(Camera.main.GetComponent<MainCameraScript>())
 					{
                         Camera.main.GetComponent<MainCameraScript>().AddBird(SelectedBird);
                         Camera.main.GetComponent<MainCameraScript>().LockCamera = false;
                     }
-                    SelectedBird = null;
                     GameStart = false;
                     //Make Fly Animation;
                 }
@@ -76,7 +75,7 @@ public class GameScript : MonoBehaviour
             else if(isPress)
 			{
                 Camera.main.GetComponent<MainCameraScript>().LockCamera = true;
-                bird.InvokeTakeAimEvent(mouseCoor);
+                Bird.InvokeTakeAimEvent(mouseCoor);
                 var script = SelectedBird.GetComponent<BirdScript>();
                 script.DrawTraectory(SelectedBird.transform.right * (StartLocation - mouseCoor).sqrMagnitude);
             }           
@@ -109,12 +108,12 @@ public class GameScript : MonoBehaviour
         if (Birds.Count > 0) 
 		{
             SelectedBird = Birds.Dequeue();
-            bird = SelectedBird.GetComponent<GameObjectScript>().ABGameObj as Bird;            
-            bird.TakeAim += ChangeBand;
-            bird.TakeAim += ManageBird;
-            bird.ResetBird += ResetBand;
-            bird.ResetBird += ResetBand;
-            bird.ReadyFly += DropBird;
+            Bird = SelectedBird.GetComponent<GameObjectScript>().ABGameObj as Bird;            
+            Bird.TakeAim += ChangeBand;
+            Bird.TakeAim += ManageBird;
+            Bird.ResetBird += ResetBand;
+            Bird.ResetBird += ResetBand;
+            Bird.ReadyFly += DropBird;
             startRotation = SelectedBird.transform.rotation;
         }
 	}

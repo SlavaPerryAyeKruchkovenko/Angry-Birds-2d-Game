@@ -18,6 +18,7 @@ namespace Assets.scripts
     public delegate void Power(CancellationTokenSource cancelTokenSource);
     public class Bird : AngryBirdsGameObject
     {
+        public bool IsFly { get; private set; } = false;
         public override float Health { get; protected set; } = 1;
         public override float Armor { get; protected set; } = 0;
 
@@ -40,6 +41,7 @@ namespace Assets.scripts
                 ReadyFly.Invoke(range);
             if (StartFly != null)
                 StartFly.Invoke();
+            IsFly = true;
         }
         public void InvokeTakeAimEvent(Vector3 range)
 		{
@@ -50,18 +52,23 @@ namespace Assets.scripts
 		{
             ResetBird.Invoke();
 		}
-        public static Bird GetBird(Birds bird, IPowers powersRealeasetion)
+		public override void InvokeDiedEvent()
+		{
+            IsFly = false;
+			base.InvokeDiedEvent();
+		}
+		public static Bird GetBird(Birds bird, IPowers powersRealeasetion)
         {
             return bird switch
             {
                 Birds.Red => new RedBird(),
-                Birds.Blue => new BlueBird(powersRealeasetion.Clone , true),
+                Birds.Blue => new BlueBird(powersRealeasetion.Clone , false),
                 Birds.Yellow => new YellowBird(powersRealeasetion.SpeedUp),
                 Birds.Black => new BlackBird(powersRealeasetion.Explode),
                 Birds.Green => new GreenBird(powersRealeasetion.UTurn),
                 Birds.White => new WhiteBird(powersRealeasetion.DropEgg),
                 Birds.BigRed => new BigRedBird(),
-                Birds.BlueClone => new BlueBird(powersRealeasetion.Clone,false),
+                Birds.BlueClone => new BlueBird(powersRealeasetion.Clone,true),
                 _ => throw new Exception("Bird not found"),
             };
         }
@@ -106,9 +113,9 @@ namespace Assets.scripts
 	}
     public class BlueBird: BirdWithPower
     {       
-        public BlueBird(Power _power, bool _canUsePower):base(_power)
+        public BlueBird(Power _power, bool isClone):base(_power)
 		{
-            canUsePower = _canUsePower;
+            canUsePower = !isClone;
             if(!canUsePower)
 			{
                 cancelTokenSource.Cancel();

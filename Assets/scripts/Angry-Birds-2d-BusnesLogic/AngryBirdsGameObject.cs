@@ -36,7 +36,7 @@ namespace Assets.scripts
 				}
 			}
 		}
-		public void InvokeDiedEvent()
+		public virtual void InvokeDiedEvent()
 		{
 			if(Health == 0)
 				this.ObjectDie.Invoke();			

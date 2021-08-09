@@ -39,18 +39,27 @@ namespace Assets.scripts.Converters
 			{
 				return;
 			}
-			GameObject egg = gameObject.transform.GetChild(0).gameObject;
-			egg.GetComponent<CapsuleCollider2D>().enabled = true;
-			egg.GetComponent<SpriteRenderer>().enabled = true;
-			GameObject.Instantiate(egg, this.gameObject.transform.position - Vector3.up, default);
-			var rigidbody = egg.GetComponent<Rigidbody2D>();
-			float power = rigidbody.mass * 10;//F = mg
-			rigidbody.AddForce(-Vector3.up * power, ForceMode2D.Impulse);
+			GameObject egg = GetEgg(gameObject);
+			GameObject.Instantiate(egg, this.gameObject.transform.position - Vector3.up, default);			
 			await Task.Delay(20);
+			AddPower(egg, gameObject);
 			cancelTokenSource.Cancel();
 			Debug.Log("Снес яйцо");
 		}
-
+		private static GameObject GetEgg(GameObject game)
+		{
+			var egg = game.transform.GetChild(0).gameObject;
+			egg.GetComponent<CapsuleCollider2D>().enabled = true;
+			egg.GetComponent<SpriteRenderer>().enabled = true;
+			return egg;
+		}
+		private static void AddPower(GameObject egg, GameObject gameObject)
+		{
+			var rigidbody = egg.GetComponent<Rigidbody2D>();
+			float power = rigidbody.mass * 10;//F = mg
+			rigidbody.AddForce(-Vector3.up * power, ForceMode2D.Impulse);
+			gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * 10, ForceMode2D.Impulse);
+		}
 		async public void Explode(CancellationTokenSource cancelTokenSource)
 		{
 			if(gameObject.GetComponent<CircleCollider2D>())
@@ -66,11 +75,12 @@ namespace Assets.scripts.Converters
 					rigidbody.mass *= mass * i;
 					if (cancelTokenSource.IsCancellationRequested)
 					{
-						return;
+						gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
+						return;						
 					}
 					await Task.Delay(10);
 				}
-				cancelTokenSource.Cancel();
+				cancelTokenSource.Cancel();				
 				gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
 				Debug.Log("boom");
 			}
@@ -107,7 +117,7 @@ namespace Assets.scripts.Converters
 					return;
 				}
 				gameObject.transform.rotation = Quaternion.AngleAxis(angel - i, Vector3.forward);
-				if (rigidbody.velocity.magnitude > 0)
+				if (rigidbody.velocity.magnitude > 1)
 				{
 					rigidbody.velocity -= new Vector2(0.03f, 0.03f);
 				}

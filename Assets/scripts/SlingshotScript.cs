@@ -16,7 +16,7 @@ public class SlingshotScript : MonoBehaviour
         }
 		else
 		{
-            if(game.SelectedBird == null)
+            if(game.Bird.IsFly)
 			{
                 game.ChangeBird();
 			}
