@@ -13,7 +13,7 @@ public class BirdScriptEditor : Editor
 	BirdScript script;
 	public void OnEnable()
 	{
-		script = (BirdScript)this.target;
+		script = (BirdScript)target;
 	}
 	public override void OnInspectorGUI()
 	{

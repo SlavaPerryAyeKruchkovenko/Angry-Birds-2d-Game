@@ -39,7 +39,7 @@ namespace Assets.scripts
 		public virtual void InvokeDiedEvent()
 		{
 			if(Health == 0)
-				this.ObjectDie.Invoke();			
+				ObjectDie.Invoke();			
 		}
 
 		public static AngryBirdsGameObjects GetTypesOfGameObject(string tag) => tag switch

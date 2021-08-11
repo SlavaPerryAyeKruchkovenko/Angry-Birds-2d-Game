@@ -12,7 +12,7 @@ public class GameObjectEditor : Editor
 	GameObjectScript script;
 	public void OnEnable()
 	{
-		script = (GameObjectScript)this.target;
+		script = (GameObjectScript)target;
 	}
 	public override void OnInspectorGUI()
 	{

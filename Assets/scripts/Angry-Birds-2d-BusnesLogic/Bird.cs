@@ -1,8 +1,8 @@
 ﻿
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
 using System;
+using System.Numerics;
 using System.Threading;
-using UnityEngine;
 
 namespace Assets.scripts
 {  
@@ -24,11 +24,11 @@ namespace Assets.scripts
 
         public event BirdReadyFly ReadyFly = null;
 
-        public event BirdStartFly StartFly = null;
+        public event Action StartFly = null;
 
-        public event TakeAim TakeAim = null;
+        public event Action<Vector3> TakeAim = null;
 
-        public event ResetBird ResetBird = null;
+        public event Action ResetBird = null;
         public override short SpriteCoount => 2;
         public readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
 		public override void GetDamage(float damage)

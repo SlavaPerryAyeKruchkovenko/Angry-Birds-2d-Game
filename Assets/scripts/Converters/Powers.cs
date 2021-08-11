@@ -18,9 +18,9 @@ namespace Assets.scripts.Converters
 			{
 				return;
 			}
-			var gameObj1 = GameObject.Instantiate(gameObject, this.gameObject.transform.position + Vector3.up, default);
+			var gameObj1 = GameObject.Instantiate(gameObject, gameObject.transform.position + Vector3.up, default);
 			ReturnForce(gameObj1, gameObject);
-			var gameObj2 = GameObject.Instantiate(gameObject, this.gameObject.transform.position - Vector3.up, default);
+			var gameObj2 = GameObject.Instantiate(gameObject, gameObject.transform.position - Vector3.up, default);
 			ReturnForce(gameObj2, gameObject);
 
 			cancelTokenSource.Cancel();
@@ -40,8 +40,8 @@ namespace Assets.scripts.Converters
 				return;
 			}
 			GameObject egg = GetEgg(gameObject);
-			GameObject.Instantiate(egg, this.gameObject.transform.position - Vector3.up, default);			
-			await Task.Delay(20);
+			GameObject.Instantiate(egg, gameObject.transform.position - Vector3.up, default);			
+			await Task.Delay(100);
 			AddPower(egg, gameObject);
 			cancelTokenSource.Cancel();
 			Debug.Log("Снес яйцо");
@@ -56,6 +56,7 @@ namespace Assets.scripts.Converters
 		private static void AddPower(GameObject egg, GameObject gameObject)
 		{
 			var rigidbody = egg.GetComponent<Rigidbody2D>();
+			rigidbody.velocity = Vector2.zero;
 			float power = rigidbody.mass * 10;//F = mg
 			rigidbody.AddForce(-Vector3.up * power, ForceMode2D.Impulse);
 			gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * 10, ForceMode2D.Impulse);
@@ -78,7 +79,7 @@ namespace Assets.scripts.Converters
 						gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
 						return;						
 					}
-					await Task.Delay(10);
+					await Task.Delay(60);
 				}
 				cancelTokenSource.Cancel();				
 				gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();

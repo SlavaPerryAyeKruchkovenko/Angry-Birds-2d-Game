@@ -17,10 +17,10 @@ class HelpWindowEditor : EditorWindow
 	private void OnGUI()
 	{
 		EditorGUILayout.BeginVertical();
-		scrollPos = EditorGUILayout.BeginScrollView(scrollPos,GUILayout.Width(this.position.width), GUILayout.Height(this.position.height));
+		scrollPos = EditorGUILayout.BeginScrollView(scrollPos,GUILayout.Width(position.width), GUILayout.Height(position.height));
 		GetConditionalAboutTag("Pig");
 		GetConditionalAboutTag("Build Material");
-		this.Repaint();
+		Repaint();
 		EditorGUILayout.EndScrollView();
 	}
 	private static void GetConditionalAboutTag(string tag)
