@@ -7,20 +7,19 @@ namespace Assets.scripts.Converters
 {
 	class Powers : IPowers
 	{
+		private readonly GameObject gameObject;
+
 		public Powers(GameObject _gameObject)
 		{
 			gameObject = _gameObject;
 		}
-		private readonly GameObject gameObject;
-		async public void Clone(CancellationTokenSource cancelTokenSource)
+
+		public async void Clone(CancellationTokenSource cancelTokenSource)
 		{
-			if(cancelTokenSource.IsCancellationRequested)
-			{
-				return;
-			}
-			var gameObj1 = GameObject.Instantiate(gameObject, this.gameObject.transform.position + Vector3.up, default);
+			if(cancelTokenSource.IsCancellationRequested) return;
+			var gameObj1 = GameObject.Instantiate(gameObject, gameObject.transform.position + Vector3.up, default);
 			ReturnForce(gameObj1, gameObject);
-			var gameObj2 = GameObject.Instantiate(gameObject, this.gameObject.transform.position - Vector3.up, default);
+			var gameObj2 = GameObject.Instantiate(gameObject, gameObject.transform.position - Vector3.up, default);
 			ReturnForce(gameObj2, gameObject);
 
 			cancelTokenSource.Cancel();
@@ -33,12 +32,9 @@ namespace Assets.scripts.Converters
 			gameObject1.GetComponent<GameObjectScript>().BirdType = Birds.BlueClone;
 			gameObject1.GetComponent<GameObjectScript>().SetStartSettings();
 		}
-		async public void DropEgg(CancellationTokenSource cancelTokenSource)
+		public async void DropEgg(CancellationTokenSource cancelTokenSource)
 		{
-			if(cancelTokenSource.IsCancellationRequested)
-			{
-				return;
-			}
+			if(cancelTokenSource.IsCancellationRequested) return;
 			GameObject egg = GetEgg(gameObject);
 			GameObject.Instantiate(egg, this.gameObject.transform.position - Vector3.up, default);			
 			await Task.Delay(20);
@@ -66,9 +62,9 @@ namespace Assets.scripts.Converters
 			{
 				var colider = gameObject.GetComponent<CircleCollider2D>();
 				var rigidbody = gameObject.GetComponent<Rigidbody2D>();
-				rigidbody.velocity -= new Vector2(rigidbody.velocity.x * 0.8f, rigidbody.velocity.y * 0.8f);
 				float radius = colider.radius;
 				float mass = rigidbody.mass;
+				rigidbody.velocity -= new Vector2(rigidbody.velocity.x * 0.8f, rigidbody.velocity.y * 0.8f);
 				for (float i = 1; i < 3; i += 0.1f)
 				{
 					colider.radius = radius * i;
@@ -84,16 +80,16 @@ namespace Assets.scripts.Converters
 				gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
 				Debug.Log("boom");
 			}
-		} 
+		}
 
-		async public void SpeedUp(CancellationTokenSource cancelTokenSource)
+		public async void SpeedUp(CancellationTokenSource cancelTokenSource)
 		{
 			Vector2 startSpeed = gameObject.GetComponent<Rigidbody2D>().velocity;
-			int speed;
-			for (speed = 1; speed <= 3; speed++)
+			for (int speed = 1; speed <= 3; speed++)
 			{
-				gameObject.GetComponent<Rigidbody2D>().velocity = startSpeed * speed;
-				gameObject.GetComponent<Rigidbody2D>().mass += 1;
+				var rigidBody = gameObject.GetComponent<Rigidbody2D>();
+				rigidBody.velocity = startSpeed * speed;
+				rigidBody.mass += 1;
 				if (cancelTokenSource.IsCancellationRequested)
 				{
 					return;
@@ -107,8 +103,8 @@ namespace Assets.scripts.Converters
 		{
 			CancellationToken token = cancelTokenSource.Token;
 			var rotation = gameObject.transform.rotation;
-			var rigidbody = gameObject.GetComponent<Rigidbody2D>();
-			Vector2 speed = rigidbody.velocity;			
+			var rigidBody = gameObject.GetComponent<Rigidbody2D>();
+			Vector2 speed = rigidBody.velocity;			
 			float angel = gameObject.transform.rotation.eulerAngles.z;
 			for (int i = 1; i <= 180; i+=3)
 			{
@@ -117,15 +113,15 @@ namespace Assets.scripts.Converters
 					return;
 				}
 				gameObject.transform.rotation = Quaternion.AngleAxis(angel - i, Vector3.forward);
-				if (rigidbody.velocity.magnitude > 1)
+				if (rigidBody.velocity.magnitude > 1)
 				{
-					rigidbody.velocity -= new Vector2(0.03f, 0.03f);
+					rigidBody.velocity -= new Vector2(0.03f, 0.03f);
 				}
 				await Task.Delay(1);
 			}
 			cancelTokenSource.Cancel();
 			await Task.Run(() => Debug.Log("Развернулся"));
-			rigidbody.velocity = -speed;
+			rigidBody.velocity = -speed;
 		}		
 	}
 }

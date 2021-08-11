@@ -1,10 +1,5 @@
 using Assets.scripts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class MainCameraScript : MonoBehaviour
 {
@@ -20,36 +15,33 @@ public class MainCameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(background == null)
-		{
-            background = GameObject.FindGameObjectWithTag("Background");
-            startPosition = this.transform.position;
-        }       
+        if (background != null) return;
+        background = GameObject.FindGameObjectWithTag("Background");
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!LockCamera)
-		{
-            lastLocation = this.transform.position;
+        if (!LockCamera)
+        {
+            lastLocation = transform.position;
             if (clickCount >= 2)
             {
                 ResetCamera();
                 clickCount = 0;
-                
             }
             else if (Input.GetMouseButtonDown(0))
             {
                 firstClickTime = Time.time;
-                if(range == null)
-				{
+                if (range == null)
+                {
                     range = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 }
                 else
-				{
+                {
                     range += Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                }               
+                }
             }
             else if (Input.GetMouseButtonUp(0))
             {
@@ -61,48 +53,52 @@ public class MainCameraScript : MonoBehaviour
                 {
                     clickCount = 0;
                 }
-                
-                if(range != null)
-				{
+
+                if (range != null)
+                {
                     range -= Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    this.gameObject.transform.position += new Vector3(range.Value.x, range.Value.y, 0);
-                }               
+                    gameObject.transform.position += new Vector3(range.Value.x, range.Value.y, 0);
+                    range = null;
+                }
+
                 if (!CanMoveCamera(background, Camera.main))
                 {
-                    this.gameObject.transform.position = lastLocation;
+                    gameObject.transform.position = lastLocation;
                 }
-                range = null;
             }
-            else if (bird != null && FlyingBird!= null && bird.IsFly)
+            else if (bird != null && FlyingBird != null && bird.IsFly)
             {
                 var coor = FlyingBird.transform.position;
-                this.gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
+                gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
                 if (!CanMoveCamera(background, Camera.main))
                 {
-                    this.gameObject.transform.position = lastLocation;
+                    gameObject.transform.position = lastLocation;
                 }
             }
         }
         else
-		{
+        {
             range = null;
-		}
+        }
     }
+
     public void AddBird(GameObject bird)
-	{
-        if(bird.GetComponent<GameObjectScript>() && bird.GetComponent<GameObjectScript>().ABGameObj is Bird)
-		{
+    {
+        if (bird.GetComponent<GameObjectScript>() && bird.GetComponent<GameObjectScript>().ABGameObj is Bird)
+        {
             FlyingBird = bird;
             this.bird = bird.GetComponent<GameObjectScript>().ABGameObj as Bird;
             FlyingBird.GetComponent<GameObjectScript>().ABGameObj.ObjectDie += ResetCamera;
-		}
-	}
-    private void ResetCamera()
-	{
-        this.gameObject.transform.position = startPosition;                    
+        }
     }
+
+    private void ResetCamera()
+    {
+        gameObject.transform.position = startPosition;
+    }
+
     private static bool CanMoveCamera(GameObject background, Camera camera)
-	{
+    {
         var rect = background.GetComponent<RectTransform>();
         float width = background.transform.localScale.x * rect.rect.width; // weight
         float height = background.transform.localScale.y * rect.rect.height;// height

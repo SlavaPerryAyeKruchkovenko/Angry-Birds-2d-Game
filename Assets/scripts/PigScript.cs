@@ -9,9 +9,10 @@ public class PigScript : MonoBehaviour
     public List<Sprite> Default;
     public List<Sprite> Damaged;
     public List<Sprite> SoDamaged;
+    public Animator Animator;
 
 	private async void Start()
-	{       
+	{
         while (true)
         {
             if (this.gameObject.GetComponent<GameObjectScript>().ABGameObj.Health <= 0) { break; }
