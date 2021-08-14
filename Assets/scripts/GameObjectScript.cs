@@ -32,46 +32,43 @@ public class GameObjectScript : MonoBehaviour
 		else if (ABGameObj is BuildMaterial)
 			ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
 
-		if (gameObject.GetComponent<Rigidbody2D>())
-			gameObject.GetComponent<Rigidbody2D>().mass = ABGameObj.Mass;
+		var rigidbody = gameObject.GetComponent<Rigidbody2D>();
+		if (rigidbody)
+			rigidbody.mass = ABGameObj.Mass;
 
 		maxHealth = ABGameObj.Health;// const that compare it with now health    
 		ABGameObj.ObjectDie += () => Destroy(gameObject);
+		ABGameObj.ObjectGetDamage += ChangeConditional;
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (gameObject.GetComponent<Rigidbody2D>())
+		var rigidbody = gameObject.GetComponent<Rigidbody2D>();
+		if (rigidbody)
 		{
-			var rigidbody = gameObject.GetComponent<Rigidbody2D>();
-
 			float damage = CountDamage(gameObject, collision);
-			ABGameObj.GetDamage(damage);
-			ChangeConditional();
-			if (rigidbody.velocity.magnitude > 4)
+			ABGameObj.GetDamage(damage);			
+			ChangeSpeed(rigidbody, collision, ABGameObj.Mass);
+		}
+	}
+	private static void ChangeSpeed(Rigidbody2D rigidbody, Collision2D collision, float mass)
+	{
+		if (rigidbody.velocity.magnitude > 4)
+		{
+			Vector2 speed = new Vector2(rigidbody.velocity.x / 5, rigidbody.velocity.y / 5);
+			rigidbody.velocity -= speed;
+			if (collision.gameObject.GetComponent<Rigidbody2D>())
 			{
-				Vector2 speed = new Vector2(rigidbody.velocity.x / 5, rigidbody.velocity.y / 5);
-				rigidbody.velocity -= speed;
-				if (collision.gameObject.GetComponent<Rigidbody2D>())
-				{
-					collision.gameObject.GetComponent<Rigidbody2D>().velocity += speed / ABGameObj.Mass;
-				}
-			}
-			if (gameObject.GetComponent<BirdScript>())
-			{
-				gameObject.GetComponent<BirdScript>().Token.Cancel();
-
+				collision.gameObject.GetComponent<Rigidbody2D>().velocity += speed / mass;
 			}
 		}
 	}
 	private void Update()
 	{
-		if (ABGameObj.Health == 0)
-		{
-			if (gameObject.GetComponent<Rigidbody2D>() && gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= 0.005)
-			{
-				ABGameObj.InvokeDiedEvent();
-			}
-		}
+		var rigidbody = GetComponent<Rigidbody2D>();
+		if (ABGameObj is BirdWithPower ibird && (ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal))
+			return;
+		if (rigidbody && rigidbody.velocity.sqrMagnitude <= 0.005 && ABGameObj.Health == 0)
+			ABGameObj.InvokeDiedEvent();
 	}
 
 	private void ChangeConditional()
@@ -90,30 +87,25 @@ public class GameObjectScript : MonoBehaviour
 	private static float CountDamage(GameObject gameObject, Collision2D collision)
 	{
 		float damage = collision.relativeVelocity.magnitude;
-		var damagedObj = collision.gameObject;
+		GameObject damagedObj = collision.gameObject;
 		var angryBirdsObj = gameObject.GetComponent<GameObjectScript>();
+		var rigidbody = gameObject.GetComponent<Rigidbody2D>();
+		var colisionRigidbody = damagedObj.GetComponent<Rigidbody2D>();
 
-		damage *= gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
-
-		if (collision.gameObject.GetComponent<Rigidbody2D>())
+		damage *= rigidbody.velocity.magnitude;// second Newton's law
+		if (colisionRigidbody)
 		{
-			damage *= collision.gameObject.GetComponent<Rigidbody2D>().mass;
+			damage *= colisionRigidbody.mass;
 		}
 		else//if object down on ground
 		{
 			damage *= 5;
 		}
-		if (gameObject.GetComponent<Rigidbody2D>())// second Newton's law
+
+		var script = damagedObj.GetComponent<GameObjectScript>();
+		if (script && angryBirdsObj.ABGameObj is IBird && script.CompareTag("Build Material"))
 		{
-			damage *= gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
-		}
-		if (damagedObj.GetComponent<GameObjectScript>())// mul on ability damage
-		{
-			var script = damagedObj.GetComponent<GameObjectScript>();
-			if (angryBirdsObj.ABGameObj is IBird && script.CompareTag("Build Material"))
-			{
-				damage *= Bird.CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);
-			}
+			damage *= Bird.CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);// mul on ability damage
 		}
 		return Mathf.Abs(damage);
 	}

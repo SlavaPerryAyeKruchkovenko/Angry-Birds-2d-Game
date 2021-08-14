@@ -1,7 +1,5 @@
 
 using Assets.scripts;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -25,16 +23,16 @@ public class GameObjectEditor : Editor
 			default:
 				break;
 		}
-		script.Awake();	
-		if(GUILayout.Button("Add new Sprite", GUILayout.Height(20)))
-		{			
-			script.ConditionalSprites.Add(Sprite.Create(null,default,default));
+		script.Awake();
+		if (GUILayout.Button("Add new Sprite", GUILayout.Height(20)))
+		{
+			script.ConditionalSprites.Add(Sprite.Create(null, default, default));
 		}
 		if (script.ConditionalSprites == null)
 		{
 			script.ConditionalSprites = new List<Sprite>();
 		}
-		if (script.ConditionalSprites.Count > 0) 
+		if (script.ConditionalSprites.Count > 0)
 		{
 			for (int i = 0; i < script.ConditionalSprites.Count; i++)
 			{
@@ -42,12 +40,12 @@ public class GameObjectEditor : Editor
 					$"Image {i + 1}", script.ConditionalSprites[i], typeof(Sprite), true);
 			}
 		}
-		if (script.ConditionalSprites.Count > 0 && script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount) 
+		if (script.ConditionalSprites.Count > 0 && script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount)
 		{
 			if (GUILayout.Button("Delete last Sprite", GUILayout.Height(20)))
-			{			
+			{
 				script.ConditionalSprites.RemoveAt(script.ConditionalSprites.Count - 1);
-			}			
+			}
 		}
 		if (script.ConditionalSprites.Count != script.ABGameObj.SpriteCoount)
 		{
@@ -61,4 +59,3 @@ public class GameObjectEditor : Editor
 		EditorSceneManager.MarkSceneDirty(obj.scene);
 	}
 }
- 

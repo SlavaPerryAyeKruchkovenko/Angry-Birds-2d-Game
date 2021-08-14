@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 {
+	[SerializeField]
 	private const short maxCameraSize = 10;
+	[SerializeField]
 	private const short minCameraSize = 6;
 	private const float clickTime = 0.12f;//0.12 is time of standart click
 	public GameObject FlyingBird { get; private set; }
@@ -17,19 +19,19 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 	private Vector3? range = null;
 	private float firstClickTime = 0;
 	private int clickCount = 0;
-	public bool LockCamera = false;
+	private bool lockCamera = false;
 	// Start is called before the first frame update
 	void Awake()
 	{
-		if (background != null) return;
+		if (background) return;
 		background = GameObject.FindGameObjectWithTag("Background");
-		startPosition = transform.position;
+		startPosition = transform.position;	
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (!LockCamera)
+		if (!lockCamera)
 		{
 			if (Input.mouseScrollDelta.y != 0)
 			{
@@ -39,6 +41,10 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 			if (CheckOnDoubleTap())//if user use double click skip range
 			{
 				ResetCamera();
+				if(FlyingBird && FlyingBird.GetComponent<Rigidbody2D>())
+				{
+					bird.ObjectDie -= ResetCamera;
+				}
 				ChangeCameraSize(Camera.main, -(Camera.main.orthographicSize - minCameraSize));
 			}
 			else if (Input.GetMouseButtonDown(0))
@@ -65,7 +71,7 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 				}
 				range = null;
 			}
-			else if (bird != null && FlyingBird != null && bird.IsFly && NeedCheck)
+			else if (bird != null && FlyingBird && bird.IsFly && NeedCheck)
 			{
 				var coor = FlyingBird.transform.position;
 				gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
@@ -123,12 +129,14 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 			bird = value.GetComponent<GameObjectScript>().ABGameObj as Bird;
 			bird.ObjectDie += ResetCamera;
 			NeedCheck = true;
+			bird.StartFly += () => lockCamera = false;
+			bird.TakeAim += (vector) => lockCamera = true;
 		}
 	}
 	private void ResetCamera()
 	{
 		transform.position = startPosition;
-		if (FlyingBird != null && FlyingBird.GetComponent<Rigidbody2D>())
+		if (FlyingBird && FlyingBird.GetComponent<Rigidbody2D>())
 			NeedCheck = false;
 	}
 	private bool SelectCameraChanges()
@@ -148,6 +156,7 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 	{
 		float startValue = Mathf.Abs(camera.ViewportToWorldPoint(new Vector2(0, 0)).x);
 		camera.orthographicSize += value;
+
 		float finishValue = Mathf.Abs(camera.ViewportToWorldPoint(new Vector2(0, 0)).x);//left point after change size
 		var range = (finishValue - startValue) * Vector3.right;
 		camera.transform.position = startPosition + range;

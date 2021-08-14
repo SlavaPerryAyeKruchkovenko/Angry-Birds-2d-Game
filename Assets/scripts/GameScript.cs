@@ -20,7 +20,7 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 	// Start is called before the first frame update
 	void Awake()
 	{
-		if (slingshot != null) return;
+		if (slingshot) return;
 
 		StartGame += () => IsGameStart = true;
 		slingshot = GameObject.Find("Slingshot");
@@ -32,11 +32,11 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 	void Update()
 	{
 		var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		var mouseCoor = new UnityEngine.Vector3(coor.x, coor.y, -1);
-		if (IsGameStart && SelectedBird != null && !Bird.IsFly)
+		var mouseCoor = new Vector3(coor.x, coor.y, -1);
+		if (IsGameStart && SelectedBird && !Bird.IsFly)
 		{
-			var cameraLeftButtomCoor = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)) + UnityEngine.Vector3.up;
-			var cameraRightUpCoor = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) - new UnityEngine.Vector3(3, 1, 0);
+			var cameraLeftButtomCoor = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)) + Vector3.up;
+			var cameraRightUpCoor = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) - new Vector3(3, 1, 0);
 			if (!CompareVectors3(mouseCoor, cameraLeftButtomCoor) || !CompareVectors3(cameraRightUpCoor, mouseCoor))
 			{
 				isPress = false;
@@ -54,11 +54,6 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 				{
 					var vector = ConvertUnityVectorInBase(StartLocation - mouseCoor);
 					Bird.InvokeFlyEvent(vector);
-					if (Camera.main.GetComponent<MainCameraScript>())
-					{
-						Camera.main.GetComponent<MainCameraScript>().LockCamera = false;
-					}
-					//Make Fly Animation;
 				}
 				else
 				{
@@ -68,18 +63,16 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 			}
 			else if (isPress)
 			{
-				Camera.main.GetComponent<MainCameraScript>().LockCamera = true;
 				Bird.InvokeTakeAimEvent(ConvertUnityVectorInBase(mouseCoor));
-				var script = SelectedBird.GetComponent<BirdScript>();
+				var birdScript = SelectedBird.GetComponent<BirdScript>();
 				float impulse = GetImpulse(StartLocation - mouseCoor);
-				script.DrawTraectory(SelectedBird.transform.right * impulse);
+				birdScript.DrawTraectory(SelectedBird.transform.right * impulse);
 			}
 		}
 	}
 	private void DropBird(System.Numerics.Vector3 range)//when Bird Start Flying
 	{
-		SelectedBird.AddComponent<Rigidbody2D>();
-		var rigidbody = SelectedBird.GetComponent<Rigidbody2D>();
+		var rigidbody = SelectedBird.AddComponent<Rigidbody2D>();
 		rigidbody.mass = Bird.Mass;
 		var power = GetImpulse(ConvertBaseVectorInUnity(range));
 		var vector = SelectedBird.transform.right;
@@ -111,8 +104,9 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 	}
 	private void ResetTraectroy()
 	{
-		if (SelectedBird.GetComponent<LineRenderer>())
-			SelectedBird.GetComponent<LineRenderer>().enabled = false;
+		var lineRenderer = SelectedBird.GetComponent<LineRenderer>();
+		if (lineRenderer)
+			lineRenderer.enabled = false;
 	}
 	private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
 	public static bool CompareVectors3(Vector3 vector1, Vector3 vector2)//if 1 postion will be more that true
@@ -145,7 +139,8 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 		Bird.ResetBird += ResetBird;
 		Bird.ReadyFly += DropBird;
 		Bird.ResetBird += ResetTraectroy;
-		Bird.TakeAim += (vector) => { SelectedBird.GetComponent<LineRenderer>().enabled = true; };
+		var lineRenderer = SelectedBird.GetComponent<LineRenderer>();		
+			Bird.TakeAim += (vector) => { if (lineRenderer) lineRenderer.enabled = true; };
 		startRotation = SelectedBird.transform.rotation;
 	}
 	public void OnCompleted()

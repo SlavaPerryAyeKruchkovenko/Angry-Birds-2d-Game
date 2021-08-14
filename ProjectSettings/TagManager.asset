@@ -11,6 +11,7 @@ TagManager:
   - Background
   - point
   - Egg
+  - boom
   layers:
   - Default
   - TransparentFX

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3717880096202938027}
   - component: {fileID: 1500668875253322890}
   - component: {fileID: 7300777347137361089}
-  - component: {fileID: 6292135811065900436}
   - component: {fileID: 69898317799007162}
   - component: {fileID: 4594202113996563766}
+  - component: {fileID: 6292135811065900436}
   m_Layer: 0
   m_Name: BigPig
   m_TagString: Pig
@@ -98,7 +98,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1.1193099
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -107,28 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6292135811065900436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7152420865481618257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d85e041a5cdd9468c95c00e9e1b3a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Default:
-  - {fileID: 4943830071169559792, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  Damaged:
-  - {fileID: 4001713014966193700, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: -3519555057197554669, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 7694926773988658659, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  SoDamaged:
-  - {fileID: -7210397941977962713, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: -1309295458589434795, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: -5996852404213109638, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
 --- !u!70 &69898317799007162
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,3 +143,25 @@ MonoBehaviour:
   - {fileID: 4943830071169559792, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: -3519555057197554669, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: -7210397941977962713, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+--- !u!114 &6292135811065900436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152420865481618257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d85e041a5cdd9468c95c00e9e1b3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Default:
+  - {fileID: 4943830071169559792, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  Damaged:
+  - {fileID: 4001713014966193700, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: -3519555057197554669, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: 7694926773988658659, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  SoDamaged:
+  - {fileID: -7210397941977962713, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: -1309295458589434795, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: -5996852404213109638, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}

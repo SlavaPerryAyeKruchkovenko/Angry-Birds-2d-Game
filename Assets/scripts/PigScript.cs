@@ -1,4 +1,5 @@
 
+using Assets.scripts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,19 +7,26 @@ using UnityEngine;
 
 public class PigScript : MonoBehaviour
 {
-	public List<Sprite> Default;
-	public List<Sprite> Damaged;
-	public List<Sprite> SoDamaged;
-
-	private async void Start()
+	[SerializeField]
+	private List<Sprite> Default;
+	[SerializeField]
+	private List<Sprite> Damaged;
+	[SerializeField]
+	private List<Sprite> SoDamaged;
+	private Pig pig;
+	private async void Awake()
 	{
+		var game = GetComponent<GameObjectScript>();
+		game.Awake();
+		pig = game.ABGameObj as Pig;
+		
 		while (true)
 		{
-			if (gameObject.GetComponent<GameObjectScript>().ABGameObj.Health <= 0) { break; }
+			if (pig.Health <= 0) { break; }
 			await Task.Delay(new System.Random().Next(1000, 10000));
 			if (this == null)
 				break;
-			ChangeCondition(gameObject.GetComponent<GameObjectScript>().ABGameObj.Health);
+			ChangeCondition(pig.Health);
 		}
 	}
 	private void ChangeCondition(float health)
@@ -30,5 +38,5 @@ public class PigScript : MonoBehaviour
 			else if (health <= 33) { ChangeSprite(SoDamaged); }
 		}
 	}
-	private void ChangeSprite(List<Sprite> sprites) => gameObject.GetComponent<SpriteRenderer>().sprite = sprites[new System.Random().Next(0, sprites.Count)];
+	private void ChangeSprite(List<Sprite> sprites) => GetComponent<SpriteRenderer>().sprite = sprites[new System.Random().Next(0, sprites.Count)];
 }

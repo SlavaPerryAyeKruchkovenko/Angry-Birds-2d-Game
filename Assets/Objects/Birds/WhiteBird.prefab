@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7538212944054619986}
   - component: {fileID: 8963489194642498232}
   - component: {fileID: 6045713556510987204}
+  - component: {fileID: 517463131043140381}
   m_Layer: 0
   m_Name: WhiteBird
   m_TagString: Bird
@@ -262,6 +263,25 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &517463131043140381
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7326827097003631269}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 47e49f59a31da28448e32c49486aff93, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7201634297798935285
 PrefabInstance:
   m_ObjectHideFlags: 0
