@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7455739326506278472}
   - component: {fileID: 2027597706254408502}
   - component: {fileID: 2536709123107572465}
-  - component: {fileID: 7079586621461672095}
   - component: {fileID: 7133208399777593299}
+  - component: {fileID: 7079586621461672095}
   m_Layer: 0
   m_Name: King Pig
   m_TagString: Pig
@@ -156,6 +156,26 @@ PolygonCollider2D:
       - {x: 0.4670322, y: 0.7986561}
       - {x: 0.35830498, y: 0.57086563}
       - {x: 0.25147521, y: 0.8396396}
+--- !u!114 &7133208399777593299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145289573458370321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeOfGameObj: 0
+  PigType: 3
+  BirdType: 0
+  MaterialType: 0
+  ConditionalSprites:
+  - {fileID: 3713925945392856412, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: 6122306260934979499, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
+  - {fileID: 6264910782672858377, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
 --- !u!114 &7079586621461672095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,23 +200,3 @@ MonoBehaviour:
   - {fileID: 6264910782672858377, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 150336265212133426, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
   - {fileID: 3773548337026037002, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
---- !u!114 &7133208399777593299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145289573458370321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ead7a0991d33024da20c0c36ec26fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TypeOfGameObj: 0
-  PigType: 3
-  BirdType: 0
-  MaterialType: 0
-  ConditionalSprites:
-  - {fileID: 3713925945392856412, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 6122306260934979499, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}
-  - {fileID: 6264910782672858377, guid: 8b76b13d1c9d46449aa193a87be0dd95, type: 3}

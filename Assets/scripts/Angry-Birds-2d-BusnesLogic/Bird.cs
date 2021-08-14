@@ -1,8 +1,8 @@
 ﻿
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
 using System;
+using System.Numerics;
 using System.Threading;
-using UnityEngine;
 
 namespace Assets.scripts
 {  
@@ -24,12 +24,12 @@ namespace Assets.scripts
 
         public event BirdReadyFly ReadyFly = null;
 
-        public event BirdStartFly StartFly = null;
+        public event Action StartFly = null;
 
-        public event TakeAim TakeAim = null;
+        public event Action<Vector3> TakeAim = null;
 
-        public event ResetBird ResetBird = null;
-        public override short SpriteCoount => 2;
+        public event Action ResetBird = null;
+        public override short SpriteCoount => 0;
         public readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
 		public override void GetDamage(float damage)
 		{
@@ -37,14 +37,15 @@ namespace Assets.scripts
             Health -= damage;
             if (Health < 0)
                 Health = 0;
-		}
+            InvokeDamageEvent();
+        }
 		public void InvokeFlyEvent(Vector3 range)
 		{
-            if(ReadyFly!= null)
+            IsFly = true;
+            if (ReadyFly!= null)
                 ReadyFly.Invoke(range);
             if (StartFly != null)
-                StartFly.Invoke();
-            IsFly = true;
+                StartFly.Invoke();          
         }
         public void InvokeTakeAimEvent(Vector3 range)
 		{
@@ -93,19 +94,19 @@ namespace Assets.scripts
 	{
         public BirdWithPower(Power _power)
         {
-            power = _power;
-            this.ObjectDie += cancelTokenSource.Cancel;
+            Ability += _power;
+            ObjectDie += cancelTokenSource.Cancel;
         }
-        private readonly Power power;
+        public event Power Ability;
         protected bool canUsePower = true;
 
-        public virtual TypeUsingAbility Ability => TypeUsingAbility.Click;
+        public virtual TypeUsingAbility AbilityType => TypeUsingAbility.Click;
 		public void UsePower()
         {
             CancellationToken token = cancelTokenSource.Token;
             if (canUsePower && !token.IsCancellationRequested)
 			{
-                power(cancelTokenSource);
+                Ability.Invoke(cancelTokenSource);
                 canUsePower = false;
             }                
         }
@@ -115,9 +116,11 @@ namespace Assets.scripts
 		public override float Mass => 1;
 	}
     public class BlueBird: BirdWithPower
-    {       
+    {
+        public readonly bool IsClone;
         public BlueBird(Power _power, bool isClone):base(_power)
 		{
+            IsClone = isClone;
             canUsePower = !isClone;
             if(!canUsePower)
 			{
@@ -144,7 +147,7 @@ namespace Assets.scripts
         {
 
         }
-		public override TypeUsingAbility Ability => TypeUsingAbility.Universal;
+		public override TypeUsingAbility AbilityType => TypeUsingAbility.Universal;
 		public override float Mass => 1.2f;
     }
     public class WhiteBird : BirdWithPower

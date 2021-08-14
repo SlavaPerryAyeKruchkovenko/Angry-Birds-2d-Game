@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8918042836197895231}
   - component: {fileID: -4512176249127140818}
   - component: {fileID: -1827453321890600386}
+  - component: {fileID: 2810258472579208037}
   m_Layer: 0
   m_Name: BlackBird
   m_TagString: Bird
@@ -232,3 +233,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &2810258472579208037
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547543058917793840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e5d26bd1139d57d489a93e2d7ca01537, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -15,6 +15,7 @@ namespace Assets.scripts
 		public abstract short SpriteCoount { get; }
 		public virtual float Mass => 1;
 		public event ObjectDieDelegate ObjectDie = null;
+		public event Action ObjectGetDamage = null;
 		public virtual void GetDamage(float damage)
 		{
 			if (damage >= 1)
@@ -35,11 +36,17 @@ namespace Assets.scripts
 					Health = 0;
 				}
 			}
+			InvokeDamageEvent();
+		}
+		protected void InvokeDamageEvent()
+		{
+			if(ObjectGetDamage != null)
+				ObjectGetDamage.Invoke();
 		}
 		public virtual void InvokeDiedEvent()
 		{
 			if(Health == 0)
-				this.ObjectDie.Invoke();			
+				ObjectDie.Invoke();			
 		}
 
 		public static AngryBirdsGameObjects GetTypesOfGameObject(string tag) => tag switch

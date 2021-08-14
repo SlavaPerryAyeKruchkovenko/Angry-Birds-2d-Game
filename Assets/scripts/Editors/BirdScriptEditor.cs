@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -13,13 +8,13 @@ public class BirdScriptEditor : Editor
 	BirdScript script;
 	public void OnEnable()
 	{
-		script = (BirdScript)this.target;
+		script = (BirdScript)target;
 	}
 	public override void OnInspectorGUI()
 	{
-		if(script.FlyMaterial == null)
+		if (script.FlyMaterial == null)
 		{
-			EditorGUILayout.LabelField("Please add Material", EditorStyles.boldLabel);			
+			EditorGUILayout.LabelField("Please add Material", EditorStyles.boldLabel);
 		}
 		script.FlyMaterial = (GameObject)EditorGUILayout.ObjectField($"points", script.FlyMaterial, typeof(GameObject), true);
 	}

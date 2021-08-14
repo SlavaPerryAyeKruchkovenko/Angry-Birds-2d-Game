@@ -1,6 +1,5 @@
 using Assets.scripts;
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,58 +9,81 @@ public class BirdScript : MonoBehaviour
 	public GameObject FlyMaterial;
 	private Bird bird;
 	private bool canDrawPoint = true;
-    private readonly int steps = 50;
+	private readonly int steps = 50;
 	private const float g = 9.8f;
 	public readonly CancellationTokenSource Token = new CancellationTokenSource();
+	private Animator animator;
 
-	private void Awake()
-	{					
-		if(bird == null)
+	public void Awake()
+	{
+		var game = GetComponent<GameObjectScript>();
+		if (bird == null && game)
 		{
-			bird = this.gameObject.GetComponent<GameObjectScript>().ABGameObj as Bird;
-			if (gameObject.GetComponent<LineRenderer>())
+			animator = GetComponent<Animator>();
+			bird = game.ABGameObj as Bird;
+			var lineRenderer = GetComponent<LineRenderer>();
+			if (lineRenderer)
 			{
-				gameObject.GetComponent<LineRenderer>().positionCount = steps;
-				bird.StartFly += () => Destroy(gameObject.GetComponent<LineRenderer>());
+				lineRenderer.positionCount = steps;
+				bird.StartFly += () => Destroy(lineRenderer);
 			}			
 			if (bird != null && canDrawPoint)
-			{
-				bird.StartFly += DeleteFlyPoints;				
+			{				
+				bird.StartFly += DeleteFlyPoints;
+				bird.ObjectGetDamage += Token.Cancel;
+				if (animator)
+				{
+					animator.enabled = true;
+					bird.ObjectGetDamage += () => animator.SetBool("IsFly", false);
+					bird.StartFly += () => animator.SetBool("IsFly", bird.IsFly);
+					if(bird is BirdWithPower ibird)
+					{
+						ibird.Ability += SetAblityAnimation;
+						if(ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal)
+						{
+							bird.ObjectDie += ibird.UsePower;
+						}
+					}
+					if(bird is BlueBird blueBird && blueBird.IsClone)
+					{
+						animator.SetBool("IsClone", true);
+						animator.SetBool("IsFly", true);
+					}
+				}		
 			}
-		}		
+		}
 	}
-	async public void DrawPoints(CancellationTokenSource token)
+	public async void DrawPoints(CancellationTokenSource token)
 	{
 		for (int i = 0; i <= 100; i++)
 		{
-			if(token.Token.IsCancellationRequested)
+			if (token.Token.IsCancellationRequested)
 			{
 				return;
 			}
-			if (this.gameObject.GetComponent<Rigidbody2D>())
+			if (GetComponent<Rigidbody2D>())
 			{
-				Instantiate(FlyMaterial, this.gameObject.transform.position, default);			
+				Instantiate(FlyMaterial, transform.position, default);
 			}
 			await Task.Delay(5);
-		}	
+		}
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (bird!=null && canDrawPoint && collision.gameObject.CompareTag("Slingshot"))
+		if (bird != null && canDrawPoint && collision.CompareTag("Slingshot"))
 		{
 			DrawPoints(Token);
 			canDrawPoint = false;
 		}
 	}
-	private void OnCollisionEnter2D(Collision2D collision)
+	private void OnCollisionEnter2D(Collision2D collision)//use ability if bird touch game object
 	{
-		if (bird is IBird birdAbility)
+		if (bird is IBird birdAbility && GetComponent<Rigidbody2D>())
 		{
-			if (birdAbility.Ability == TypeUsingAbility.TouchObject || birdAbility.Ability == TypeUsingAbility.Universal)
-			{
+			if (birdAbility.AbilityType == TypeUsingAbility.TouchObject || birdAbility.AbilityType == TypeUsingAbility.Universal)
+			{			
 				Token.Cancel();
-				birdAbility.UsePower();				
-				bird.GetDamage(1);
+				birdAbility.UsePower();
 			}
 		}
 	}
@@ -72,28 +94,31 @@ public class BirdScript : MonoBehaviour
 			Destroy(item);
 		}
 	}
-	private void OnTriggerStay2D(Collider2D collision)
+	private void OnTriggerStay2D(Collider2D collision)// if bird in game scnee triger can use ability
 	{
-		if (collision.CompareTag("Background") && this.gameObject.GetComponent<Rigidbody2D>())
-		{			
-			if (bird is IBird ibird && ibird.Ability == TypeUsingAbility.Click)
+		if (collision.CompareTag("Background") && GetComponent<Rigidbody2D>())
+		{
+			if (Input.GetMouseButton(0))
 			{
-				Token.Cancel();
-				ibird.UsePower();
+				if (bird is IBird ibird && (ibird.AbilityType == TypeUsingAbility.Click || ibird.AbilityType == TypeUsingAbility.Universal))
+				{
+					Token.Cancel();
+					ibird.UsePower();
+				}
 			}
 		}
 	}
 	public void DrawTraectory(Vector3 range)
 	{
-		var coordinate = CountPoints(this.gameObject.transform.position, range);
-		this.gameObject.GetComponent<LineRenderer>().SetPositions(coordinate);
+		var coordinate = CountPoints(transform.position, range);
+		GetComponent<LineRenderer>().SetPositions(coordinate);
 	}
 	private Vector3[] CountPoints(Vector3 posicion, Vector3 impulse)
 	{
 		Vector3[] results = new Vector3[steps];
 		Vector2 newImpulse = new Vector2(impulse.x, impulse.y);
 		float speed = (newImpulse / bird.Mass).magnitude; // v = p/m
-		float corner = gameObject.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+		float corner = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 
 		float time = 0;
 		for (int i = 0; i < steps; i++)
@@ -105,5 +130,9 @@ public class BirdScript : MonoBehaviour
 			results[i] = posicion + point;
 		}
 		return results;
+	}
+	private void SetAblityAnimation(CancellationTokenSource token)
+	{
+		animator.SetBool("UseAbility", true);
 	}
 }

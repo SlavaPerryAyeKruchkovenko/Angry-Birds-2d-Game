@@ -14,7 +14,7 @@ namespace Assets.scripts.Angry_Birds_2d_BusnesLogic
 	public interface IBird
 	{
 		void UsePower();
-		TypeUsingAbility Ability { get; }
+		TypeUsingAbility AbilityType { get; }
 	}
 	public interface IPowers
 	{

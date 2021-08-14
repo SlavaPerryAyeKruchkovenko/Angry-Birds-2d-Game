@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5708637177634328875}
   - component: {fileID: 472156334757661445}
   - component: {fileID: 4126232150589249783}
+  - component: {fileID: 6455822112600186898}
   m_Layer: 0
   m_Name: BigRedBird
   m_TagString: Bird
@@ -232,3 +233,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &6455822112600186898
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57584614343211392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb2cee8186965784d86a13936fb45d5f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

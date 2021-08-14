@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 979467105008139824}
   - component: {fileID: 3509828181911215055}
   - component: {fileID: 6846404309554359028}
+  - component: {fileID: 7422981787206830206}
   m_Layer: 0
   m_Name: GreenBird
   m_TagString: Bird
@@ -263,3 +264,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &7422981787206830206
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449682106790720181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 022e1969b59b5424588a85b3eda4df89, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
