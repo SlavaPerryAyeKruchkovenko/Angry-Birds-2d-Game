@@ -58,3 +58,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+Packages/System.Threading.Tasks.Extensions.4.5.4/
+
+Packages/System.Runtime.InteropServices.WindowsRuntime.4.3.0/
+
+Packages/System.Runtime.CompilerServices.Unsafe.4.5.3/
+
+Packages/System.Reactive.5.0.0/
