@@ -33,6 +33,7 @@ namespace Assets.scripts.Converters
 			var game = gameObject1.GetComponent<GameObjectScript>();
 			game.BirdType = Birds.BlueClone;
 			game.SetStartSettings();
+
 			var birdScript = gameObject1.GetComponent<BirdScript>();
 			birdScript.Awake();
 		}
@@ -61,6 +62,7 @@ namespace Assets.scripts.Converters
 			var rigidbody = egg.GetComponent<Rigidbody2D>();
 			rigidbody.velocity = Vector2.zero;
 			float power = rigidbody.mass * 10;//F = mg
+			
 			rigidbody.AddForce(-Vector3.up * power, ForceMode2D.Impulse);
 			gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * 10, ForceMode2D.Impulse);
 		}
@@ -88,12 +90,13 @@ namespace Assets.scripts.Converters
 
 		public async void SpeedUp(CancellationTokenSource cancelTokenSource)
 		{
-			Vector2 startSpeed = gameObject.GetComponent<Rigidbody2D>().velocity;
+			var rigidbody = gameObject.GetComponent<Rigidbody2D>();
+			Vector2 startSpeed = rigidbody.velocity;
 			float speed;
 			for (speed = 1.5f; speed < 2f; speed += 0.1f)
 			{
-				gameObject.GetComponent<Rigidbody2D>().velocity = startSpeed * speed;
-				gameObject.GetComponent<Rigidbody2D>().mass += 1;
+				rigidbody.velocity = startSpeed * speed;
+				rigidbody.mass += 1;
 				if (cancelTokenSource.IsCancellationRequested)
 				{
 					return;

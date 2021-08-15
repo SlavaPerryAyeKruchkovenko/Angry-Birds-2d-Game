@@ -7,8 +7,14 @@ public class SlingshotScript : MonoBehaviour
 	private readonly Queue<GameObject> birds = new Queue<GameObject>();
 	private IObserver<GameObject> game;
 	private IObserver<GameObject> cameraObserver;
+	private LineRenderer lineRenderer;
+	private GameScript gameScript;
+	private MainCameraScript mainCameraScript;
 	private void Awake()
 	{
+		mainCameraScript = Camera.main.GetComponent<MainCameraScript>();
+		gameScript = Camera.main.GetComponent<GameScript>();
+		lineRenderer = GetComponent<LineRenderer>();
 		game = Camera.main.GetComponent<GameScript>();
 		cameraObserver = Camera.main.GetComponent<MainCameraScript>();
 		var birds = GameObject.FindGameObjectsWithTag("Bird");
@@ -28,14 +34,13 @@ public class SlingshotScript : MonoBehaviour
 	}
 	private void OnMouseDown()
 	{
-		var game = Camera.main.GetComponent<GameScript>();
-		if (!game.IsGameStart)
+		if (!gameScript.IsGameStart)
 		{
-			gameObject.GetComponent<LineRenderer>().enabled = true;
-			game.InvokeStartGame();
+			lineRenderer.enabled = true;
+			gameScript.InvokeStartGame();
 			AddBird();
 		}
-		else if(!Camera.main.GetComponent<MainCameraScript>().NeedCheck)
+		else if(!mainCameraScript.NeedCheck)
 		{
 			AddBird();
 		}

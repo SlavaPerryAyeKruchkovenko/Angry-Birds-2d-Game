@@ -38,5 +38,8 @@ public class PigScript : MonoBehaviour
 			else if (health <= 33) { ChangeSprite(SoDamaged); }
 		}
 	}
-	private void ChangeSprite(List<Sprite> sprites) => GetComponent<SpriteRenderer>().sprite = sprites[new System.Random().Next(0, sprites.Count)];
+	private void ChangeSprite(List<Sprite> sprites)
+	{
+		GetComponent<SpriteRenderer>().sprite = sprites[new System.Random().Next(0, sprites.Count)];
+	}
 }

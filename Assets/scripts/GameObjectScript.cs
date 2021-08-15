@@ -21,17 +21,20 @@ public class GameObjectScript : MonoBehaviour
 		}
 	}
 	public void SetStartSettings()
-	{
+	{		
 		ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
-		if (ABGameObj is Pig)
-			ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...)
-
-		else if (ABGameObj is Bird)
-			ABGameObj = Bird.GetBird(BirdType, new Powers(gameObject));
-
-		else if (ABGameObj is BuildMaterial)
-			ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
-
+		switch (ABGameObj)
+		{
+			case Pig _:
+				ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...) 
+				break;
+			case Bird _:
+				ABGameObj = Bird.GetBird(BirdType, new Powers(gameObject));
+				break;
+			case BuildMaterial _:
+				ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
+				break;
+		}
 		var rigidbody = gameObject.GetComponent<Rigidbody2D>();
 		if (rigidbody)
 			rigidbody.mass = ABGameObj.Mass;
@@ -54,11 +57,13 @@ public class GameObjectScript : MonoBehaviour
 	{
 		if (rigidbody.velocity.magnitude > 4)
 		{
+			var rigidbodyColision = collision.gameObject.GetComponent<Rigidbody2D>();
 			Vector2 speed = new Vector2(rigidbody.velocity.x / 5, rigidbody.velocity.y / 5);
 			rigidbody.velocity -= speed;
-			if (collision.gameObject.GetComponent<Rigidbody2D>())
+			
+			if (rigidbodyColision)
 			{
-				collision.gameObject.GetComponent<Rigidbody2D>().velocity += speed / mass;
+				rigidbodyColision.velocity += speed / mass;
 			}
 		}
 	}

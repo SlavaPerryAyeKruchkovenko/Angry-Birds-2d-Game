@@ -74,7 +74,7 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 			else if (bird != null && FlyingBird && bird.IsFly && NeedCheck)
 			{
 				var coor = FlyingBird.transform.position;
-				gameObject.transform.position = new Vector3(coor.x, coor.y, transform.position.z);
+				transform.position = new Vector3(coor.x, coor.y, transform.position.z);
 				if (!CanMoveCamera(background, Camera.main))
 				{
 					gameObject.transform.position = lastLocation;
