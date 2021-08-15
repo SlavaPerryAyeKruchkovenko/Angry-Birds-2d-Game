@@ -15,7 +15,7 @@ public class BirdScript : MonoBehaviour
 	private Animator animator;
 
 	public void Awake()
-	{
+	{		
 		var game = GetComponent<GameObjectScript>();
 		if (bird == null && game)
 		{
@@ -28,7 +28,8 @@ public class BirdScript : MonoBehaviour
 				bird.StartFly += () => Destroy(lineRenderer);
 			}			
 			if (bird != null && canDrawPoint)
-			{				
+			{
+				bird.StartFly += ChangeParticles;
 				bird.StartFly += DeleteFlyPoints;
 				bird.ObjectGetDamage += Token.Cancel;
 				if (animator)
@@ -38,7 +39,7 @@ public class BirdScript : MonoBehaviour
 					bird.StartFly += () => animator.SetBool("IsFly", bird.IsFly);
 					if(bird is BirdWithPower ibird)
 					{
-						ibird.Ability += SetAblityAnimation;
+						ibird.Ability += SetAblityAnimation;						
 						if(ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal)
 						{
 							bird.ObjectDie += ibird.UsePower;
@@ -48,6 +49,11 @@ public class BirdScript : MonoBehaviour
 					{
 						animator.SetBool("IsClone", true);
 						animator.SetBool("IsFly", true);
+					}
+					if(bird is WhiteBird)
+					{
+						var egg = gameObject.transform.Find("egg");
+						egg.GetComponent<GameObjectScript>().ABGameObj.ObjectGetDamage += ChangeDieParticles;
 					}
 				}		
 			}
@@ -134,5 +140,42 @@ public class BirdScript : MonoBehaviour
 	private void SetAblityAnimation(CancellationTokenSource token)
 	{
 		animator.SetBool("UseAbility", true);
+	}
+	public void ChangeParticles()
+	{
+		var system = gameObject.GetComponent<ParticleSystem>();
+		if (system) 
+		{
+			if(system.isPlaying)
+			{
+				system.Stop();
+			}
+			else if(bird.Health > 0)
+			{
+				system.Play(false);
+			}			
+		}			
+	}
+	public void ChangeDieParticles()
+	{
+		if(gameObject.transform.childCount > 0)
+		{
+			for (int i = 0; i < gameObject.transform.childCount; i++)
+			{
+				var system = gameObject.transform.GetChild(i).gameObject;
+				var particleSystem = system.GetComponent<ParticleSystem>();
+				if (particleSystem)
+				{
+					if(particleSystem.isPlaying)
+					{
+						particleSystem.Stop();
+					}
+					else
+					{
+						particleSystem.Play(true);
+					}
+				}
+			}		
+		}	
 	}
 }

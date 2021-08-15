@@ -50,8 +50,8 @@ namespace Assets.scripts.Converters
 			Debug.Log("Снес яйцо");
 		}
 		private static GameObject GetEgg(GameObject game)
-		{
-			var egg = game.transform.GetChild(0).gameObject;
+		{		
+			var egg = game.transform.Find("egg").gameObject;
 			egg.GetComponent<CapsuleCollider2D>().enabled = true;
 			egg.GetComponent<SpriteRenderer>().enabled = true;
 			return egg;
@@ -78,7 +78,7 @@ namespace Assets.scripts.Converters
 				{
 					colider.radius = radius * i;
 					rigidbody.mass *= mass * i;
-					await Task.Delay(200);
+					await Task.Delay(250);
 				}
 				cancelTokenSource.Cancel();				
 				gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
