@@ -23,11 +23,11 @@ namespace Assets.scripts
 	}
 	public class IceBuildMaterial : BuildMaterial
 	{
-		public override float Health { get; protected set; } = 50;
+		public override float Health { get; protected set; } = 30;
 
 		public override float Armor { get; protected set; } = 0;
 
-		public override float Mass => 0.5f;
+		public override float Mass => 2.5f;
 	}
 	public class WoodBildMaterial : BuildMaterial
 	{
@@ -35,7 +35,7 @@ namespace Assets.scripts
 
 		public override float Armor { get; protected set; } = 0;
 
-		public override float Mass => 1f;
+		public override float Mass => 2f;
 	}
 	public class StoneBildMaterial : BuildMaterial
 	{
@@ -43,7 +43,7 @@ namespace Assets.scripts
 
 		public override float Armor { get; protected set; } = 100;
 
-		public override float Mass => 2f;
+		public override float Mass => 3f;
 	}
 
 }

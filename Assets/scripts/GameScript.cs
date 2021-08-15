@@ -24,8 +24,12 @@ public class GameScript : MonoBehaviour, IObserver<GameObject>
 
 		StartGame += () => IsGameStart = true;
 		slingshot = GameObject.Find("Slingshot");
-		var position = new Vector3(slingshot.transform.position.x, slingshot.transform.position.y, -1);
-		StartLocation = position;
+		if(slingshot)
+		{
+			var position = new Vector3(slingshot.transform.position.x, slingshot.transform.position.y, -1);
+			StartLocation = position;
+
+		}		
 	}
 
 	// Update is called once per frame

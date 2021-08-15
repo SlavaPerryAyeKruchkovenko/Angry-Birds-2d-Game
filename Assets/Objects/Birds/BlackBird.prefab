@@ -112,7 +112,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 2547543058917793840}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 15eb5968b0464984096b7040509047ac, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -135,9 +135,7 @@ MonoBehaviour:
   PigType: 0
   BirdType: 3
   MaterialType: 0
-  ConditionalSprites:
-  - {fileID: -3238897439310337441, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
-  - {fileID: -6583705251678338530, guid: 7dc7daeeb5da43944b1cbbae0d881395, type: 3}
+  ConditionalSprites: []
 --- !u!120 &-1827453321890600386
 LineRenderer:
   m_ObjectHideFlags: 0

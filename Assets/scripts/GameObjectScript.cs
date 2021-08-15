@@ -106,12 +106,19 @@ public class GameObjectScript : MonoBehaviour
 		{
 			damage *= 5;
 		}
-
 		var script = damagedObj.GetComponent<GameObjectScript>();
-		if (script && angryBirdsObj.ABGameObj is IBird && script.CompareTag("Build Material"))
+		if(script)
 		{
-			damage *= Bird.CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);// mul on ability damage
-		}
+			var ABGameObject = angryBirdsObj.ABGameObj;
+			if (ABGameObject is Bird && script.ABGameObj is Pig)
+			{
+				damage *= 10;
+			}
+			if (angryBirdsObj is IBird && script.CompareTag("Build Material"))
+			{
+				damage *= Bird.CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);// mul on ability damage
+			}
+		}		
 		return Mathf.Abs(damage);
 	}
 
