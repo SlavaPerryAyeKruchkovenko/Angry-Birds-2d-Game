@@ -13,13 +13,8 @@ namespace Assets.scripts.Models
 	}
 	public class Setting
 	{
-		public bool AimVisible;
-		public float SoundValue { get=> SoundValue; set
-			{
-				if (value <= 1) SoundValue = value;
-				else throw new Exception("Uncorrect Value");
-			} 
-		}
+		public bool AimVisible = true;
+		public float SoundValue = 1;
 		public QualityImage quality = QualityImage.high;
 	}
 }

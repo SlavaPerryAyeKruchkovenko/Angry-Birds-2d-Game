@@ -27,6 +27,10 @@ namespace Assets.scripts.Models
 			DropBird = user.DropBird;
 			KillPig = user.KillPig;
 		}
+		public void ChangeProperty(Setting setting)
+		{
+			Setting = setting;
+		}
 		public void Save()
 		{
 			var path = Environment.CurrentDirectory + Name + ".json";
