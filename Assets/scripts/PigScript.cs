@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class PigScript : MonoBehaviour
+internal class PigScript : MonoBehaviour
 {
 	[SerializeField]
 	private List<Sprite> Default;
@@ -19,7 +19,7 @@ public class PigScript : MonoBehaviour
 		var game = GetComponent<GameObjectScript>();
 		game.Awake();
 		pig = game.ABGameObj as Pig;
-		
+
 		while (true)
 		{
 			if (pig.Health <= 0) { break; }

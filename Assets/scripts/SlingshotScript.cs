@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlingshotScript : MonoBehaviour
+internal class SlingshotScript : MonoBehaviour
 {
 	private readonly Queue<GameObject> birds = new Queue<GameObject>();
 	private IObserver<GameObject> game;
@@ -40,7 +40,7 @@ public class SlingshotScript : MonoBehaviour
 			gameScript.InvokeStartGame();
 			AddBird();
 		}
-		else if(!mainCameraScript.NeedCheck)
+		else if (!mainCameraScript.NeedCheck)
 		{
 			AddBird();
 		}

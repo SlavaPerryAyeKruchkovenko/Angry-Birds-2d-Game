@@ -10,10 +10,10 @@ namespace Assets.scripts.Models
 		public User(string name)
 		{
 			Name = name;
-			Setting = new Setting();
+			Setting = new Settings<QualityImage>();
 		}
 		public string Name { get; private set; }
-		public Setting Setting { get; private set; }
+		public Settings<QualityImage> Setting { get; private set; }
 		public int DropBird;
 		public int KillPig;
 		public void ChangeProperty(IUser user)
@@ -27,7 +27,7 @@ namespace Assets.scripts.Models
 			DropBird = user.DropBird;
 			KillPig = user.KillPig;
 		}
-		public void ChangeProperty(Setting setting)
+		public void ChangeProperty(Settings<QualityImage> setting)
 		{
 			Setting = setting;
 		}

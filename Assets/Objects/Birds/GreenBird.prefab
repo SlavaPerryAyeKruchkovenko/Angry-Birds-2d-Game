@@ -5063,6 +5063,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4172826037899725977}
     m_Modifications:
+    - target: {fileID: 1222122207604468091, guid: 66e613f329f8a174fbf5205cc60d8dfa, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.96626914
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222122207604468091, guid: 66e613f329f8a174fbf5205cc60d8dfa, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.99001384
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222122207604468091, guid: 66e613f329f8a174fbf5205cc60d8dfa, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.058204785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222122207604468091, guid: 66e613f329f8a174fbf5205cc60d8dfa, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222122207604468091, guid: 66e613f329f8a174fbf5205cc60d8dfa, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.02352939
+      objectReference: {fileID: 0}
     - target: {fileID: 3761291598008404672, guid: 66e613f329f8a174fbf5205cc60d8dfa, type: 3}
       propertyPath: looping
       value: 1

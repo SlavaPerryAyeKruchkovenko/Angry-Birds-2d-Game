@@ -1,10 +1,11 @@
 using Assets.scripts;
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
+using Assets.scripts.Exstensions;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class BirdScript : MonoBehaviour
+internal class BirdScript : MonoBehaviour
 {
 	public GameObject FlyMaterial;
 	private Bird bird;
@@ -21,45 +22,14 @@ public class BirdScript : MonoBehaviour
 		{
 			animator = GetComponent<Animator>();
 			bird = game.ABGameObj as Bird;
-			var lineRenderer = GetComponent<LineRenderer>();
-			if (lineRenderer)
+			
+			if(bird != null)
 			{
-				lineRenderer.positionCount = steps;
-				bird.StartFly += () => Destroy(lineRenderer);
+				AwakeStartSetting();
 			}			
-			if (bird != null && canDrawPoint)
-			{
-				bird.StartFly += ChangeParticles;
-				bird.StartFly += DeleteFlyPoints;
-				bird.ObjectGetDamage += Token.Cancel;
-				if (animator)
-				{
-					animator.enabled = true;
-					bird.ObjectGetDamage += () => animator.SetBool("IsFly", false);
-					bird.StartFly += () => animator.SetBool("IsFly", bird.IsFly);
-					if(bird is BirdWithPower ibird)
-					{
-						ibird.Ability += SetAblityAnimation;						
-						if(ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal)
-						{
-							bird.ObjectDie += ibird.UsePower;
-						}
-					}
-					if(bird is BlueBird blueBird && blueBird.IsClone)
-					{
-						animator.SetBool("IsClone", true);
-						animator.SetBool("IsFly", true);
-					}
-					if(bird is WhiteBird)
-					{
-						var egg = gameObject.transform.Find("egg");
-						egg.GetComponent<GameObjectScript>().ABGameObj.ObjectGetDamage += ChangeDieParticles;
-					}
-				}		
-			}
 		}
 	}
-	public async void DrawPoints(CancellationTokenSource token)
+	internal async void DrawPoints(CancellationTokenSource token)
 	{
 		for (int i = 0; i <= 100; i++)
 		{
@@ -114,9 +84,9 @@ public class BirdScript : MonoBehaviour
 			}
 		}
 	}
-	public void DrawTraectory(Vector3 range)
+	internal void DrawTraectory(System.Numerics.Vector3 range)
 	{
-		var coordinate = CountPoints(transform.position, range);
+		var coordinate = CountPoints(transform.position, range.ConvertBaseVectorInUnity());
 		GetComponent<LineRenderer>().SetPositions(coordinate);
 	}
 	private Vector3[] CountPoints(Vector3 posicion, Vector3 impulse)
@@ -150,7 +120,7 @@ public class BirdScript : MonoBehaviour
 			{
 				system.Stop();
 			}
-			else if(bird.Health > 0)
+			else if(bird!= null && bird.Health > 0)
 			{
 				system.Play(false);
 			}			
@@ -158,9 +128,9 @@ public class BirdScript : MonoBehaviour
 	}
 	public void ChangeDieParticles()
 	{
-		if(gameObject.transform.childCount > 0)
+		if(transform.childCount > 0)
 		{
-			for (int i = 0; i < gameObject.transform.childCount; i++)
+			for (int i = 0; i < transform.childCount; i++)
 			{
 				var system = gameObject.transform.GetChild(i).gameObject;
 				var particleSystem = system.GetComponent<ParticleSystem>();
@@ -177,5 +147,49 @@ public class BirdScript : MonoBehaviour
 				}
 			}		
 		}	
+	}
+	private void AwakeStartSetting()
+	{
+		var lineRenderer = GetComponent<LineRenderer>();
+		if (lineRenderer)
+		{
+			lineRenderer.positionCount = steps;
+			bird.StartFly += () => Destroy(lineRenderer);
+		}
+		if (canDrawPoint)
+		{
+			bird.StartFly += ChangeParticles;
+			bird.StartFly += DeleteFlyPoints;
+			bird.TakeAim += DrawTraectory;
+			bird.ObjectGetDamage += Token.Cancel;
+			if (animator)
+			{
+				animator.enabled = true;
+				bird.ObjectGetDamage += () => animator.SetBool("IsFly", false);
+				bird.StartFly += () => animator.SetBool("IsFly", bird.IsFly);
+				if (bird is BirdWithPower ibird)
+				{
+					ibird.Ability += SetAblityAnimation;
+					if (ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal)
+					{
+						bird.ObjectDie += ibird.UsePower;
+					}
+				}
+				if (bird is BlueBird blueBird && blueBird.IsClone)
+				{
+					animator.SetBool("IsClone", true);
+					animator.SetBool("IsFly", true);
+				}
+				if (bird is WhiteBird)
+				{
+					var egg = gameObject.transform.Find("egg");
+					var script = egg.GetComponent<GameObjectScript>();
+					if (script != null)
+					{
+						script.ABGameObj.ObjectGetDamage += ChangeDieParticles;
+					}
+				}
+			}
+		}
 	}
 }

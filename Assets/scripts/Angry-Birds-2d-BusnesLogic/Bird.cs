@@ -26,9 +26,10 @@ namespace Assets.scripts
 
         public event Action StartFly = null;
 
-        public event Action<Vector3> TakeAim = null;
+        public event Action<Vector3> ChangeBird = null;
 
         public event Action ResetBird = null;
+        public event Action<Vector3> TakeAim = null;
         public override short SpriteCoount => 0;
         public readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
 		public override void GetDamage(float damage)
@@ -47,11 +48,16 @@ namespace Assets.scripts
             if (StartFly != null)
                 StartFly.Invoke();          
         }
-        public void InvokeTakeAimEvent(Vector3 range)
+        public void InvokeChangeBirdEvent(Vector3 range)
+		{
+            if (ChangeBird != null)
+                ChangeBird.Invoke(range);          
+		}
+        public void InvokeTakeAim(Vector3 value)
 		{
             if (TakeAim != null)
-                TakeAim.Invoke(range);
-		}
+                TakeAim.Invoke(value);
+        }
         public void InvokeResetEvent()
 		{
             ResetBird.Invoke();
@@ -78,19 +84,36 @@ namespace Assets.scripts
         }
         public static float CountDamageAbility(Birds bird, BuildMaterials material)// Calculate Damage for bird with ability
         {
-            switch (bird)
-            {
-                case (Birds.Black): if (material == BuildMaterials.Stone) { return 2; } break;
-                case (Birds.Yellow): if (material == BuildMaterials.Wood) { return 3; } break;
-                case (Birds.Blue): if (material == BuildMaterials.Ice) { return 4; } break;
-                case (Birds.White): if (material == BuildMaterials.Stone) { return 5; } break;
-                case (Birds.BigRed): if (material == BuildMaterials.Wood) { return 2; } break;
-                case (Birds.Green): if (material == BuildMaterials.Wood) { return 2; } break;
-            }
-            return 1;
+			switch (bird)
+			{
+				case Birds.Black: if (material == BuildMaterials.Stone) { return 10; } break;
+				case Birds.Yellow: if (material == BuildMaterials.Wood) { return 10; } break;
+				case Birds.Blue: if (material == BuildMaterials.Ice) { return 10; } break;
+				case Birds.White: if (material == BuildMaterials.Stone) { return 5; } break;
+				case Birds.BigRed: return 15;
+				case Birds.Green: if (material == BuildMaterials.Wood) { return 7; } break;
+				case Birds.BlueClone: if (material == BuildMaterials.Ice) { return 10; } break;
+				case Birds.Red: return 5;
+			}
+            return 2;
         }
-    }
-    public class BirdWithPower : Bird, IBird
+		public static float CountDamegedPig(Birds bird)
+		{
+			return bird switch
+			{
+				Birds.Black => 10,
+				Birds.Yellow => 5,
+				Birds.Blue => 3,
+				Birds.White => 7,
+				Birds.BigRed => 15,
+				Birds.Green => 7,
+				Birds.Red => 5,
+				Birds.BlueClone => 3,
+				_ => 1,
+			};
+		}
+	}
+	public class BirdWithPower : Bird, IBird
 	{
         public BirdWithPower(Power _power)
         {

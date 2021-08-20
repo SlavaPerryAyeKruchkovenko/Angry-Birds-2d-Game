@@ -1,68 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Assets.scripts.Converters;
+using Assets.scripts.Models;
+using Assets.scripts.UIModels;
+using Assets.scripts.ViewModel;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MessageBoxScript : MonoBehaviour
 {
-    private StringBuilder UserName;
-    private static readonly List<char> tabooSigns = new List<char>() {'.',',',' ','\'','\"' };
-    private Text errorText;
-    private Text text;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        UserName = new StringBuilder(string.Empty);
-        var output = GameObject.Find("Error Text");
-        if(output)
-            errorText = output.GetComponent<Text>();
-        var input = GameObject.Find("input");
-        if (input)
-            text = input.GetComponent<Text>();
-    }
+	[SerializeField]
+	private Text errorText;
+	[SerializeField]
+	private Text text;
+	[SerializeField]
+	private GameObject button;
 
-    // Update is called once per frame
-    void Update()
-    {
-		
-    }
-    public void CheckOnError(string name)
+	private MenuViewModel viewModel;
+	private MessageBox MessageBox;
+	private Animator animator;
+	// Start is called before the first frame update
+	void Awake()
 	{
-        foreach (var item in tabooSigns)
-        {
-            if (name.Contains(item))
-            {
-                PrintError();
-                return;
-            }
-        }
-        errorText.enabled = false;
-    }
-    public void UpdateName(string name)
-	{
-        UserName = new StringBuilder(name);
+		animator = GetComponent<Animator>();
+		MessageBox = new MessageBox(gameObject, new Drawer(errorText));
+		viewModel = transform.parent.GetComponent<MenuScript>().ViewModel;
+		viewModel.InvalidClick += () => ShowError(true);
 	}
-    private void PrintError()
+
+	// Update is called once per frame
+	public void CheckOnError(string name)
 	{
-        if(errorText)
+		HideButton(false);
+		if (MessageBox.CheckSyntax(name))
+			PrintError();
+		errorText.enabled = false;
+	}
+	public void UpdateName(string name)
+	{
+		HideButton(true);
+		MessageBox.ChangeText(name);
+	}
+	private void PrintError()
+	{
+		if (errorText)
 		{
-            errorText.text = $"dont use signs these signs ({ListToString<char>(tabooSigns)})";
-            errorText.enabled = true;
-        }
+			MessageBox.PrintSyntaxError();
+			errorText.enabled = true;
+		}
 	}
-    private void ClearText()
+	private void ClearText()
 	{
-        if (text)
-            text.text = string.Empty;
+		if (text)
+			text.text = string.Empty;
 	}
-    private static string ListToString<T>(IEnumerable<T> list)
+	public void CloseMessageBox()
 	{
-        StringBuilder text = new StringBuilder(string.Empty);
-        foreach (var item in list)
-            text.Append(item.ToString() + " ");
-		
-        return text.ToString();
+		ClearText();
+		viewModel.SerealizeUser(new User(MessageBox.text.ToString()));
+		viewModel.InvokeChangeConditionalUI(true);
+		this.gameObject.SetActive(false);
+	}
+	private void HideButton(bool value)
+	{
+		if (button)
+			button.SetActive(value);
+	}
+	public void ShowError(bool value)
+	{
+		animator.SetBool("HaveError", value);
+	}
+	private void OnMouseDown()
+	{
+		ShowError(false);
 	}
 }

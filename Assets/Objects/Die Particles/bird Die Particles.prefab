@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8268543710033510640}
-  - component: {fileID: 3761291598008404672}
-  - component: {fileID: -5071977341319773191}
+  - component: {fileID: 1222122207604468091}
+  - component: {fileID: 6599815008392042872}
   m_Layer: 0
   m_Name: bird Die Particles
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &3761291598008404672
+--- !u!198 &1222122207604468091
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4738,7 +4738,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &-5071977341319773191
+--- !u!199 &6599815008392042872
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0

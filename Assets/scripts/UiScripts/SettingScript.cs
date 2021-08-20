@@ -1,22 +1,22 @@
 ﻿using Assets.scripts.Models;
+using Assets.scripts.ViewModel;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingScript : MonoBehaviour
 {
-	private User user;
-	private Setting setting;
+	private Settings<QualityImage> setting;
+	private MenuViewModel viewModel;
 	private void Awake()
 	{
-		if(user != null)
-		{
-			AwakeStartSettings(user.Name);
-			setting = user.Setting;
-		}
-		else
-		{
-			setting = new Setting();
-		}
+		viewModel = transform.parent.GetComponent<MenuScript>().ViewModel;
+		var user = viewModel.User as User;
+		setting = user.Setting;
+		if (setting == null)
+			setting = new Settings<QualityImage>();
+
+		AwakeStartSettings();
 	}
 	public void ChangeSettings(bool value)
 	{
@@ -26,27 +26,36 @@ public class SettingScript : MonoBehaviour
 	{
 		setting.SoundValue = value;
 	}
+	public void ChangeSettings(int value)
+	{
+		int count = Enum.GetNames(typeof(QualityImage)).Length;
+		if (value > 0 && value < count)
+			setting.Quality = (QualityImage)Enum.GetValues(typeof(QualityImage)).GetValue(value);
+		else
+			Debug.Log("incorrect value");
+	}
+	public void ChangeSettings(QualityImage value)
+	{
+		setting.Quality = value;
+	}
 	public void CloseSettingMenu()
 	{
-		if(user != null)
-		{
-			user.ChangeProperty(setting);
-			user.Save();
-		}
-			
-		this.gameObject.SetActive(false);
+		viewModel.ChangeSettings(setting);
+		viewModel.SaveUser();
+		gameObject.SetActive(false);
 	}
-	public void LoadSettingMenu(string name)
+	public void LoadSettingMenu()
 	{
-		user = new User(name);
-		user.Load();
-		this.gameObject.SetActive(true);
-		AwakeStartSettings(name);
+		gameObject.SetActive(true);
+		viewModel.LoadUser();
+		AwakeStartSettings();
 	}
-	private void AwakeStartSettings(string name)
+	public void AwakeStartSettings()
 	{
-		if (user == null)
-			user = new User(name);
-		GameObject.Find("Toggle").GetComponent<Toggle>().isOn = user.Setting.AimVisible;
-	}	
+		var toggle = GameObject.Find("Toggle");
+		toggle.GetComponent<Toggle>().isOn = setting.AimVisible;
+		toggle.GetComponent<ToggleButtonScript>().Awake();
+		GameObject.Find("Slider").GetComponent<Slider>().value = setting.SoundValue;
+		GameObject.Find("Dropdown").GetComponent<Dropdown>().value = (int)setting.Quality;
+	}
 }

@@ -4,8 +4,9 @@ using Assets.scripts.Converters;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectScript : MonoBehaviour
+internal class GameObjectScript : MonoBehaviour
 {
+	public const float g = 9.8f;
 	public AngryBirdsGameObjects TypeOfGameObj;
 	private float maxHealth;
 	public Pigs PigType;
@@ -17,12 +18,13 @@ public class GameObjectScript : MonoBehaviour
 	{
 		if (ABGameObj == null)
 		{
+			ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
 			SetStartSettings();
+			ABGameObj.ObjectDie += () => gameObject.SetActive(false);
 		}
 	}
 	public void SetStartSettings()
-	{		
-		ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
+	{				
 		switch (ABGameObj)
 		{
 			case Pig _:
@@ -70,8 +72,6 @@ public class GameObjectScript : MonoBehaviour
 	private void Update()
 	{
 		var rigidbody = GetComponent<Rigidbody2D>();
-		if (ABGameObj is BirdWithPower ibird && (ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal))
-			return;
 		if (rigidbody && rigidbody.velocity.sqrMagnitude <= 0.005 && ABGameObj.Health == 0)
 			ABGameObj.InvokeDiedEvent();
 	}
@@ -97,14 +97,17 @@ public class GameObjectScript : MonoBehaviour
 		var rigidbody = gameObject.GetComponent<Rigidbody2D>();
 		var colisionRigidbody = damagedObj.GetComponent<Rigidbody2D>();
 
-		damage *= rigidbody.velocity.magnitude;// second Newton's law
+		if(rigidbody.velocity.magnitude >= 1)
+		{
+			damage *= rigidbody.velocity.magnitude;// second Newton's law
+		}		
 		if (colisionRigidbody)
 		{
 			damage *= colisionRigidbody.mass;
 		}
 		else//if object down on ground
 		{
-			damage *= 5;
+			damage *= rigidbody.mass * g;
 		}
 		var script = damagedObj.GetComponent<GameObjectScript>();
 		if(script)
@@ -112,9 +115,9 @@ public class GameObjectScript : MonoBehaviour
 			var ABGameObject = angryBirdsObj.ABGameObj;
 			if (ABGameObject is Bird && script.ABGameObj is Pig)
 			{
-				damage *= 10;
+				damage *= Bird.CountDamegedPig(angryBirdsObj.BirdType);
 			}
-			if (angryBirdsObj is IBird && script.CompareTag("Build Material"))
+			if (angryBirdsObj is IBird && script.ABGameObj is BuildMaterial)
 			{
 				damage *= Bird.CountDamageAbility(angryBirdsObj.BirdType, script.MaterialType);// mul on ability damage
 			}

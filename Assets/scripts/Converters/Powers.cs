@@ -34,8 +34,7 @@ namespace Assets.scripts.Converters
 			game.BirdType = Birds.BlueClone;
 			game.SetStartSettings();
 
-			var birdScript = gameObject1.GetComponent<BirdScript>();
-			birdScript.Awake();
+			gameObject1.SetActive(true);
 		}
 		public async void DropEgg(CancellationTokenSource cancelTokenSource)
 		{

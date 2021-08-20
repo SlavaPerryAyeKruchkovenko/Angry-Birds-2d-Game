@@ -2,11 +2,9 @@ using Assets.scripts;
 using System;
 using UnityEngine;
 
-public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
+internal class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 {
-	[SerializeField]
-	private const short maxCameraSize = 10;
-	[SerializeField]
+	private const short maxCameraSize = 12;
 	private const short minCameraSize = 6;
 	private const float clickTime = 0.12f;//0.12 is time of standart click
 	public GameObject FlyingBird { get; private set; }
@@ -25,7 +23,7 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 	{
 		if (background) return;
 		background = GameObject.FindGameObjectWithTag("Background");
-		startPosition = transform.position;	
+		startPosition = transform.position;
 	}
 
 	// Update is called once per frame
@@ -41,7 +39,7 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 			if (CheckOnDoubleTap())//if user use double click skip range
 			{
 				ResetCamera();
-				if(FlyingBird && FlyingBird.GetComponent<Rigidbody2D>())
+				if (FlyingBird && FlyingBird.GetComponent<Rigidbody2D>())
 				{
 					bird.ObjectDie -= ResetCamera;
 				}
@@ -130,7 +128,7 @@ public class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 			bird.ObjectDie += ResetCamera;
 			NeedCheck = true;
 			bird.StartFly += () => lockCamera = false;
-			bird.TakeAim += (vector) => lockCamera = true;
+			bird.ChangeBird += (vector) => lockCamera = true;
 		}
 	}
 	private void ResetCamera()
