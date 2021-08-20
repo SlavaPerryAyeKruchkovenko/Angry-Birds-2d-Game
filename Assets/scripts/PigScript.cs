@@ -1,5 +1,6 @@
 
 using Assets.scripts;
+using Assets.scripts.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -19,7 +20,7 @@ internal class PigScript : MonoBehaviour
 		var game = GetComponent<GameObjectScript>();
 		game.Awake();
 		pig = game.ABGameObj as Pig;
-
+		pig.ObjectDie += IsWin;
 		while (true)
 		{
 			if (pig.Health <= 0) { break; }
@@ -41,5 +42,12 @@ internal class PigScript : MonoBehaviour
 	private void ChangeSprite(List<Sprite> sprites)
 	{
 		GetComponent<SpriteRenderer>().sprite = sprites[new System.Random().Next(0, sprites.Count)];
+	}
+	private void IsWin()
+	{
+		var pigs = GameObject.FindGameObjectsWithTag("Pig");
+		if (pigs.Length > 0)
+			return;
+		GameViewModel.LevelComplete();		
 	}
 }

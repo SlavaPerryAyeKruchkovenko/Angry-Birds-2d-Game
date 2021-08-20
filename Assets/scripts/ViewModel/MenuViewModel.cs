@@ -1,11 +1,18 @@
 ﻿using Assets.scripts.Exstensions;
 using Assets.scripts.Models;
 using System;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Assets.scripts.ViewModel
 {
 	public class MenuViewModel
 	{
+		public MenuViewModel()
+		{
+			GameViewModel.Awake();
+			User = GameViewModel.GetUser();		
+		}
 		public event Action InvalidClick;
 		public event Action<bool> ChangeConditionalUI;
 		public IUser User { get; private set; }
@@ -21,6 +28,11 @@ namespace Assets.scripts.ViewModel
 			CreateUser(user);
 			LoadUser();
 		}
+		public IEnumerator StartGame()
+		{
+			GameViewModel.SetUser(User);
+			return GameViewModel.AsyncLoadNextLevel();
+		}		
 		public void LoadUser()
 		{
 			try

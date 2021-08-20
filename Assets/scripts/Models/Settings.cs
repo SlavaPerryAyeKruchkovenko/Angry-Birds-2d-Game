@@ -8,8 +8,8 @@ namespace Assets.scripts.Models
 	}
 	public sealed class Settings<T> where T : Enum
 	{
-		public bool AimVisible = true;
-		public float SoundValue = 1;
+		public bool AimVisible;
+		public float SoundValue;
 		public T Quality;
 	}
 }

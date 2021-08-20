@@ -1,3 +1,4 @@
+using Assets.scripts;
 using Assets.scripts.ViewModel;
 using System.Collections.Generic;
 using UnityEngine;

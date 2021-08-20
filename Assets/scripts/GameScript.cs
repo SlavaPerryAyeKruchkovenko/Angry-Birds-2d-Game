@@ -1,19 +1,24 @@
 using Assets.scripts;
 using Assets.scripts.Exstensions;
+using Assets.scripts.ViewModel;
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 internal class GameScript : MonoBehaviour, IObserver<GameObject>
 {
+	public event Action StartGame = null;
 	public GameObject SelectedBird { get; private set; }
 	public Bird Bird { get; private set; }
 	public Vector3 StartLocation { get; private set; } = default;
 	public bool IsGameStart { get; private set; } = false;
 
-	public event Action StartGame = null;
+	[SerializeField]
+	private GameObject messageBox;
 
 	private GameObject slingshot;
 	private Quaternion startRotation = default;
@@ -22,14 +27,17 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 	void Awake()
 	{
 		if (slingshot) return;
-
+		if (messageBox)
+		{
+			messageBox.SetActive(false);
+			GameViewModel.GameEnd += () => messageBox.SetActive(true);
+		}
 		StartGame += () => IsGameStart = true;
 		slingshot = GameObject.Find("Slingshot");
 		if (slingshot)
 		{
 			var position = new Vector3(slingshot.transform.position.x, slingshot.transform.position.y, -1);
 			StartLocation = position;
-
 		}
 	}
 
@@ -151,10 +159,15 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 	{
 		throw new NotImplementedException();
 	}
-
 	public void OnError(Exception error)
 	{
 		Debug.Log(error.Message);
+	}
+	public static IEnumerator OpenMenu()
+	{
+		var operation = SceneManager.LoadSceneAsync(0);
+		if (!operation.isDone)
+			yield return null;
 	}
 }
 

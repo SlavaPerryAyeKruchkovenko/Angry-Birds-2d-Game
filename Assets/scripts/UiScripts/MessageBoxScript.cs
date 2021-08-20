@@ -21,9 +21,9 @@ public class MessageBoxScript : MonoBehaviour
 	void Awake()
 	{
 		animator = GetComponent<Animator>();
-		MessageBox = new MessageBox(gameObject, new Drawer(errorText));
+		MessageBox = new MessageBox(gameObject, new Drawer(errorText,gameObject));
 		viewModel = transform.parent.GetComponent<MenuScript>().ViewModel;
-		viewModel.InvalidClick += () => ShowError(true);
+		viewModel.InvalidClick += () => MessageBox.ShowError(true);
 	}
 
 	// Update is called once per frame
@@ -64,12 +64,9 @@ public class MessageBoxScript : MonoBehaviour
 		if (button)
 			button.SetActive(value);
 	}
-	public void ShowError(bool value)
-	{
-		animator.SetBool("HaveError", value);
-	}
+	
 	private void OnMouseDown()
 	{
-		ShowError(false);
+		MessageBox.ShowError(false);
 	}
 }

@@ -34,5 +34,9 @@ namespace Assets.scripts.UIModels
 		{
 			this.text = new StringBuilder(text);
 		}
+		public void ShowError(bool value)
+		{
+			drawer.ShowAnimation(value);
+		}
 	}
 }
