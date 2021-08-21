@@ -7,13 +7,7 @@ using UnityEngine.SceneManagement;
 namespace Assets.scripts.ViewModel
 {
 	public class MenuViewModel
-	{
-		public MenuViewModel()
-		{
-			GameViewModel.Awake();
-			User = GameViewModel.GetUser();		
-		}
-		public event Action InvalidClick;
+	{		
 		public event Action<bool> ChangeConditionalUI;
 		public IUser User { get; private set; }
 		private void CreateUser(IUser user)
@@ -21,28 +15,26 @@ namespace Assets.scripts.ViewModel
 			if (user is User newUser && !user.IsEmpty())
 				User = newUser;
 			else
-				User = new User(user.Name);
+				return;
 		}
 		public void SerealizeUser(IUser user)
 		{
 			CreateUser(user);
 			LoadUser();
-		}
-		public IEnumerator StartGame()
-		{
-			GameViewModel.SetUser(User);
-			return GameViewModel.AsyncLoadNextLevel();
 		}		
 		public void LoadUser()
 		{
-			try
+			if(User != null)
 			{
-				User.Load();
-			}
-			catch (Exception)
-			{
-				User.Save();
-			}
+				try
+				{
+					User.Load();
+				}
+				catch (Exception)
+				{
+					User.Save();
+				}
+			}			
 		}
 		public void DeserealizeUser(IUser user)
 		{
@@ -57,11 +49,6 @@ namespace Assets.scripts.ViewModel
 		{
 			var user = User as User;
 			user.ChangeProperty(settings);
-		}
-		public void SelectWindow()
-		{
-			if (InvalidClick != null)
-				InvalidClick.Invoke();
 		}
 		public void InvokeChangeConditionalUI(bool isSee)
 		{

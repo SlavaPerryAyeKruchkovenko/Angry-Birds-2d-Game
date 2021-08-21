@@ -16,17 +16,17 @@ internal class BirdScript : MonoBehaviour
 	private Animator animator;
 
 	public void Awake()
-	{		
+	{
 		var game = GetComponent<GameObjectScript>();
 		if (bird == null && game)
 		{
 			animator = GetComponent<Animator>();
 			bird = game.ABGameObj as Bird;
-			
-			if(bird != null)
+
+			if (bird != null)
 			{
 				AwakeStartSetting();
-			}			
+			}
 		}
 	}
 	internal async void DrawPoints(CancellationTokenSource token)
@@ -57,7 +57,7 @@ internal class BirdScript : MonoBehaviour
 		if (bird is IBird birdAbility && GetComponent<Rigidbody2D>())
 		{
 			if (birdAbility.AbilityType == TypeUsingAbility.TouchObject || birdAbility.AbilityType == TypeUsingAbility.Universal)
-			{			
+			{
 				Token.Cancel();
 				birdAbility.UsePower();
 			}
@@ -114,21 +114,21 @@ internal class BirdScript : MonoBehaviour
 	public void ChangeParticles()
 	{
 		var system = gameObject.GetComponent<ParticleSystem>();
-		if (system) 
+		if (system)
 		{
-			if(system.isPlaying)
+			if (system.isPlaying)
 			{
 				system.Stop();
 			}
-			else if(bird!= null && bird.Health > 0)
+			else if (bird != null && bird.Health > 0)
 			{
 				system.Play(false);
-			}			
-		}			
+			}
+		}
 	}
 	public void ChangeDieParticles()
 	{
-		if(transform.childCount > 0)
+		if (transform.childCount > 0)
 		{
 			for (int i = 0; i < transform.childCount; i++)
 			{
@@ -136,7 +136,7 @@ internal class BirdScript : MonoBehaviour
 				var particleSystem = system.GetComponent<ParticleSystem>();
 				if (particleSystem)
 				{
-					if(particleSystem.isPlaying)
+					if (particleSystem.isPlaying)
 					{
 						particleSystem.Stop();
 					}
@@ -145,8 +145,8 @@ internal class BirdScript : MonoBehaviour
 						particleSystem.Play(true);
 					}
 				}
-			}		
-		}	
+			}
+		}
 	}
 	private void AwakeStartSetting()
 	{

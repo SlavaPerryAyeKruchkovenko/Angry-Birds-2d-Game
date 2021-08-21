@@ -14,13 +14,13 @@ namespace Assets.scripts.Converters
 		private readonly GameObject gameObject;
 		public async void Clone(CancellationTokenSource cancelTokenSource)
 		{
-			if(cancelTokenSource.IsCancellationRequested)
+			if (cancelTokenSource.IsCancellationRequested)
 			{
 				return;
 			}
-			var gameObj1 = GameObject.Instantiate(gameObject, gameObject.transform.position + Vector3.up*2, default);
+			var gameObj1 = GameObject.Instantiate(gameObject, gameObject.transform.position + Vector3.up * 2, default);
 			ReturnForce(gameObj1, gameObject);
-			var gameObj2 = GameObject.Instantiate(gameObject, gameObject.transform.position - Vector3.up*2, default);
+			var gameObj2 = GameObject.Instantiate(gameObject, gameObject.transform.position - Vector3.up * 2, default);
 			ReturnForce(gameObj2, gameObject);
 
 			cancelTokenSource.Cancel();
@@ -38,19 +38,19 @@ namespace Assets.scripts.Converters
 		}
 		public async void DropEgg(CancellationTokenSource cancelTokenSource)
 		{
-			if(cancelTokenSource.IsCancellationRequested)
+			if (cancelTokenSource.IsCancellationRequested)
 			{
 				return;
 			}
 			GameObject egg = GetEgg(gameObject);
-			Object.Instantiate(egg, gameObject.transform.position - Vector3.up, default);			
+			Object.Instantiate(egg, gameObject.transform.position - (Vector3.up * 1.5f), default);
 			await Task.Delay(100);
 			AddPower(egg, gameObject);
 			cancelTokenSource.Cancel();
 			Debug.Log("Снес яйцо");
 		}
 		private static GameObject GetEgg(GameObject game)
-		{		
+		{
 			var egg = game.transform.Find("egg").gameObject;
 			egg.GetComponent<CapsuleCollider2D>().enabled = true;
 			egg.GetComponent<SpriteRenderer>().enabled = true;
@@ -61,17 +61,17 @@ namespace Assets.scripts.Converters
 			var rigidbody = egg.GetComponent<Rigidbody2D>();
 			rigidbody.velocity = Vector2.zero;
 			float power = rigidbody.mass * 10;//F = mg
-			
+
 			rigidbody.AddForce(-Vector3.up * power, ForceMode2D.Impulse);
 			gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * 10, ForceMode2D.Impulse);
 		}
 		public async void Explode(CancellationTokenSource cancelTokenSource)
 		{
-			if(gameObject.GetComponent<CircleCollider2D>())
+			if (gameObject.GetComponent<CircleCollider2D>())
 			{
 				var colider = gameObject.GetComponent<CircleCollider2D>();
 				var rigidbody = gameObject.GetComponent<Rigidbody2D>();
-				
+
 				float radius = colider.radius;
 				float mass = rigidbody.mass;
 				rigidbody.velocity -= new Vector2(rigidbody.velocity.x * 0.9f, rigidbody.velocity.y * 0.9f);
@@ -81,11 +81,11 @@ namespace Assets.scripts.Converters
 					rigidbody.mass *= mass * i;
 					await Task.Delay(250);
 				}
-				cancelTokenSource.Cancel();				
+				cancelTokenSource.Cancel();
 				gameObject.GetComponent<GameObjectScript>().ABGameObj.InvokeDiedEvent();
 				Debug.Log("boom");
 			}
-		} 
+		}
 
 		public async void SpeedUp(CancellationTokenSource cancelTokenSource)
 		{
@@ -110,11 +110,11 @@ namespace Assets.scripts.Converters
 			CancellationToken token = cancelTokenSource.Token;
 			var rotation = gameObject.transform.rotation;
 			var rigidbody = gameObject.GetComponent<Rigidbody2D>();
-			Vector2 speed = rigidbody.velocity;			
+			Vector2 speed = rigidbody.velocity;
 			float angel = gameObject.transform.rotation.eulerAngles.z;
-			for (int i = 1; i <= 180; i+=3)
+			for (int i = 1; i <= 180; i += 3)
 			{
-				if(cancelTokenSource.Token.IsCancellationRequested)//if bird die
+				if (cancelTokenSource.Token.IsCancellationRequested)//if bird die
 				{
 					return;
 				}
@@ -127,7 +127,7 @@ namespace Assets.scripts.Converters
 			}
 			cancelTokenSource.Cancel();
 			await Task.Run(() => Debug.Log("Развернулся"));
-			rigidbody.velocity = new Vector2(-speed.x , speed.y);
-		}		
+			rigidbody.velocity = new Vector2(-speed.x, speed.y);
+		}
 	}
 }

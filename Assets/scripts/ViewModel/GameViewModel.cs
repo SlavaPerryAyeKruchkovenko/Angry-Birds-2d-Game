@@ -1,6 +1,7 @@
 ﻿using Assets.scripts.Models;
 using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.scripts.ViewModel
@@ -9,13 +10,13 @@ namespace Assets.scripts.ViewModel
 	{
 		public static event Action GameEnd;
 		private static readonly Game game = new Game();
-		public static void Awake()
-		{
-			GameEnd += game.SaveUser;
-		}
 		public static IEnumerator AsyncLoadNextLevel()
-		{			
-			var operation = SceneManager.LoadSceneAsync(game.User.LevelNow);
+		{
+			AsyncOperation operation;
+			if (game.User != null)
+				operation = SceneManager.LoadSceneAsync(game.User.LevelNow);
+			else
+				operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
 			if (!operation.isDone)
 				yield return null;
 		}
@@ -33,9 +34,10 @@ namespace Assets.scripts.ViewModel
 		{
 			return game.User;
 		}
-		public static void SetUser(IUser user)
+		public static void SaveUser(IUser user)
 		{
 			game.UploadUser(user);
+			game.SaveUser();
 		}
 	}
 }

@@ -10,6 +10,7 @@ public class MenuScript : MonoBehaviour
 	private GameObject messageBox;
 	private void Awake()
 	{
+		ViewModel.SerealizeUser(GameViewModel.GetUser());
 		if (messageBox && ViewModel.User == null)
 		{
 			messageBox.SetActive(true);
@@ -30,10 +31,11 @@ public class MenuScript : MonoBehaviour
 	{
 		CloseMenu();
 		ViewModel.SaveUser();
-		StartCoroutine(ViewModel.StartGame());
+		StartCoroutine(GameViewModel.AsyncLoadNextLevel());
 	}
 	private void CloseMenu()
 	{
 		ViewModel.InvokeChangeConditionalUI(false);
+		GameViewModel.SaveUser(ViewModel.User);
 	}
 }

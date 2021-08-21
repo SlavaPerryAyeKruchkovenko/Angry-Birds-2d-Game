@@ -31,6 +31,7 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 		{
 			messageBox.SetActive(false);
 			GameViewModel.GameEnd += () => messageBox.SetActive(true);
+			GameViewModel.GameEnd += () => IsGameStart = false;
 		}
 		StartGame += () => IsGameStart = true;
 		slingshot = GameObject.Find("Slingshot");
@@ -43,11 +44,11 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 
 	// Update is called once per frame
 	void Update()
-	{
-		var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		var mouseCoor = new Vector3(coor.x, coor.y, -1);
+	{		
 		if (IsGameStart && SelectedBird && !Bird.IsFly)
 		{
+			var coor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			var mouseCoor = new Vector3(coor.x, coor.y, -1);
 			var cameraLeftButtomCoor = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)) + Vector3.up;
 			var cameraRightUpCoor = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) - new Vector3(3, 1, 0);
 			if (!CompareVectors3(mouseCoor, cameraLeftButtomCoor) || !CompareVectors3(cameraRightUpCoor, mouseCoor))

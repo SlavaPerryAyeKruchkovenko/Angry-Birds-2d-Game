@@ -29,7 +29,7 @@ public class SettingScript : MonoBehaviour
 	public void ChangeSettings(int value)
 	{
 		int count = Enum.GetNames(typeof(QualityImage)).Length;
-		if (value > 0 && value < count)
+		if (value >= 0 && value < count)
 			setting.Quality = (QualityImage)Enum.GetValues(typeof(QualityImage)).GetValue(value);
 		else
 			Debug.Log("incorrect value");

@@ -15,7 +15,8 @@ namespace Assets.scripts.Converters
 		private readonly GameObject gameObject;
 		public void PrintError(string text)
 		{
-			textBox.text = text;
+			if (textBox)
+				textBox.text = text;
 		}
 
 		public void ShowAnimation(bool value)
@@ -23,6 +24,11 @@ namespace Assets.scripts.Converters
 			var animator = gameObject.GetComponent<Animator>();
 			if (animator)
 				animator.SetBool("HaveError", value);
+		}
+
+		public void ClearText()
+		{
+			textBox.text = string.Empty;
 		}
 	}
 }

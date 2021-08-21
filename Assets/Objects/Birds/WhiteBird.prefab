@@ -299,7 +299,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5066,9 +5066,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 494757905797124880, guid: 9e898cb38225aac49ae79e6152321a4a, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 823139189476035244, guid: 9e898cb38225aac49ae79e6152321a4a, type: 3}
       propertyPath: m_Name
       value: egg
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188928984304348732, guid: 9e898cb38225aac49ae79e6152321a4a, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3537910404739757164, guid: 9e898cb38225aac49ae79e6152321a4a, type: 3}
       propertyPath: m_Enabled

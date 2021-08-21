@@ -1,4 +1,5 @@
 using Assets.scripts;
+using Assets.scripts.ViewModel;
 using System;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ internal class MainCameraScript : MonoBehaviour, IObserver<GameObject>
 	void Awake()
 	{
 		if (background) return;
+		GameViewModel.GameEnd += () => lockCamera = true;
 		background = GameObject.FindGameObjectWithTag("Background");
 		startPosition = transform.position;
 	}

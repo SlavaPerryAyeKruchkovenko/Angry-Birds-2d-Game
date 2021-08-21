@@ -13,9 +13,14 @@ namespace Assets.scripts
 		public void WinGame(Action GameEnd)
 		{
 			if(User != null)
-			User.ChangeProperty(true);
+			{
+				User.ChangeProperty(true);
+				User.Save();
+			}
 			if (GameEnd != null)
+			{
 				GameEnd.Invoke();
+			}				
 		}
 		public void SaveUser()
 		{

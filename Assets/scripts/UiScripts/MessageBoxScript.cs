@@ -15,47 +15,37 @@ public class MessageBoxScript : MonoBehaviour
 	private GameObject button;
 
 	private MenuViewModel viewModel;
-	private MessageBox MessageBox;
-	private Animator animator;
+	private MessageBox messageBox;
 	// Start is called before the first frame update
 	void Awake()
 	{
-		animator = GetComponent<Animator>();
-		MessageBox = new MessageBox(gameObject, new Drawer(errorText,gameObject));
+		messageBox = new MessageBox(new Drawer(errorText, gameObject));
 		viewModel = transform.parent.GetComponent<MenuScript>().ViewModel;
-		viewModel.InvalidClick += () => MessageBox.ShowError(true);
 	}
-
-	// Update is called once per frame
 	public void CheckOnError(string name)
 	{
 		HideButton(false);
-		if (MessageBox.CheckSyntax(name))
+		if (messageBox.CheckSyntax(name))
 			PrintError();
 		errorText.enabled = false;
 	}
 	public void UpdateName(string name)
 	{
 		HideButton(true);
-		MessageBox.ChangeText(name);
+		messageBox.ChangeText(name);
 	}
 	private void PrintError()
 	{
 		if (errorText)
 		{
-			MessageBox.PrintSyntaxError();
+			messageBox.PrintSyntaxError();
 			errorText.enabled = true;
 		}
 	}
-	private void ClearText()
-	{
-		if (text)
-			text.text = string.Empty;
-	}
 	public void CloseMessageBox()
 	{
-		ClearText();
-		viewModel.SerealizeUser(new User(MessageBox.text.ToString()));
+		messageBox.ClearText();
+		viewModel.SerealizeUser(new User(messageBox.Text.ToString()));
 		viewModel.InvokeChangeConditionalUI(true);
 		this.gameObject.SetActive(false);
 	}
@@ -63,10 +53,5 @@ public class MessageBoxScript : MonoBehaviour
 	{
 		if (button)
 			button.SetActive(value);
-	}
-	
-	private void OnMouseDown()
-	{
-		MessageBox.ShowError(false);
 	}
 }
