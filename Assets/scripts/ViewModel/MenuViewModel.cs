@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 namespace Assets.scripts.ViewModel
 {
 	public class MenuViewModel
-	{		
+	{
+		public event Action PropertyChangedEvent;
 		public event Action<bool> ChangeConditionalUI;
 		public IUser User { get; private set; }
 		private void CreateUser(IUser user)
@@ -54,6 +55,10 @@ namespace Assets.scripts.ViewModel
 		{
 			if (ChangeConditionalUI != null)
 				ChangeConditionalUI.Invoke(isSee);
+		}
+		public void ChangeProperty()
+		{
+			PropertyChangedEvent.Invoke();
 		}
 	}
 }

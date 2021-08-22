@@ -1,6 +1,7 @@
 using Assets.scripts;
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
 using Assets.scripts.Exstensions;
+using Assets.scripts.ViewModel;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -66,9 +67,7 @@ internal class BirdScript : MonoBehaviour
 	private void DeleteFlyPoints()
 	{
 		foreach (var item in GameObject.FindGameObjectsWithTag("point"))
-		{
 			Destroy(item);
-		}
 	}
 	private void OnTriggerStay2D(Collider2D collision)// if bird in game scnee triger can use ability
 	{
@@ -87,7 +86,9 @@ internal class BirdScript : MonoBehaviour
 	internal void DrawTraectory(System.Numerics.Vector3 range)
 	{
 		var coordinate = CountPoints(transform.position, range.ConvertBaseVectorInUnity());
-		GetComponent<LineRenderer>().SetPositions(coordinate);
+		var lineRenderer = GetComponent<LineRenderer>();
+		if (lineRenderer)
+			lineRenderer.SetPositions(coordinate);
 	}
 	private Vector3[] CountPoints(Vector3 posicion, Vector3 impulse)
 	{
@@ -153,6 +154,7 @@ internal class BirdScript : MonoBehaviour
 		var lineRenderer = GetComponent<LineRenderer>();
 		if (lineRenderer)
 		{
+			GameViewModel.AwakeAimVisibleSetting(lineRenderer);
 			lineRenderer.positionCount = steps;
 			bird.StartFly += () => Destroy(lineRenderer);
 		}
@@ -162,6 +164,7 @@ internal class BirdScript : MonoBehaviour
 			bird.StartFly += DeleteFlyPoints;
 			bird.TakeAim += DrawTraectory;
 			bird.ObjectGetDamage += Token.Cancel;
+			bird.ObjectDie += () => Destroy(gameObject);
 			if (animator)
 			{
 				animator.enabled = true;
@@ -172,7 +175,8 @@ internal class BirdScript : MonoBehaviour
 					ibird.Ability += SetAblityAnimation;
 					if (ibird.AbilityType == TypeUsingAbility.TouchObject || ibird.AbilityType == TypeUsingAbility.Universal)
 					{
-						bird.ObjectDie += ibird.UsePower;
+						bird.ObjectDie -= () => Destroy(gameObject);
+						bird.ObjectDie += () => BirdDie(ibird);
 					}
 				}
 				if (bird is BlueBird blueBird && blueBird.IsClone)
@@ -191,5 +195,13 @@ internal class BirdScript : MonoBehaviour
 				}
 			}
 		}
+	}
+	private void BirdDie(BirdWithPower bird)
+	{
+		var task = new Task(bird.UsePower);
+		task.Start();
+		task.Wait();
+		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 }

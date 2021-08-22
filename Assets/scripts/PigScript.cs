@@ -21,6 +21,7 @@ internal class PigScript : MonoBehaviour
 		game.Awake();
 		pig = game.ABGameObj as Pig;
 		pig.ObjectDie += IsWin;
+		pig.ObjectDie += () => Destroy(gameObject);
 		while (true)
 		{
 			if (pig.Health <= 0) { break; }

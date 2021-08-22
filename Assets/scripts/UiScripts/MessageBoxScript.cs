@@ -47,6 +47,8 @@ public class MessageBoxScript : MonoBehaviour
 		messageBox.ClearText();
 		viewModel.SerealizeUser(new User(messageBox.Text.ToString()));
 		viewModel.InvokeChangeConditionalUI(true);
+		GameViewModel.SaveUser(viewModel.User);
+		viewModel.ChangeProperty();
 		this.gameObject.SetActive(false);
 	}
 	private void HideButton(bool value)

@@ -21,10 +21,12 @@ public class SettingScript : MonoBehaviour
 	public void ChangeSettings(bool value)
 	{
 		setting.AimVisible = value;
+		ChangeSetting();
 	}
 	public void ChangeSettings(float value)
 	{
 		setting.SoundValue = value;
+		ChangeSetting();
 	}
 	public void ChangeSettings(int value)
 	{
@@ -33,15 +35,16 @@ public class SettingScript : MonoBehaviour
 			setting.Quality = (QualityImage)Enum.GetValues(typeof(QualityImage)).GetValue(value);
 		else
 			Debug.Log("incorrect value");
+		ChangeSetting();
 	}
 	public void ChangeSettings(QualityImage value)
 	{
 		setting.Quality = value;
+		ChangeSetting();
 	}
 	public void CloseSettingMenu()
 	{
-		viewModel.ChangeSettings(setting);
-		viewModel.SaveUser();
+		ChangeSetting();
 		gameObject.SetActive(false);
 	}
 	public void LoadSettingMenu()
@@ -57,5 +60,11 @@ public class SettingScript : MonoBehaviour
 		toggle.GetComponent<ToggleButtonScript>().Awake();
 		GameObject.Find("Slider").GetComponent<Slider>().value = setting.SoundValue;
 		GameObject.Find("Dropdown").GetComponent<Dropdown>().value = (int)setting.Quality;
+	}
+	private void ChangeSetting()
+	{
+		viewModel.ChangeSettings(setting);
+		GameViewModel.SaveUser(viewModel.User);
+		viewModel.ChangeProperty();
 	}
 }

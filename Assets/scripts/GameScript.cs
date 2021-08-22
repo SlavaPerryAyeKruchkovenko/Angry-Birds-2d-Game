@@ -23,6 +23,7 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 	private GameObject slingshot;
 	private Quaternion startRotation = default;
 	private bool isPress;
+	private LineRenderer rubberBand;
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -37,6 +38,7 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 		slingshot = GameObject.Find("Slingshot");
 		if (slingshot)
 		{
+			rubberBand = slingshot.GetComponent<LineRenderer>();
 			var position = new Vector3(slingshot.transform.position.x, slingshot.transform.position.y, -1);
 			StartLocation = position;
 		}
@@ -119,7 +121,7 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 	{
 		var lineRenderer = SelectedBird.GetComponent<LineRenderer>();
 		if (lineRenderer)
-			lineRenderer.enabled = false;
+			lineRenderer.SetPositions(new Vector3[] { });
 	}
 	private static float GetAngle(Vector3 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
 	public static bool CompareVectors3(Vector3 vector1, Vector3 vector2)//if 1 postion will be more that true
@@ -136,7 +138,8 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 	}
 	private void ResetBand()
 	{
-		slingshot.GetComponent<LineRenderer>().enabled = false;
+		if(rubberBand)
+			rubberBand.enabled = false;
 	}
 	public void InvokeStartGame()
 	{
@@ -152,8 +155,6 @@ internal class GameScript : MonoBehaviour, IObserver<GameObject>
 		Bird.ResetBird += ResetBird;
 		Bird.ReadyFly += DropBird;
 		Bird.ResetBird += ResetTraectroy;
-		var lineRenderer = SelectedBird.GetComponent<LineRenderer>();
-		Bird.ChangeBird += (vector) => { if (lineRenderer) lineRenderer.enabled = true; };
 		startRotation = SelectedBird.transform.rotation;
 	}
 	public void OnCompleted()

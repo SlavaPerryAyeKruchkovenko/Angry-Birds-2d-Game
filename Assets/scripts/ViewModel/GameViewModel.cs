@@ -39,5 +39,21 @@ namespace Assets.scripts.ViewModel
 			game.UploadUser(user);
 			game.SaveUser();
 		}
+		public static void AwakeAudioSetting(AudioSource audio)
+		{
+			var setting = game.GetSettings();
+			if (audio)
+				audio.volume = setting.SoundValue;
+		}
+		public static void AwakeAimVisibleSetting(LineRenderer lineRenderer)
+		{
+			var setting = game.GetSettings();
+			if (lineRenderer) 
+				lineRenderer.enabled = setting.AimVisible;
+		}
+		public static void AwakeImageQualitySetting()
+		{
+			Debug.Log(game.GetSettings().Quality.ToString());
+		}
 	}
 }

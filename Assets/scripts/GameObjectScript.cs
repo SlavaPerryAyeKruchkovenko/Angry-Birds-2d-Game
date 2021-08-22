@@ -29,15 +29,16 @@ internal class GameObjectScript : MonoBehaviour
 		switch (ABGameObj)
 		{
 			case Pig _:
-				ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...) 
-				ABGameObj.ObjectDie += () => Destroy(gameObject);
+				ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...) 				
 				break;
 			case Bird _:
 				ABGameObj = Bird.GetBird(BirdType, new Powers(gameObject));
-				ABGameObj.ObjectDie += BirdDie;
 				break;
 			case BuildMaterial _:
 				ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
+				ABGameObj.ObjectDie += () => Destroy(gameObject);
+				break;
+			case Egg _:
 				ABGameObj.ObjectDie += () => Destroy(gameObject);
 				break;
 		}
@@ -54,8 +55,11 @@ internal class GameObjectScript : MonoBehaviour
 		if (rigidbody)
 		{
 			float damage = CountDamage(gameObject, collision);
-			ABGameObj.GetDamage(damage);			
-			ChangeSpeed(rigidbody, collision, ABGameObj.Mass);
+			ABGameObj.GetDamage(damage);
+			if(ABGameObj is Bird)
+			{
+				ChangeSpeed(rigidbody, collision, ABGameObj.Mass);
+			}		
 		}
 	}
 	private static void ChangeSpeed(Rigidbody2D rigidbody, Collision2D collision, float mass)
@@ -127,15 +131,4 @@ internal class GameObjectScript : MonoBehaviour
 		}		
 		return Mathf.Abs(damage);
 	}
-	private async void BirdDie()
-	{
-		var bird = ABGameObj as Bird;
-		while(!bird.cancelTokenSource.IsCancellationRequested)
-		{
-			await Task.Delay(100);
-		}
-		gameObject.SetActive(false);
-		Destroy(gameObject);		
-	}
-
 }

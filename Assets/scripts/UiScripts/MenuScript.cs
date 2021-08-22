@@ -10,11 +10,20 @@ public class MenuScript : MonoBehaviour
 	private GameObject messageBox;
 	private void Awake()
 	{
+		var audio = GetComponent<AudioSource>();
 		ViewModel.SerealizeUser(GameViewModel.GetUser());
+		if(audio)
+		{
+			ViewModel.PropertyChangedEvent += () => GameViewModel.AwakeAudioSetting(audio);
+		}		
 		if (messageBox && ViewModel.User == null)
 		{
 			messageBox.SetActive(true);
 			CloseMenu();
+		}
+		else
+		{
+			ViewModel.ChangeProperty();
 		}
 	}
 	public void OpenSettingsMenu()

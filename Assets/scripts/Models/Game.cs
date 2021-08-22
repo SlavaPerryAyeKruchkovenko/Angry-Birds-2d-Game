@@ -31,5 +31,13 @@ namespace Assets.scripts
 		{
 			User = user;
 		}
+		public Settings<QualityImage> GetSettings()
+		{
+			var user = User as User;
+			if (user != null)
+				return user.Setting;
+			else
+				return new Settings<QualityImage>();
+		}
 	}
 }
