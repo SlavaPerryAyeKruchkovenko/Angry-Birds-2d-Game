@@ -19,7 +19,7 @@ namespace Assets.scripts.Models
 		[JsonProperty]
 		public int LevelsComplete { get; private set; }		
 		public int LevelNow => LevelsComplete + 1;
-		private string Path => Environment.CurrentDirectory + "\\" + Name + ".json";
+		private string Path => Environment.CurrentDirectory + "\\Assets\\Saves\\" + Name + ".json";
 
 		public int DropBird;
 		public int KillPig;

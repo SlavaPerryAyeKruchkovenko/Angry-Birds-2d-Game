@@ -2,6 +2,7 @@ using Assets.scripts;
 using Assets.scripts.Angry_Birds_2d_BusnesLogic;
 using Assets.scripts.Converters;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 internal class GameObjectScript : MonoBehaviour
@@ -20,7 +21,7 @@ internal class GameObjectScript : MonoBehaviour
 		{
 			ABGameObj = AngryBirdsGameObject.GetGameObjectType(TypeOfGameObj);
 			SetStartSettings();
-			ABGameObj.ObjectDie += () => gameObject.SetActive(false);
+			//ABGameObj.ObjectDie += () => gameObject.SetActive(false);
 		}
 	}
 	public void SetStartSettings()
@@ -29,20 +30,22 @@ internal class GameObjectScript : MonoBehaviour
 		{
 			case Pig _:
 				ABGameObj = Pig.GetPig(PigType);// Get pig type (armor pig, king pig...) 
+				ABGameObj.ObjectDie += () => Destroy(gameObject);
 				break;
 			case Bird _:
 				ABGameObj = Bird.GetBird(BirdType, new Powers(gameObject));
+				ABGameObj.ObjectDie += BirdDie;
 				break;
 			case BuildMaterial _:
 				ABGameObj = BuildMaterial.GetBuildMaterial(MaterialType);
+				ABGameObj.ObjectDie += () => Destroy(gameObject);
 				break;
 		}
 		var rigidbody = gameObject.GetComponent<Rigidbody2D>();
 		if (rigidbody)
 			rigidbody.mass = ABGameObj.Mass;
 
-		maxHealth = ABGameObj.Health;// const that compare it with now health    
-		ABGameObj.ObjectDie += () => Destroy(gameObject);
+		maxHealth = ABGameObj.Health;// const that compare it with now health    		
 		ABGameObj.ObjectGetDamage += ChangeConditional;
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -123,6 +126,16 @@ internal class GameObjectScript : MonoBehaviour
 			}
 		}		
 		return Mathf.Abs(damage);
+	}
+	private async void BirdDie()
+	{
+		var bird = ABGameObj as Bird;
+		while(!bird.cancelTokenSource.IsCancellationRequested)
+		{
+			await Task.Delay(100);
+		}
+		gameObject.SetActive(false);
+		Destroy(gameObject);		
 	}
 
 }

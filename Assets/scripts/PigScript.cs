@@ -46,7 +46,7 @@ internal class PigScript : MonoBehaviour
 	private void IsWin()
 	{
 		var pigs = GameObject.FindGameObjectsWithTag("Pig");
-		if (pigs.Length > 0)
+		if (pigs.Length > 1)
 			return;
 		GameViewModel.LevelComplete();		
 	}
